@@ -1,0 +1,88 @@
+.store-nav {
+  position: sticky;
+  top: 64px;
+  z-index: 90;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 10px 24px;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+}
+
+/* Categories button */
+.categories-btn {
+  background: #1e293b;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 52px;
+  left: 24px;
+  background: #020617;
+  border: 1px solid #1e293b;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 140px);
+  gap: 12px;
+}
+
+.grid-item {
+  background: #1e293b;
+  color: white;
+  padding: 14px;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.grid-item:hover {
+  background: #334155;
+}
+
+/* All Games */
+.grid-item.all {
+  grid-column: span 3;
+  background: #2563eb;
+}
+
+.grid-item.all:hover {
+  background: #1d4ed8;
+}
+
+/* Search input */
+input {
+  margin-left: 24px;
+  background: #020617;
+  border: 1px solid #1e293b;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* Icons */
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #cbd5f5;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.icon-btn:hover {
+  color: white;
+}

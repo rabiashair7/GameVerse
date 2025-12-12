@@ -1,0 +1,25 @@
+<nav class="top-nav">
+
+  <div class="logo" (click)="navigate('/store')">🎮 GameVerse</div>
+
+  <div class="nav-links">
+    <button (click)="navigate('/store')">Store</button>
+    <button (click)="navigate('/library')">Library</button>
+    <button (click)="navigate('/profile')">
+      {{ userService.isAdmin() ? 'Admin Panel' : 'Profile' }}
+    </button>
+  </div>
+
+  <div class="auth">
+    <ng-container *ngIf="!userService.isLoggedIn(); else logged">
+      <button (click)="navigate('/login')">Login</button>
+      <button (click)="navigate('/signup')">Sign Up</button>
+    </ng-container>
+
+    <ng-template #logged>
+      <span>Welcome, {{ userService.getCurrentUser()?.username }}</span>
+      <button (click)="logout()">Logout</button>
+    </ng-template>
+  </div>
+
+</nav>
