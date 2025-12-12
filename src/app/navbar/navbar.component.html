@@ -1,0 +1,40 @@
+<nav class="store-nav">
+
+  <!-- Categories Button -->
+  <button class="categories-btn" (click)="toggleCategories()">
+    Categories ▾
+  </button>
+
+  <!-- Categories Dropdown -->
+  <div class="dropdown" *ngIf="showCategories">
+
+    <div class="grid">
+
+      <!-- All Games -->
+      <div class="grid-item all" (click)="goToAllGames()">
+        🎮 All Games
+      </div>
+
+      <!-- Category Items -->
+      <div
+        class="grid-item"
+        *ngFor="let category of categories"
+        (click)="goToCategory(category)">
+        {{ category }}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Search -->
+  <input
+    type="text"
+    placeholder="Search games..."
+    #searchInput
+    (input)="updateSearch(searchInput.value)" />
+
+  <!-- Icons -->
+  <button class="icon-btn" (click)="goToWishlist()">❤️ Wishlist</button>
+  <button class="icon-btn" (click)="goToCart()">🛒 Cart</button>
+
+</nav>
