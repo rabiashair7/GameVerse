@@ -1,40 +1,30 @@
-<nav class="store-nav">
+<nav class="store-navbar">
+  <!-- LEFT: Categories -->
+  <div class="categories">
+    <button class="categories-btn">Categories ▾</button>
 
-  <!-- Categories Button -->
-  <button class="categories-btn" (click)="toggleCategories()">
-    Categories ▾
-  </button>
+    <div class="dropdown">
+      <a routerLink="/games" class="category all">All Games</a>
 
-  <!-- Categories Dropdown -->
-  <div class="dropdown" *ngIf="showCategories">
-
-    <div class="grid">
-
-      <!-- All Games -->
-      <div class="grid-item all" (click)="goToAllGames()">
-        🎮 All Games
+      <div class="grid">
+        <a routerLink="/category/action">Action</a>
+        <a routerLink="/category/adventure">Adventure</a>
+        <a routerLink="/category/sports">Sports</a>
+        <a routerLink="/category/rpg">RPG</a>
+        <a routerLink="/category/racing">Racing</a>
+        <a routerLink="/category/strategy">Strategy</a>
       </div>
-
-      <!-- Category Items -->
-      <div
-        class="grid-item"
-        *ngFor="let category of categories"
-        (click)="goToCategory(category)">
-        {{ category }}
-      </div>
-
     </div>
   </div>
 
-  <!-- Search -->
-  <input
-    type="text"
-    placeholder="Search games..."
-    #searchInput
-    (input)="updateSearch(searchInput.value)" />
+  <!-- CENTER: Search -->
+  <div class="search">
+    <input type="text" placeholder="Search games..." />
+  </div>
 
-  <!-- Icons -->
-  <button class="icon-btn" (click)="goToWishlist()">❤️ Wishlist</button>
-  <button class="icon-btn" (click)="goToCart()">🛒 Cart</button>
-
+  <!-- RIGHT: Icons -->
+  <div class="icons">
+    <a routerLink="/wishlist" title="Wishlist">❤️</a>
+    <a routerLink="/cart" title="Cart">🛒</a>
+  </div>
 </nav>

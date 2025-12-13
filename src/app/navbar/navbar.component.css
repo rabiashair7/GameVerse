@@ -1,88 +1,79 @@
-.store-nav {
-  position: sticky;
-  top: 64px;
-  z-index: 90;
-
+.store-navbar {
   display: flex;
   align-items: center;
-  gap: 16px;
-
-  padding: 10px 24px;
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
 
-/* Categories button */
+/* Categories */
+.categories {
+  position: relative;
+}
+
 .categories-btn {
-  background: #1e293b;
-  color: white;
+  background: none;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--text);
   cursor: pointer;
 }
 
 /* Dropdown */
 .dropdown {
   position: absolute;
-  top: 52px;
-  left: 24px;
-  background: #020617;
-  border: 1px solid #1e293b;
-  padding: 16px;
-  border-radius: 8px;
+  top: 100%;
+  left: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 12px;
+  display: none;
+  min-width: 240px;
+  z-index: 10;
+}
+
+.categories:hover .dropdown {
+  display: block;
+}
+
+.dropdown .all {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: var(--accent);
 }
 
 /* Grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 140px);
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
 }
 
-.grid-item {
-  background: #1e293b;
-  color: white;
-  padding: 14px;
-  border-radius: 6px;
-  text-align: center;
-  cursor: pointer;
+.grid a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 4px 0;
 }
 
-.grid-item:hover {
-  background: #334155;
+.grid a:hover {
+  color: var(--accent);
 }
 
-/* All Games */
-.grid-item.all {
-  grid-column: span 3;
-  background: #2563eb;
-}
-
-.grid-item.all:hover {
-  background: #1d4ed8;
-}
-
-/* Search input */
-input {
-  margin-left: 24px;
-  background: #020617;
-  border: 1px solid #1e293b;
-  color: white;
+/* Search */
+.search input {
   padding: 6px 10px;
   border-radius: 6px;
-  outline: none;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* Icons */
-.icon-btn {
-  background: transparent;
-  border: none;
-  color: #cbd5f5;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.icon-btn:hover {
-  color: white;
+.icons a {
+  margin-left: 16px;
+  font-size: 1.3rem;
+  text-decoration: none;
 }

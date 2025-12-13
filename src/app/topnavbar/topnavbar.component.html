@@ -1,25 +1,24 @@
-<nav class="top-nav">
+<header class="top-navbar">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="logo">
+      <span>🎮 GameVerse</span>
+    </div>
 
-  <div class="logo" (click)="navigate('/store')">🎮 GameVerse</div>
+    <nav class="links">
+      <a routerLink="/home" routerLinkActive="active">Store</a>
+      <a routerLink="/library" routerLinkActive="active">Library</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a routerLink="/about" routerLinkActive="active">About</a>
+    </nav>
+  </div>
 
-  <div class="nav-links">
-    <button (click)="navigate('/store')">Store</button>
-    <button (click)="navigate('/library')">Library</button>
-    <button (click)="navigate('/profile')">
-      {{ userService.isAdmin() ? 'Admin Panel' : 'Profile' }}
+  <!-- RIGHT -->
+  <div class="right">
+    <button class="theme-btn" (click)="toggleTheme()">
+      {{ userService.isDarkMode() ? '☀️' : '🌙' }}
     </button>
+
+    <a routerLink="/login" class="auth">Login / Sign Up</a>
   </div>
-
-  <div class="auth">
-    <ng-container *ngIf="!userService.isLoggedIn(); else logged">
-      <button (click)="navigate('/login')">Login</button>
-      <button (click)="navigate('/signup')">Sign Up</button>
-    </ng-container>
-
-    <ng-template #logged>
-      <span>Welcome, {{ userService.getCurrentUser()?.username }}</span>
-      <button (click)="logout()">Logout</button>
-    </ng-template>
-  </div>
-
-</nav>
+</header>

@@ -1,0 +1,58 @@
+.footer {
+  background-color: var(--bg);
+  color: var(--text);
+  border-top: 1px solid var(--border);
+  padding: 32px 24px 16px;
+  margin-top: 40px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.brand h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.brand p {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.developers h4 {
+  margin-bottom: 8px;
+}
+
+.developers ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.developers li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.developers a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.developers a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
