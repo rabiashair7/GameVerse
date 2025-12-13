@@ -1,6 +1,7 @@
 <app-topnavbar></app-topnavbar>
 
-<!-- Category navbar appears on store pages -->
-<app-navbar *ngIf="true"></app-navbar>
+<app-navbar *ngIf="showStoreNavbar"></app-navbar>
 
 <router-outlet></router-outlet>
+
+<app-footer></app-footer>
