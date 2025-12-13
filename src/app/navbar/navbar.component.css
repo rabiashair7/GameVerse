@@ -1,79 +1,97 @@
+/* ===============================
+   Store Navbar – Theme Aware
+   =============================== */
+
 .store-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
-  background-color: var(--bg);
+
+  padding: 12px 20px;
+  background: var(--panel);
   border-bottom: 1px solid var(--border);
 }
 
-/* Categories */
+/* ---------- Categories ---------- */
 .categories {
   position: relative;
+  padding-bottom: 8px;
 }
 
 .categories-btn {
-  background: none;
-  border: none;
-  font-size: 1rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
   color: var(--text);
+  font-weight: 600;
   cursor: pointer;
 }
 
-/* Dropdown */
+/* ---------- Dropdown ---------- */
 .dropdown {
   position: absolute;
-  top: 100%;
+  top: 40px;
   left: 0;
-  background: var(--bg);
+  width: 240px;
+  padding: 10px;
+
+  background: var(--panel);
   border: 1px solid var(--border);
-  padding: 12px;
+  border-radius: 8px;
+
   display: none;
-  min-width: 240px;
   z-index: 10;
 }
 
-.categories:hover .dropdown {
+.categories:hover .dropdown,
+.dropdown:hover {
   display: block;
+}
+
+.dropdown a {
+  display: block;
+  padding: 6px 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.dropdown a:hover {
+  background: rgba(124, 58, 237, 0.15);
 }
 
 .dropdown .all {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
-  text-decoration: none;
-  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--brand);
 }
 
-/* Grid */
-.grid {
+.dropdown .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 4px;
 }
 
-.grid a {
-  text-decoration: none;
-  color: var(--text);
-  padding: 4px 0;
-}
-
-.grid a:hover {
-  color: var(--accent);
-}
-
-/* Search */
+/* ---------- Search ---------- */
 .search input {
+  width: 220px;
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid var(--border);
-  background: var(--bg);
+  background: var(--panel);
   color: var(--text);
 }
 
-/* Icons */
+/* ---------- Icons ---------- */
+.icons {
+  display: flex;
+  gap: 12px;
+}
+
 .icons a {
-  margin-left: 16px;
-  font-size: 1.3rem;
+  font-size: 18px;
   text-decoration: none;
+  color: var(--text);
 }

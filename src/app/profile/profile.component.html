@@ -1,1 +1,17 @@
-<p>profile works!</p>
+<div *ngIf="!isLoggedIn">
+  <div *ngIf="view === 'login'">
+    <h2>Login</h2>
+    <button (click)="login()">Mock Login</button>
+    <button (click)="switchToSignup()">Sign up</button>
+  </div>
+
+  <div *ngIf="view === 'signup'">
+    <h2>Sign Up</h2>
+    <button (click)="switchToLogin()">Back to login</button>
+  </div>
+</div>
+
+<div *ngIf="isLoggedIn">
+  <h2>Your Profile</h2>
+  <button (click)="logout()">Logout</button>
+</div>

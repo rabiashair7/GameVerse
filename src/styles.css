@@ -1,20 +1,76 @@
-:root {
-  --bg: #ffffff;
-  --text: #111111;
-  --border: #dddddd;
-  --accent: #1f5bd7;
+/* ===============================
+   GameVerse – Stage 1 (GLOBAL)
+   =============================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body.dark-theme {
-  --bg: #121212;
-  --text: #eaeaea;
-  --border: #2a2a2a;
-  --accent: #4f8cff;
+html, body {
+  height: 100%;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--bg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #f6f7fb;
+  color: #111827;
+  line-height: 1.5;
+}
+
+/* Theme variables */
+:root {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: rgba(0,0,0,0.08);
+  --brand: #7c3aed;
+  --radius: 16px;
+  --shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Optional dark mode */
+body.dark {
+  --bg: #0f172a;
+  --panel: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: rgba(255,255,255,0.1);
+}
+
+body {
+  background: var(--bg);
   color: var(--text);
+}
+
+/* Layout helpers */
+.container {
+  width: min(1100px, calc(100% - 32px));
+  margin: auto;
+}
+
+.page {
+  padding: 40px 0;
+}
+
+/* Common cards */
+.card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+/* Footer spacing */
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
 }

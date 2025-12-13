@@ -9,11 +9,10 @@ export class UserService {
 
   toggleTheme(): void {
     this.darkMode = !this.darkMode;
-    document.body.classList.toggle('dark-theme', this.darkMode);
+    document.body.classList.toggle('dark', this.darkMode);
   }
 
   isDarkMode(): boolean {
     return this.darkMode;
   }
-
 }
