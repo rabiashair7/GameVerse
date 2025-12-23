@@ -1,2 +1,62 @@
-<h2>Admin Panel</h2>
+<div class="container-fluid">
+  <div class="row min-vh-100">
 
+    <!-- SIDEBAR -->
+    <div class="col-12 col-md-3 col-lg-2 bg-dark text-white p-4">
+      <h4 class="text-info mb-4">🎮 Admin</h4>
+      <ul class="nav nav-pills flex-column gap-2">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Games</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Settings</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="col p-4 text-white">
+      <h2 class="mb-4">Game Management</h2>
+
+      <!-- ADD GAME -->
+      <div class="row g-2 mb-3">
+        <div class="col-md-5">
+          <input class="form-control bg-dark text-white border-secondary"
+                 placeholder="Game Title">
+        </div>
+        <div class="col-md-3">
+          <input type="number"
+                 class="form-control bg-dark text-white border-secondary"
+                 placeholder="Price">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-info w-100">Add Game</button>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Example Game</td>
+            <td>$59</td>
+            <td>
+              <button class="btn btn-danger btn-sm">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

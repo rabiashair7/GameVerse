@@ -17,6 +17,7 @@ import { AdminComponent } from './admin/admin.component';
 
 /* Info */
 import { AboutComponent } from './about/about.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
 
   /* Info */
   { path: 'about', component: AboutComponent },
+  { path: 'login', component: LoginComponent},
 
   /* Admin */
   { path: 'admin', component: AdminComponent },

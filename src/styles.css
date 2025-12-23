@@ -13,8 +13,6 @@ body.dark-theme {
 }
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  background-color: #121212;
 }
+

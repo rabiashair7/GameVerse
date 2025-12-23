@@ -1,24 +1,44 @@
-<header class="top-navbar">
-  <!-- LEFT -->
-  <div class="left">
-    <div class="logo">
-      <span>🎮 GameVerse</span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+  <a class="navbar-brand text-info fw-bold" routerLink="/">🎮 GameVerse</a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navMenu">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navMenu">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home">Store</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/library">Library</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile">Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="userService.isAdmin()">
+        <a class="nav-link text-warning" routerLink="/admin">Admin</a>
+      </li>
+    </ul>
+
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn btn-outline-info btn-sm"
+              (click)="userService.toggleTheme()">
+        {{ userService.isDarkMode() ? '☀️' : '🌙' }}
+      </button>
+
+      <a *ngIf="!userService.isLoggedIn()"
+         routerLink="/login"
+         class="btn btn-info btn-sm">
+        Login
+      </a>
+
+      <button *ngIf="userService.isLoggedIn()"
+              class="btn btn-danger btn-sm"
+              (click)="logout()">
+        Logout
+      </button>
     </div>
-
-    <nav class="links">
-      <a routerLink="/home" routerLinkActive="active">Store</a>
-      <a routerLink="/library" routerLinkActive="active">Library</a>
-      <a routerLink="/profile" routerLinkActive="active">Profile</a>
-      <a routerLink="/about" routerLinkActive="active">About</a>
-    </nav>
   </div>
-
-  <!-- RIGHT -->
-  <div class="right">
-    <button class="theme-btn" (click)="toggleTheme()">
-      {{ userService.isDarkMode() ? '☀️' : '🌙' }}
-    </button>
-
-    <a routerLink="/login" class="auth">Login / Sign Up</a>
-  </div>
-</header>
+</nav>

@@ -19,4 +19,15 @@ export class AppComponent {
       }
     });
   }
+  
+  ngOnInit(): void {
+    if (!localStorage.getItem('users')) {
+      localStorage.setItem('users', JSON.stringify([
+        { username: 'admin', password: '1234', role: 'admin' },
+        { username: 'user', password: '1234', role: 'user' }
+      ]));
+    }
+  }
 }
+
+
