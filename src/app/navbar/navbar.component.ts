@@ -7,6 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+ isOpen = false;
 
+  toggleDropdown(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  closeDropdown(): void {
+    this.isOpen = false;
+  }
  
 }

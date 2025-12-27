@@ -56,3 +56,10 @@
   border-top: 1px solid var(--border);
   padding-top: 12px;
 }
+footer {
+  background: var(--bg-shell);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding: 16px;
+  text-align: center;
+}

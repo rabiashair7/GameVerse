@@ -1,18 +1,98 @@
-:root {
-  --bg: #ffffff;
-  --text: #111111;
-  --border: #dddddd;
-  --accent: #1f5bd7;
+/* ===========================
+   BASE RESET
+=========================== */
+* {
+  box-sizing: border-box;
 }
 
-body.dark-theme {
-  --bg: #121212;
-  --text: #eaeaea;
-  --border: #2a2a2a;
-  --accent: #4f8cff;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-body {
-  background-color: #121212;
+/* ===========================
+   APP ROOT (THEME VARIABLES)
+=========================== */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* ---------- LIGHT MODE ---------- */
+  --bg-main: #f8fafc;        /* page content */
+  --bg-shell: #ffffff;      /* navbar + footer */
+
+  --text-main: #0f172a;     /* main content text */
+  --text-shell: #0f172a;    /* navbar + footer text */
+  --text-muted: #475569;
+
+  --border: #e5e7eb;
+  --accent: #2563eb;
+
+  background: var(--bg-main);
+  color: var(--text-main);
+
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* ===========================
+   DARK MODE
+=========================== */
+.app-root.dark {
+  --bg-main: #0b1220;        /* page content */
+  --bg-shell: #111827;      /* navbar + footer */
+
+  --text-main: #e5e7eb;     /* main content text */
+  --text-shell: #e5e7eb;    /* navbar + footer text */
+  --text-muted: #94a3b8;
+
+  --border: #1f2933;
+  --accent: #22c55e;
+}
+
+/* ===========================
+   MAIN CONTENT AREA
+=========================== */
+main,
+.page-content {
+  background: var(--bg-main);
+  color: var(--text-main);
+  flex: 1;
+  padding: 24px;
+}
+
+/* ===========================
+   SHELL ELEMENTS (NAVBAR / FOOTER)
+=========================== */
+header,
+nav,
+footer {
+  background: var(--bg-shell);
+  color: var(--text-shell);
+}
+
+/* ===========================
+   SHARED UI
+=========================== */
+.card {
+  background: var(--bg-shell);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  color: var(--text-main);
+}
+
+button {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}

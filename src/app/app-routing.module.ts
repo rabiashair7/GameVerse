@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 /* Core pages */
 import { HomeComponent } from './home/home.component';
-import { GamesComponent } from './games/games.component';
 import { CategoryComponent } from './category/category.component';
 
 /* User pages */
@@ -14,20 +13,18 @@ import { ProfileComponent } from './profile/profile.component';
 
 /* Admin & auth */
 import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 /* Info */
 import { AboutComponent } from './about/about.component';
-import { LoginComponent } from './login/login.component';
-
 
 const routes: Routes = [
 
   /* Default */
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-  /* Store / Public */
+  /* Store */
   { path: 'home', component: HomeComponent },
-  { path: 'games', component: GamesComponent },
   { path: 'category/:name', component: CategoryComponent },
 
   /* User */
@@ -38,12 +35,13 @@ const routes: Routes = [
 
   /* Info */
   { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
 
   /* Admin */
   { path: 'admin', component: AdminComponent },
 
-
+  /* Fallback */
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

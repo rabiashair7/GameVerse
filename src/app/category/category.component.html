@@ -1,1 +1,22 @@
-<p>category works!</p>
+<h2 class="title">{{ category | titlecase }}</h2>
+
+<div class="search-sort">
+  <input
+    placeholder="Search..."
+    [(ngModel)]="search"
+    (input)="applySearchAndSort(games)"
+  >
+
+  <select [(ngModel)]="sortBy" (change)="applySearchAndSort(games)">
+    <option value="title">Title</option>
+    <option value="price">Price</option>
+  </select>
+</div>
+
+<div class="grid">
+  <div class="game-card" *ngFor="let g of games">
+    <img [src]="g.coverImage">
+    <h4>{{ g.title }}</h4>
+    <p>${{ g.price }}</p>
+  </div>
+</div>

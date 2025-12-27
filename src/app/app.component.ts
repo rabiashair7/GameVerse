@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-
+import { UserService } from './userService.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +9,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent {
   showStoreNavbar = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,public userService: UserService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showStoreNavbar =
@@ -23,10 +23,13 @@ export class AppComponent {
   ngOnInit(): void {
     if (!localStorage.getItem('users')) {
       localStorage.setItem('users', JSON.stringify([
-        { username: 'admin', password: '1234', role: 'admin' },
+        { username: 'Rabia149', password: '1492001Rs', role: 'admin' },
         { username: 'user', password: '1234', role: 'user' }
       ]));
     }
+  }
+  get isDarkMode(): boolean {
+    return this.userService.isDarkMode();
   }
 }
 

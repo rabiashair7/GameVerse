@@ -1,7 +1,14 @@
-<app-topnavbar></app-topnavbar>
+<div class="app-root" [class.dark]="isDarkMode">
 
-<app-navbar *ngIf="showStoreNavbar"></app-navbar>
+  <app-topnavbar></app-topnavbar>
 
-<router-outlet></router-outlet>
+  <app-navbar *ngIf="showStoreNavbar"></app-navbar>
 
-<app-footer></app-footer>
+  <!-- MAIN PAGE CONTENT -->
+  <main class="page-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-footer></app-footer>
+
+</div>

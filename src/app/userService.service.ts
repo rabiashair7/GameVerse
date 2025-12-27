@@ -22,13 +22,14 @@ export class UserService {
   constructor() {
     console.log("******************************")
     this.seedUsers();
+    console.log()
   }
 
   // Seed initial users ONCE
   private seedUsers(): void {
     if (!localStorage.getItem(this.USERS_KEY)) {
       localStorage.setItem(this.USERS_KEY, JSON.stringify([
-        { username: 'admin', password: '12345678', role: 'admin' },
+        { username: 'Rabia149', password: '1492001Rs', role: 'admin' },
         { username: 'user', password: '12345', role: 'user' }
       ]));
     }

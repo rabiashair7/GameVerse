@@ -1,1 +1,10 @@
-<p>gamecard works!</p>
+<div class="game-card">
+  <img [src]="game.image" alt="game image">
+
+  <h5>{{ game.title }}</h5>
+  <p class="price">${{ game.price }}</p>
+
+  <div class="cats">
+    <span *ngFor="let c of game.categories">{{ c }}</span>
+  </div>
+</div>

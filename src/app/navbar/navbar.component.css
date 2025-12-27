@@ -1,14 +1,20 @@
+/* ===============================
+   STORE NAVBAR
+================================ */
+
 .store-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  background-color: var(--bg);
+  background-color: var(--bg-shell);
   border-bottom: 1px solid var(--border);
-  
 }
 
-/* Categories */
+/* ===============================
+   CATEGORIES
+================================ */
+
 .categories {
   position: relative;
 }
@@ -17,64 +23,124 @@
   background: none;
   border: none;
   font-size: 1rem;
-  color: var(--text);
+  font-weight: 500;
+  color: var(--text-main);
   cursor: pointer;
+  padding: 6px 10px;
 }
 
-/* Dropdown */
+.categories-btn:hover {
+  color: var(--accent);
+}
+
+/* ===============================
+   DROPDOWN
+================================ */
+
 .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--bg);
+  margin-top: 8px;
+  background: var(--bg-shell);
   border: 1px solid var(--border);
+  border-radius: 8px;
   padding: 12px;
-  display: none;
   min-width: 240px;
-  z-index: 10;
+  z-index: 1000;
 }
+
 
 .categories:hover .dropdown {
   display: block;
 }
 
+/* ===============================
+   ALL GAMES LINK
+================================ */
+
 .dropdown .all {
   display: block;
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-weight: 600;
+  margin-bottom: 10px;
   text-decoration: none;
   color: var(--accent);
 }
 
-/* Grid */
+.dropdown .all:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   GRID
+================================ */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 8px 16px;
 }
 
 .grid a {
   text-decoration: none;
-  color: var(--text);
-  padding: 4px 0;
+  color: var(--text-main);
+  padding: 6px 4px;
+  border-radius: 4px;
 }
 
 .grid a:hover {
+  background: var(--bg-hover);
   color: var(--accent);
 }
 
-/* Search */
-.search input {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
+/* ===============================
+   SEARCH
+================================ */
+
+.search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
-/* Icons */
+.search input {
+  width: 260px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-main);
+  outline: none;
+}
+
+.search input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ===============================
+   ICONS
+================================ */
+
 .icons a {
   margin-left: 16px;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   text-decoration: none;
+  color: var(--text-main);
+}
+
+.icons a:hover {
+  color: var(--accent);
+}
+
+/* ===============================
+   LINKS (GLOBAL SAFETY)
+================================ */
+
+a {
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
 }

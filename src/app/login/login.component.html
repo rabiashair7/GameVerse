@@ -1,15 +1,40 @@
-<div class="login-container">
-  <h2>Login</h2>
+<div class="login-wrapper">
+  <div class="login-box">
 
-  <input type="text"
-         placeholder="Username"
-         [(ngModel)]="username">
+    <h2 class="title">Welcome back</h2>
+    <p class="subtitle">Login to your GameVerse account</p>
 
-  <input type="password"
-         placeholder="Password"
-         [(ngModel)]="password">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-  <button (click)="login()">Login</button>
+      <!-- USERNAME -->
+      <div class="input-group">
+        <input
+          type="text"
+          formControlName="username"
+          required
+        />
+        <label>Username</label>
+      </div>
 
-  <p class="error" *ngIf="error">{{ error }}</p>
+      <!-- PASSWORD -->
+      <div class="input-group">
+        <input
+          type="password"
+          formControlName="password"
+          required
+        />
+        <label>Password</label>
+      </div>
+
+      <div class="error" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <button type="submit" class="login-btn">
+        Login
+      </button>
+
+    </form>
+
+  </div>
 </div>

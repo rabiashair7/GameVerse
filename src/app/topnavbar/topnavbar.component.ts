@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UserService } from '../userService.service';
 import { Router } from '@angular/router';
+import { UserService } from '../userService.service';
 
 @Component({
   selector: 'app-topnavbar',
@@ -11,7 +11,7 @@ export class TopNavbarComponent {
 
   constructor(
     public userService: UserService,
-    private router: Router     // ✅ FIX
+    private router: Router
   ) {}
 
   toggleTheme(): void {
@@ -20,6 +20,6 @@ export class TopNavbarComponent {
 
   logout(): void {
     this.userService.logout();
-    this.router.navigate(['/login']);  // ✅ now works
+    this.router.navigate(['/login']);
   }
 }

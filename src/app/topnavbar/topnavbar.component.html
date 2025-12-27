@@ -1,44 +1,75 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-  <a class="navbar-brand text-info fw-bold" routerLink="/">🎮 GameVerse</a>
+<header class="top-navbar">
+  <!-- LEFT -->
+  <div class="left">
+    <!-- Dummy Logo -->
+    <span class="logo">
+      🎮 GameVerse
+    </span>
 
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navMenu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navMenu">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/home">Store</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/library">Library</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/profile">Profile</a>
-      </li>
-      <li class="nav-item" *ngIf="userService.isAdmin()">
-        <a class="nav-link text-warning" routerLink="/admin">Admin</a>
-      </li>
-    </ul>
-
-    <div class="d-flex align-items-center gap-3">
-      <button class="btn btn-outline-info btn-sm"
-              (click)="userService.toggleTheme()">
-        {{ userService.isDarkMode() ? '☀️' : '🌙' }}
-      </button>
-
-      <a *ngIf="!userService.isLoggedIn()"
-         routerLink="/login"
-         class="btn btn-info btn-sm">
-        Login
+    <!-- Navigation -->
+    <nav class="links">
+      <!-- Store (always visible) -->
+      <a routerLink="/home" routerLinkActive="active">
+        Store
       </a>
 
-      <button *ngIf="userService.isLoggedIn()"
-              class="btn btn-danger btn-sm"
-              (click)="logout()">
-        Logout
-      </button>
-    </div>
+      <!-- About Us (always visible) -->
+      <a routerLink="/about" routerLinkActive="active">
+        About Us
+      </a>
+
+      <!-- Library (hidden for admin) -->
+      <a
+        *ngIf="!userService.isAdmin()"
+        routerLink="/library"
+        routerLinkActive="active"
+      >
+        Library
+      </a>
+
+      <!-- Profile (user only) -->
+      <a
+        *ngIf="userService.isLoggedIn() && !userService.isAdmin()"
+        routerLink="/profile"
+        routerLinkActive="active"
+      >
+        Profile
+      </a>
+
+      <!-- Admin (admin only) -->
+      <a
+        *ngIf="userService.isLoggedIn() && userService.isAdmin()"
+        routerLink="/admin"
+        routerLinkActive="active"
+      >
+        Admin
+      </a>
+    </nav>
   </div>
-</nav>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <!-- Theme Toggle -->
+    <button class="theme-btn" (click)="toggleTheme()">
+      {{ userService.isDarkMode() ? '☀️' : '🌙' }}
+    </button>
+
+    <!-- Login (guest only) -->
+    <a
+      *ngIf="!userService.isLoggedIn()"
+      routerLink="/login"
+      class="login"
+    >
+      Login
+    </a>
+
+    <!-- Logout (logged in only) -->
+    <button
+      *ngIf="userService.isLoggedIn()"
+      class="logout"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  </div>
+</header>

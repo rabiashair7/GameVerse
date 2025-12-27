@@ -1,30 +1,34 @@
 <nav class="store-navbar">
-  <!-- LEFT: Categories -->
   <div class="categories">
-    <button class="categories-btn">Categories ▾</button>
+    <button
+      class="categories-btn"
+      (click)="toggleDropdown()"
+      type="button"
+    >
+      Categories ▾
+    </button>
 
-    <div class="dropdown">
-      <a routerLink="/games" class="category all">All Games</a>
+    <div class="dropdown" *ngIf="isOpen">
+      <a routerLink="/games" class="all" (click)="closeDropdown()">
+        All Games
+      </a>
 
       <div class="grid">
-        <a routerLink="/category/action">Action</a>
-        <a routerLink="/category/adventure">Adventure</a>
-        <a routerLink="/category/sports">Sports</a>
-        <a routerLink="/category/rpg">RPG</a>
-        <a routerLink="/category/racing">Racing</a>
-        <a routerLink="/category/strategy">Strategy</a>
+        <a routerLink="/category/action" (click)="closeDropdown()">Action</a>
+        <a routerLink="/category/adventure" (click)="closeDropdown()">Adventure</a>
+        <a routerLink="/category/sports" (click)="closeDropdown()">Sports</a>
+        <a routerLink="/category/rpg" (click)="closeDropdown()">RPG</a>
+        <a routerLink="/category/racing" (click)="closeDropdown()">Racing</a>
+        <a routerLink="/category/strategy" (click)="closeDropdown()">Strategy</a>
+        <a routerLink="/category/open-world" (click)="closeDropdown()">Open World</a>
       </div>
     </div>
   </div>
 
-  <!-- CENTER: Search -->
-  <div class="search">
-    <input type="text" placeholder="Search games..." />
-  </div>
 
-  <!-- RIGHT: Icons -->
+
   <div class="icons">
-    <a routerLink="/wishlist" title="Wishlist">❤️</a>
-    <a routerLink="/cart" title="Cart">🛒</a>
+    <a routerLink="/wishlist">❤️</a>
+    <a routerLink="/cart">🛒</a>
   </div>
 </nav>

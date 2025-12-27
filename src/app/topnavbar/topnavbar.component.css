@@ -1,35 +1,59 @@
+/* ===============================
+   TOP NAVBAR
+================================ */
+
 .top-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
-  height: 64px;
-  background-color: var(--bg);
-  color: var(--text);
+  padding: 14px 28px;
+  background: var(--bg-shell);
   border-bottom: 1px solid var(--border);
 }
+
+/* ===============================
+   LEFT SECTION
+================================ */
 
 .left {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
 }
 
+/* Dummy Logo */
 .logo {
-  font-size: 1.4rem;
-  font-weight: bold;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: default;
+  user-select: none;
+}
+
+/* Navigation links */
+.links {
+  display: flex;
+  gap: 20px;
 }
 
 .links a {
-  margin-right: 16px;
   text-decoration: none;
-  color: var(--text);
   font-weight: 500;
+  color: var(--text-main);
+  padding-bottom: 4px;
 }
 
 .links a:hover {
   color: var(--accent);
 }
+
+.links a.active {
+  border-bottom: 2px solid var(--accent);
+}
+
+/* ===============================
+   RIGHT SECTION
+================================ */
 
 .right {
   display: flex;
@@ -37,16 +61,52 @@
   gap: 16px;
 }
 
-.auth {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 500;
-}
+/* ===============================
+   THEME BUTTON
+================================ */
 
 .theme-btn {
   background: none;
-  border: none;
-  font-size: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
   cursor: pointer;
-  color: var(--text);
+  color: var(--text-main);
+}
+
+.theme-btn:hover {
+  background: var(--bg-hover);
+}
+
+/* ===============================
+   LOGIN LINK
+================================ */
+
+.login {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.login:hover {
+  color: var(--accent);
+}
+
+/* ===============================
+   LOGOUT BUTTON
+================================ */
+
+.logout {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+.logout:hover {
+  background: var(--bg-hover);
+  color: var(--accent);
 }
