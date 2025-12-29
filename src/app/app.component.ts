@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from './userService.service';
 @Component({
@@ -6,7 +6,7 @@ import { UserService } from './userService.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   showStoreNavbar = false;
 
   constructor(private router: Router,public userService: UserService) {
@@ -19,8 +19,10 @@ export class AppComponent {
       }
     });
   }
+
   
   ngOnInit(): void {
+    console.log("555555555")
     if (!localStorage.getItem('users')) {
       localStorage.setItem('users', JSON.stringify([
         { username: 'Rabia149', password: '1492001Rs', role: 'admin' },
