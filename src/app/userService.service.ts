@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  // =============================
+  // THEME STATE (UI ONLY)
+  // =============================
   private darkMode = false;
 
   toggleTheme(): void {
@@ -16,54 +21,77 @@ export class UserService {
     return this.darkMode;
   }
 
-  private USERS_KEY = 'users';
-  private CURRENT_USER_KEY = 'currentUser';
+  // =============================
+  // AUTH STATE (IN MEMORY)
+  // =============================
+  private currentUser: any = null;
 
-  constructor() {
-    console.log("******************************")
-    this.seedUsers();
-    console.log()
-  }
+  // =============================
+  // DATA SOURCE
+  // =============================
+  private dataUrl = 'assets/data/gameverse-data.json';
 
-  // Seed initial users ONCE
-  private seedUsers(): void {
-    if (!localStorage.getItem(this.USERS_KEY)) {
-      localStorage.setItem(this.USERS_KEY, JSON.stringify([
-        { username: 'Rabia149', password: '1492001Rs', role: 'admin' },
-        { username: 'user', password: '12345', role: 'user' }
-      ]));
-    }
-  }
+  constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): boolean {
-    console.log("Service");
-    const users = JSON.parse(localStorage.getItem(this.USERS_KEY) || '[]');
-    console.log(users);
-    const foundUser = users.find(
-      (u: any) => u.username === username && u.password === password
+  // =============================
+  // HTTP USERS
+  // =============================
+  getUsers(): Observable<any[]> {
+    return this.http.get<any>(this.dataUrl).pipe(
+      map(data => data.users || [])
     );
-
-    if (!foundUser) {
-      return false;
-    }
-
-    localStorage.setItem(this.CURRENT_USER_KEY, JSON.stringify(foundUser));
-    return true;
   }
 
+  // =============================
+  // LOGIN
+  // =============================
+  login(username: string, password: string): Observable<boolean> {
+    return this.getUsers().pipe(
+      map(users => {
+        const user = users.find(
+          u => u.username === username && u.password === password
+        );
+
+        if (user) {
+          this.currentUser = user;
+          return true;
+        }
+
+        return false;
+      })
+    );
+  }
+
+  // =============================
+  // LOGOUT
+  // =============================
   logout(): void {
-    localStorage.removeItem(this.CURRENT_USER_KEY);
+    this.currentUser = null;
   }
 
-  getCurrentUser(): any | null {
-    return JSON.parse(localStorage.getItem(this.CURRENT_USER_KEY) || 'null');
-  }
-
+  // =============================
+  // AUTH HELPERS
+  // =============================
   isLoggedIn(): boolean {
-    return !!this.getCurrentUser();
+    return !!this.currentUser;
   }
 
   isAdmin(): boolean {
-    return this.getCurrentUser()?.role === 'admin';
+    return this.currentUser?.role === 'admin';
+  }
+
+  getCurrentUser(): any {
+    return this.currentUser;
+  }
+
+  // =============================
+  // REGISTER (IN-MEMORY ONLY)
+  // =============================
+  register(newUser: any): void {
+    // JSON is read-only → simulate backend
+    this.currentUser = {
+      ...newUser,
+      role: 'user'
+    };
   }
 }

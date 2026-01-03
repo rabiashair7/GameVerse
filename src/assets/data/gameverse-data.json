@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Rabia149",
+      "password": "1492001Rs",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "password": "12345",
+      "role": "user"
+    }
+  ],
+  "games": []
+}

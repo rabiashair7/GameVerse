@@ -94,3 +94,6 @@
   box-shadow: 0 0 18px rgba(99, 102, 241, 0.7);
   transform: translateY(-1px);
 }
+input.ng-touched.ng-invalid {
+  border-color: #dc3545;
+}

@@ -14,7 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 /* Admin & auth */
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
-
+import { RegisterComponent } from './register/register.component';
 /* Info */
 import { AboutComponent } from './about/about.component';
 
@@ -36,6 +36,7 @@ const routes: Routes = [
   /* Info */
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
+  { path:'register',component:RegisterComponent},
 
   /* Admin */
   { path: 'admin', component: AdminComponent },

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../userService.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,42 +10,82 @@ import { UserService } from '../userService.service';
 })
 export class LoginComponent {
 
-  loginForm: FormGroup;
+  // ---------- LOGIN ----------
+  username = '';
+  password = '';
   error = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private router: Router
-  ) {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(4)]]
-    });
-  }
+  // ---------- FORGOT PASSWORD ----------
+  forgotStep: 'login' | 'email' | 'code' | 'newPassword' = 'login';
+  resetCode = '';
+  generatedCode = '';
+  resetEmail = '';
 
+  newPasswordForm = this.fb.group({
+    password: ['', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/)
+    ]]
+  });
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+
+  // ================= LOGIN =================
   login(): void {
     this.error = '';
+    this.userService.login(this.username, this.password)
+      .subscribe(success => {
+        if (!success) {
+          this.error = 'Invalid username or password';
+          return;
+        }
+        this.router.navigate(['/home']);
+      });
+  }
 
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+  // ================= FORGOT PASSWORD FLOW =================
+
+  openForgotPassword() {
+    this.forgotStep = 'email';
+  }
+
+  sendResetCode() {
+    if (!this.resetEmail) return;
+
+    this.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+    console.log('Password reset code sent to email:', this.generatedCode);
+
+    this.forgotStep = 'code';
+  }
+
+  verifyResetCode() {
+    if (this.resetCode !== this.generatedCode) {
+      alert('Invalid reset code');
       return;
     }
+    this.forgotStep = 'newPassword';
+  }
 
-    const { username, password } = this.loginForm.value;
+  saveNewPassword() {
+    if (this.newPasswordForm.invalid) return;
 
-    const success = this.userService.login(username, password);
-    console.log(success);
+    // JSON is read-only → simulate backend success
+    console.log('New password set:', this.newPasswordForm.value.password);
 
-    if (!success) {
-      this.error = 'Invalid username or password';
-      return;
-    }
+    alert('Password successfully reset');
+    this.resetState();
+  }
 
-    if (this.userService.isAdmin()) {
-      this.router.navigate(['/admin']);
-    } else {
-      this.router.navigate(['/profile']);
-    }
+  resetState() {
+    this.forgotStep = 'login';
+    this.resetCode = '';
+    this.resetEmail = '';
+    this.generatedCode = '';
+    this.newPasswordForm.reset();
   }
 }
