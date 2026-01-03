@@ -13,12 +13,6 @@ export class RegisterComponent {
   // ===== DATE LIMIT (blocks future dates in UI) =====
   today = new Date().toISOString().split('T')[0];
 
-  // ===== STEPS =====
-  step: 'form' | 'confirm' = 'form';
-
-  generatedCode = '';
-  emailForVerification = '';
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -53,11 +47,6 @@ export class RegisterComponent {
     ]]
   });
 
-  // ===== CONFIRMATION FORM =====
-  confirmationForm = this.fb.group({
-    code: ['', Validators.required]
-  });
-
   // ===== VALIDATORS =====
 
   noFutureDate(control: AbstractControl) {
@@ -77,36 +66,26 @@ export class RegisterComponent {
     return valid ? null : { weakPassword: true };
   }
 
-  // ===== ACTIONS =====
+  // ===== ACTION =====
 
-  submitRegister() {
+  submitRegister(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    // simulate email confirmation
-    this.generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-    this.emailForVerification = this.registerForm.value.email!;
-
-    console.log('Confirmation code sent to email:', this.generatedCode);
-
-    this.step = 'confirm';
-  }
-
-  confirmCode() {
-    if (this.confirmationForm.value.code !== this.generatedCode) {
-      this.confirmationForm.setErrors({ invalidCode: true });
-      return;
-    }
-
-    // JSON is read-only → simulate backend registration
+    // REGISTER USER (NO VERIFICATION STEP)
     this.userService.register({
-      name: this.registerForm.value.name,
-      email: this.registerForm.value.email
+      username: this.registerForm.value.email!, // login identifier
+      fullName: this.registerForm.value.name!,
+      email: this.registerForm.value.email!,
+      password: this.registerForm.value.password!,
+      role: 'user',
+      banned: false
     });
 
-    this.router.navigate(['/home']);
+    // Redirect after successful registration
+    this.router.navigate(['/login']);
   }
 
   // ===== HELPERS =====

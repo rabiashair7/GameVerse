@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../gameService.service';
+import { UserService } from '../userService.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,7 +9,17 @@ import { GameService } from '../gameService.service';
 })
 export class AdminComponent implements OnInit {
 
+  /* =============================
+     VIEW STATE
+     ============================= */
+  view: 'add' | 'edit' | 'delete' | 'users' = 'add';
+
+  /* =============================
+     GAMES
+     ============================= */
   games: any[] = [];
+  filteredGames: any[] = [];
+  gameSearch = '';
 
   categories: string[] = [
     'action',
@@ -21,9 +32,10 @@ export class AdminComponent implements OnInit {
   ];
 
   title = '';
+  developer = '';
   price: number | null = null;
   image = '';
-  unitsSold: number | null = null;
+  unitsSold = '';
   releaseDate = '';
   details = '';
 
@@ -33,32 +45,113 @@ export class AdminComponent implements OnInit {
   selectedCategories: string[] = [];
   editingGame: any = null;
 
-  constructor(private gameService: GameService) {}
+  /* =============================
+     USERS
+     ============================= */
+  users: any[] = [];
+  filteredUsers: any[] = [];
+  userSearch = '';
+
+  constructor(
+    private gameService: GameService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.gameService.games$.subscribe(games => {
+    this.loadGames();
+    this.loadUsers();
+  }
+
+  /* =============================
+     LOAD GAMES (FROM BACKEND)
+     ============================= */
+  loadGames(): void {
+    this.gameService.getGames().subscribe(games => {
       this.games = games;
+      this.filteredGames = [...games];
     });
   }
 
-  toggleCategory(cat: string): void {
-    if (this.selectedCategories.includes(cat)) {
-      this.selectedCategories =
-        this.selectedCategories.filter(c => c !== cat);
-    } else {
-      this.selectedCategories.push(cat);
+  /* =============================
+     VIEW SWITCH
+     ============================= */
+  setView(v: 'add' | 'edit' | 'delete' | 'users'): void {
+    this.view = v;
+
+    if (v === 'users') this.loadUsers();
+    if (v === 'edit' || v === 'delete') {
+      this.filteredGames = [...this.games];
     }
   }
 
+  /* =============================
+     USERS
+     ============================= */
+  loadUsers(): void {
+    this.users = this.userService.getAllUsers();
+    this.filteredUsers = [...this.users];
+  }
+
+  filterUsers(): void {
+    const value = this.userSearch.toLowerCase().trim();
+    this.filteredUsers = this.users.filter(user =>
+      user.fullName?.toLowerCase().includes(value) ||
+      user.email?.toLowerCase().includes(value) ||
+      user.role?.toLowerCase().includes(value)
+    );
+  }
+
+  toggleRole(email: string): void {
+    this.userService.toggleRole(email);
+    this.loadUsers();
+  }
+
+  banUser(email: string): void {
+    this.userService.banUser(email);
+    this.loadUsers();
+  }
+
+  unbanUser(email: string): void {
+    this.userService.unbanUser(email);
+    this.loadUsers();
+  }
+
+  /* =============================
+     GAME SEARCH
+     ============================= */
+  filterGames(): void {
+    const value = this.gameSearch.toLowerCase().trim();
+    this.filteredGames = this.games.filter(game =>
+      game.title?.toLowerCase().includes(value) ||
+      game.developer?.toLowerCase().includes(value) ||
+      game.categories?.some((c: string) =>
+        c.toLowerCase().includes(value)
+      )
+    );
+  }
+
+  /* =============================
+     CATEGORIES
+     ============================= */
+  toggleCategory(cat: string): void {
+    this.selectedCategories.includes(cat)
+      ? this.selectedCategories =
+          this.selectedCategories.filter(c => c !== cat)
+      : this.selectedCategories.push(cat);
+  }
+
+  /* =============================
+     ADD GAME (PERSISTENT)
+     ============================= */
   addGame(): void {
-    if (!this.title || this.price === null) return;
+    if (!this.title || !this.developer || this.price === null) return;
 
     const newGame = {
-      id: Date.now(),
       title: this.title,
+      developer: this.developer,
       price: this.price,
-      coverImage: this.image,
-      unitsSold: this.unitsSold ?? 0,
+      image: this.image,
+      unitsSold: this.unitsSold,
       releaseDate: this.releaseDate,
       details: this.details,
       images: this.imagesText.split('\n').filter(x => x.trim()),
@@ -66,22 +159,30 @@ export class AdminComponent implements OnInit {
       categories: [...this.selectedCategories]
     };
 
-    this.gameService.addGame(newGame);
-    this.resetForm();
+    this.gameService.addGame(newGame).subscribe(() => {
+      this.loadGames();   // 🔥 refresh from backend
+      this.resetForm();
+    });
   }
 
+  /* =============================
+     EDIT GAME
+     ============================= */
   editGame(game: any): void {
     this.editingGame = game;
 
     this.title = game.title;
+    this.developer = game.developer;
     this.price = game.price;
-    this.image = game.coverImage;
-    this.unitsSold = game.unitsSold || 0;
+    this.image = game.image;
+    this.unitsSold = game.unitsSold || '';
     this.releaseDate = game.releaseDate || '';
     this.details = game.details || '';
     this.imagesText = (game.images || []).join('\n');
     this.videosText = (game.videos || []).join('\n');
     this.selectedCategories = [...game.categories];
+
+    this.view = 'edit';
   }
 
   saveEdit(): void {
@@ -90,9 +191,10 @@ export class AdminComponent implements OnInit {
     const updated = {
       ...this.editingGame,
       title: this.title,
+      developer: this.developer,
       price: this.price,
-      coverImage: this.image,
-      unitsSold: this.unitsSold ?? 0,
+      image: this.image,
+      unitsSold: this.unitsSold,
       releaseDate: this.releaseDate,
       details: this.details,
       images: this.imagesText.split('\n').filter(x => x.trim()),
@@ -100,20 +202,31 @@ export class AdminComponent implements OnInit {
       categories: [...this.selectedCategories]
     };
 
-    this.gameService.updateGame(updated);
-    this.editingGame = null;
-    this.resetForm();
+    this.gameService.updateGame(updated).subscribe(() => {
+      this.loadGames();   // 🔥 refresh from backend
+      this.editingGame = null;
+      this.resetForm();
+    });
   }
 
+  /* =============================
+     DELETE GAME
+     ============================= */
   deleteGame(id: number): void {
-    this.gameService.deleteGame(id);
+    this.gameService.deleteGame(id).subscribe(() => {
+      this.loadGames();   // 🔥 refresh from backend
+    });
   }
 
+  /* =============================
+     RESET FORM
+     ============================= */
   resetForm(): void {
     this.title = '';
+    this.developer = '';
     this.price = null;
     this.image = '';
-    this.unitsSold = null;
+    this.unitsSold = '';
     this.releaseDate = '';
     this.details = '';
     this.imagesText = '';

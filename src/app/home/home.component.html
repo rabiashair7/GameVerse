@@ -3,10 +3,18 @@
   <h2>🔥 Most Popular Games</h2>
 
   <div class="grid">
-    <div class="game-card" *ngFor="let g of popularGames">
-      <img [src]="g.coverImage">
+    <div
+      class="game-card"
+      *ngFor="let g of popularGames"
+      [routerLink]="['/game', g.id]"
+    >
+      <img [src]="g.image" alt="{{ g.title }}">
+
       <h4>{{ g.title }}</h4>
-      <p>{{ g.unitsSold | number }} sold</p>
+
+      <p class="developer">{{ g.developer }}</p>
+
+      <p>{{ g.unitsSold }} sold</p>
     </div>
   </div>
 </section>
@@ -14,9 +22,11 @@
 <!-- 🔍 SEARCH & SORT -->
 <div class="search-sort">
   <input
-    placeholder="Search games..."
+    type="text"
+    placeholder="Search by title or developer..."
     [(ngModel)]="search"
-    (input)="applySearchAndSort()">
+    (input)="applySearchAndSort()"
+  >
 
   <select [(ngModel)]="sortBy" (change)="applySearchAndSort()">
     <option value="title">Title</option>
@@ -27,9 +37,19 @@
 
 <!-- 🎮 ALL GAMES -->
 <div class="grid">
-  <div class="game-card" *ngFor="let g of games">
-    <img [src]="g.coverImage">
+  <div
+    class="game-card"
+    *ngFor="let g of filteredGames"
+    [routerLink]="['/game', g.id]"
+  >
+    <img [src]="g.image" alt="{{ g.title }}">
+
     <h4>{{ g.title }}</h4>
-    <p>${{ g.price }}</p>
+
+    <p class="developer">{{ g.developer }}</p>
+
+    <p class="price">${{ g.price }}</p>
+
+    <span *ngIf="g.popular" class="popular-badge">🔥 Popular</span>
   </div>
 </div>

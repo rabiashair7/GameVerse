@@ -15,6 +15,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+
+/* Game */
+import { GameCardComponent } from './gamecard/gamecard.component';
+
 /* Info */
 import { AboutComponent } from './about/about.component';
 
@@ -26,6 +30,7 @@ const routes: Routes = [
   /* Store */
   { path: 'home', component: HomeComponent },
   { path: 'category/:name', component: CategoryComponent },
+  { path: 'game/:id', component: GameCardComponent }, // 🔥 THIS LINE FIXES IT
 
   /* User */
   { path: 'library', component: LibraryComponent },
@@ -36,7 +41,7 @@ const routes: Routes = [
   /* Info */
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
-  { path:'register',component:RegisterComponent},
+  { path: 'register', component: RegisterComponent },
 
   /* Admin */
   { path: 'admin', component: AdminComponent },

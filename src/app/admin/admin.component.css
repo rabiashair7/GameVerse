@@ -1,15 +1,65 @@
+/* =============================
+   LAYOUT (SIDEBAR + CONTENT)
+   ============================= */
+
 .admin-container {
   min-height: 100vh;
-  padding: 30px;
+  display: flex;
   background: var(--bg-shell);
   color: var(--text-main);
+}
+
+/* =============================
+   SIDEBAR
+   ============================= */
+
+.sidebar {
+  width: 220px;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h3 {
+  margin-bottom: 20px;
+}
+
+.sidebar button {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-hover);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar button:hover {
+  background: var(--accent);
+  color: var(--accent-contrast, #000);
+}
+
+/* =============================
+   MAIN CONTENT
+   ============================= */
+
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
 }
 
 .admin-title {
   margin-bottom: 20px;
 }
 
-/* CARD */
+/* =============================
+   CARD
+   ============================= */
+
 .admin-card {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -18,16 +68,15 @@
   margin-bottom: 30px;
 }
 
-/* FORM */
+/* =============================
+   FORM
+   ============================= */
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-top: 12px;
-}
-
-.form-row {
-  margin-top: 14px;
 }
 
 label {
@@ -44,6 +93,7 @@ textarea {
   border: 1px solid var(--border);
   background: var(--bg);
   color: var(--text-main);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input::placeholder,
@@ -51,11 +101,29 @@ textarea::placeholder {
   color: var(--text-muted);
 }
 
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
 textarea {
   resize: vertical;
 }
 
-/* CATEGORIES */
+/* =============================
+   SEARCH INPUT
+   ============================= */
+
+.search-input {
+  margin: 12px 0;
+}
+
+/* =============================
+   CATEGORIES
+   ============================= */
+
 .categories {
   margin-top: 16px;
 }
@@ -69,6 +137,7 @@ textarea {
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .category.active {
@@ -77,11 +146,11 @@ textarea {
   border-color: var(--accent);
 }
 
-/* BUTTONS */
-.actions {
-  margin-top: 16px;
-}
+/* =============================
+   BUTTONS
+   ============================= */
 
+button,
 .btn {
   padding: 8px 14px;
   margin-right: 8px;
@@ -90,6 +159,19 @@ textarea {
   background: var(--bg-hover);
   color: var(--text-main);
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  background: var(--accent);
+  color: var(--accent-contrast, #000);
+}
+
+button:disabled,
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .btn.primary {
@@ -99,13 +181,13 @@ textarea {
 }
 
 .btn.warning {
-  background: #facc15;
-  color: #000;
+  background: var(--warning, #facc15);
+  color: var(--warning-contrast, #000);
 }
 
 .btn.danger {
-  background: #ef4444;
-  color: #fff;
+  background: var(--danger, #ef4444);
+  color: var(--danger-contrast, #fff);
 }
 
 .btn.small {
@@ -113,20 +195,32 @@ textarea {
   font-size: 0.85rem;
 }
 
-/* TABLE */
-.admin-table {
+/* =============================
+   TABLE
+   ============================= */
+
+.admin-table,
+.users-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 16px;
 }
 
 .admin-table th,
-.admin-table td {
+.admin-table td,
+.users-table th,
+.users-table td {
   border-bottom: 1px solid var(--border);
   padding: 10px;
+  text-align: left;
 }
 
-.admin-table thead {
+.users-table tr:hover {
+  background: var(--bg-hover);
+}
+
+.admin-table thead,
+.users-table thead {
   background: var(--bg-hover);
 }
 
@@ -135,7 +229,10 @@ textarea {
   color: var(--text-muted);
 }
 
-/* TAGS */
+/* =============================
+   TAGS
+   ============================= */
+
 .tag {
   display: inline-block;
   background: var(--bg-hover);
@@ -145,11 +242,39 @@ textarea {
   font-size: 0.8rem;
 }
 
-/* IMAGE */
+/* =============================
+   IMAGE
+   ============================= */
+
 .thumb {
   width: 70px;
   height: 45px;
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid var(--border);
+}
+
+/* =============================
+   RESPONSIVE
+   ============================= */
+
+@media (max-width: 900px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar button {
+    flex: 1;
+    margin: 4px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }

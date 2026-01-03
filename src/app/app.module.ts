@@ -10,7 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { GamesComponent } from './games/games.component';
-import { GamecardComponent } from './gamecard/gamecard.component';
+import { GameCardComponent } from './gamecard/gamecard.component';
 import { CartComponent } from './cart/cart.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { AboutComponent } from './about/about.component';
@@ -28,7 +28,7 @@ import { RegisterComponent } from './register/register.component';
     HomeComponent,
     CategoryComponent,
     GamesComponent,
-    GamecardComponent,
+    GameCardComponent,
     CartComponent,
     WishlistComponent,
     AboutComponent,

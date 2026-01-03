@@ -1,1 +1,36 @@
-<p>games works!</p>
+<h2 class="title">🎮 All Games</h2>
+
+<!-- 🔍 SEARCH -->
+<input
+  type="text"
+  class="search-input"
+  placeholder="Search games..."
+  [(ngModel)]="search"
+  (input)="searchGames()"
+/>
+
+<!-- 🎮 GAMES GRID -->
+<div class="grid">
+  <div
+    class="game-card"
+    *ngFor="let game of filteredGames"
+    [routerLink]="['/game', game.id]"
+  >
+    <img [src]="game.image" alt="{{ game.title }}">
+
+    <h4>{{ game.title }}</h4>
+
+    <p class="developer">{{ game.developer }}</p>
+
+    <p class="price">${{ game.price }}</p>
+
+    <span *ngIf="game.popular" class="popular-badge">
+      🔥 Popular
+    </span>
+  </div>
+</div>
+
+<!-- ❌ EMPTY STATE -->
+<p *ngIf="!filteredGames.length" class="empty">
+  No games found.
+</p>

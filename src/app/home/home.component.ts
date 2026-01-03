@@ -8,44 +8,69 @@ import { GameService } from '../gameService.service';
 })
 export class HomeComponent implements OnInit {
 
+  /* =============================
+     DATA
+     ============================= */
   games: any[] = [];
   popularGames: any[] = [];
+  filteredGames: any[] = [];
 
+  /* =============================
+     SEARCH & SORT
+     ============================= */
   search = '';
   sortBy: 'title' | 'price' | 'date' = 'title';
 
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
-    this.gameService.games$.subscribe(games => {
+    this.loadGames();
+  }
+
+  /* =============================
+     LOAD FROM BACKEND
+     ============================= */
+  loadGames(): void {
+    this.gameService.getGames().subscribe(games => {
       this.games = games;
-      this.popularGames = this.gameService.getPopularGames(6);
+      this.filteredGames = [...games];
+      this.popularGames = games.filter(g => g.popular);
       this.applySearchAndSort();
     });
   }
 
+  /* =============================
+     SEARCH + SORT
+     ============================= */
   applySearchAndSort(): void {
-    let filtered = [...this.gameService.getGames()];
+    let result = [...this.games];
 
-    if (this.search.trim()) {
-      const q = this.search.toLowerCase();
-      filtered = filtered.filter(g =>
-        g.title.toLowerCase().includes(q)
+    // 🔍 SEARCH
+    const q = this.search.toLowerCase().trim();
+    if (q) {
+      result = result.filter(g =>
+        g.title?.toLowerCase().includes(q) ||
+        g.developer?.toLowerCase().includes(q)
       );
     }
 
-    if (this.sortBy === 'price') {
-      filtered.sort((a, b) => a.price - b.price);
-    } else if (this.sortBy === 'date') {
-      filtered.sort((a, b) =>
-        (a.releaseDate || '').localeCompare(b.releaseDate || '')
-      );
-    } else {
-      filtered.sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
+    // 🔃 SORT
+    switch (this.sortBy) {
+      case 'price':
+        result.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+        break;
+      case 'date':
+        result.sort((a, b) =>
+          new Date(b.releaseDate).getTime() -
+          new Date(a.releaseDate).getTime()
+        );
+        break;
+      default:
+        result.sort((a, b) =>
+          a.title.localeCompare(b.title)
+        );
     }
 
-    this.games = filtered;
+    this.filteredGames = result;
   }
 }

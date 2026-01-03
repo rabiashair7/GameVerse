@@ -11,6 +11,7 @@ export class CategoryComponent implements OnInit {
 
   category = '';
   games: any[] = [];
+  filteredGames: any[] = [];
 
   search = '';
   sortBy: 'title' | 'price' = 'title';
@@ -24,32 +25,34 @@ export class CategoryComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.category = params['name'];
 
-      this.gameService.games$.subscribe(allGames => {
-        this.applySearchAndSort(allGames);
+      this.gameService.getGames().subscribe(games => {
+        this.games = games.filter(g =>
+          g.categories?.includes(this.category)
+        );
+        this.applyFilters();
       });
     });
   }
 
-  applySearchAndSort(allGames: any[]): void {
-    let filtered = allGames.filter(g =>
-      g.categories.includes(this.category)
-    );
+  applyFilters(): void {
+    let result = [...this.games];
 
-    if (this.search.trim()) {
-      const q = this.search.toLowerCase();
-      filtered = filtered.filter(g =>
-        g.title.toLowerCase().includes(q)
+    // SEARCH
+    const q = this.search.toLowerCase().trim();
+    if (q) {
+      result = result.filter(g =>
+        g.title?.toLowerCase().includes(q) ||
+        g.developer?.toLowerCase().includes(q)
       );
     }
 
+    // SORT
     if (this.sortBy === 'price') {
-      filtered.sort((a, b) => a.price - b.price);
+      result.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
     } else {
-      filtered.sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
+      result.sort((a, b) => a.title.localeCompare(b.title));
     }
 
-    this.games = filtered;
+    this.filteredGames = result;
   }
 }

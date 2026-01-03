@@ -1,62 +1,90 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  private games: any[] = [];
-  private gamesSubject = new BehaviorSubject<any[]>([]);
-  games$ = this.gamesSubject.asObservable();
+  private apiUrl = 'http://localhost:3000/games';
 
-  constructor() {
-    const saved = localStorage.getItem('games');
-    if (saved) {
-      this.games = JSON.parse(saved);
-      this.gamesSubject.next(this.games);
+  constructor(private http: HttpClient) {}
+
+  /* =======================
+     READ
+     ======================= */
+
+  getGames(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  getGameById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  getPopularGames(limit: number = 6): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?popular=true&_limit=${limit}`);
+  }
+
+  /* =======================
+     CREATE (ADMIN)
+     ======================= */
+
+  addGame(game: any): Observable<any> {
+    game.popular = this.isPopular(game.unitsSold);
+    return this.http.post<any>(this.apiUrl, game);
+  }
+
+  /* =======================
+     UPDATE
+     ======================= */
+
+  updateGame(game: any): Observable<any> {
+    game.popular = this.isPopular(game.unitsSold);
+    return this.http.put<any>(`${this.apiUrl}/${game.id}`, game);
+  }
+
+  /* =======================
+     DELETE
+     ======================= */
+
+  deleteGame(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  /* =======================
+     SEARCH
+     ======================= */
+
+  searchGames(query: string): Observable<any[]> {
+    const q = query.trim();
+    if (!q) {
+      return this.getGames();
     }
-  }
-
-  addGame(game: any): void {
-    this.games.push(game);
-    this.update();
-  }
-
-  updateGame(updatedGame: any): void {
-    const index = this.games.findIndex(g => g.id === updatedGame.id);
-    if (index !== -1) {
-      this.games[index] = updatedGame;
-      this.update();
-    }
-  }
-
-  deleteGame(id: number): void {
-    this.games = this.games.filter(g => g.id !== id);
-    this.update();
-  }
-
-  getGames(): any[] {
-    return [...this.games];
-  }
-
-  getCategories(): string[] {
-    const set = new Set<string>();
-    this.games.forEach(g =>
-      g.categories?.forEach((c: string) => set.add(c))
+    return this.http.get<any[]>(
+      `${this.apiUrl}?q=${encodeURIComponent(q)}`
     );
-    return Array.from(set);
   }
 
-  /* 🔥 POPULAR GAMES (FIXED) */
-  getPopularGames(limit: number = 6): any[] {
-    return [...this.games]
-      .sort((a, b) => (b.unitsSold || 0) - (a.unitsSold || 0))
-      .slice(0, limit);
+  /* =======================
+     BUSINESS LOGIC
+     ======================= */
+
+  private isPopular(unitsSold: string): boolean {
+    return this.parseUnitsSold(unitsSold) >= 10_000_000;
   }
 
-  private update(): void {
-    localStorage.setItem('games', JSON.stringify(this.games));
-    this.gamesSubject.next([...this.games]);
+  private parseUnitsSold(value: string): number {
+    if (!value) return 0;
+
+    const v = value.trim().toUpperCase();
+    const n = parseFloat(v);
+
+    if (v.endsWith('B')) return n * 1_000_000_000;
+    if (v.endsWith('M')) return n * 1_000_000;
+    if (v.endsWith('K')) return n * 1_000;
+
+    return isNaN(n) ? 0 : n;
   }
 }

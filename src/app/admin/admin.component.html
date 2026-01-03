@@ -1,37 +1,175 @@
 <div class="admin-container">
 
-  <h2>🎮 GameVerse Admin Panel</h2>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>🎮 Admin</h3>
 
-  <div class="admin-card">
-    <h4>{{ editingGame ? 'Edit Game' : 'Add New Game' }}</h4>
+    <button (click)="setView('add')">➕ Add Game</button>
+    <button (click)="setView('edit')">✏️ Edit Game</button>
+    <button (click)="setView('delete')">🗑 Delete Game</button>
+    <button (click)="setView('users')">👥 Users</button>
+  </aside>
 
-    <div class="form-grid">
-      <input placeholder="Game title" [(ngModel)]="title">
-      <input type="number" placeholder="Price" [(ngModel)]="price">
-      <input placeholder="Cover Image URL" [(ngModel)]="image">
-      <input type="number" placeholder="Units Sold (Worldwide)" [(ngModel)]="unitsSold">
+  <!-- MAIN CONTENT -->
+  <section class="content">
+
+    <h2>🎮 GameVerse Admin Panel</h2>
+
+    <!-- =============================
+         ADD / EDIT GAME
+         ============================= -->
+    <div *ngIf="view === 'add' || view === 'edit'" class="admin-card">
+
+      <h4>{{ editingGame ? 'Edit Game' : 'Add New Game' }}</h4>
+
+      <div class="form-grid">
+        <input
+          placeholder="Game title"
+          [(ngModel)]="title"
+        >
+
+        <input
+          placeholder="Developer / Studio"
+          [(ngModel)]="developer"
+        >
+
+        <input
+          type="number"
+          placeholder="Price"
+          [(ngModel)]="price"
+        >
+
+        <input
+          placeholder="Cover Image URL"
+          [(ngModel)]="image"
+        >
+
+        <input
+          type="text"
+          placeholder="Units Sold (e.g. 200M, 1.2B)"
+          [(ngModel)]="unitsSold"
+        >
+      </div>
+
+      <input
+        type="date"
+        [(ngModel)]="releaseDate"
+      >
+
+      <textarea
+        rows="3"
+        placeholder="Game details"
+        [(ngModel)]="details">
+      </textarea>
+
+      <textarea
+        rows="2"
+        placeholder="Images (one per line)"
+        [(ngModel)]="imagesText">
+      </textarea>
+
+      <textarea
+        rows="2"
+        placeholder="Videos (one per line)"
+        [(ngModel)]="videosText">
+      </textarea>
+
+      <!-- CATEGORIES -->
+      <div class="categories">
+        <span
+          *ngFor="let cat of categories"
+          class="category"
+          [class.active]="selectedCategories.includes(cat)"
+          (click)="toggleCategory(cat)">
+          {{ cat }}
+        </span>
+      </div>
+
+      <button (click)="editingGame ? saveEdit() : addGame()">
+        {{ editingGame ? 'Save Changes' : 'Add Game' }}
+      </button>
     </div>
 
-    <input type="date" [(ngModel)]="releaseDate">
+    <!-- =============================
+         EDIT GAME (SEARCH)
+         ============================= -->
+    <div *ngIf="view === 'edit'" class="admin-card">
+      <h4>Edit Games</h4>
 
-    <textarea rows="3" placeholder="Game details" [(ngModel)]="details"></textarea>
+      <input
+        type="text"
+        placeholder="Search by title or developer..."
+        [(ngModel)]="gameSearch"
+        (input)="filterGames()"
+        class="search-input"
+      >
 
-    <textarea rows="2" placeholder="Images (one per line)" [(ngModel)]="imagesText"></textarea>
-    <textarea rows="2" placeholder="Videos (one per line)" [(ngModel)]="videosText"></textarea>
-
-    <div class="categories">
-      <span
-        *ngFor="let cat of categories"
-        class="category"
-        [class.active]="selectedCategories.includes(cat)"
-        (click)="toggleCategory(cat)">
-        {{ cat }}
-      </span>
+      <div *ngFor="let g of filteredGames" class="delete-row">
+        <span>{{ g.title }} — {{ g.developer }}</span>
+        <button (click)="editGame(g)">Edit</button>
+      </div>
     </div>
 
-    <button (click)="editingGame ? saveEdit() : addGame()">
-      {{ editingGame ? 'Save Changes' : 'Add Game' }}
-    </button>
-  </div>
+    <!-- =============================
+         DELETE GAME (SEARCH)
+         ============================= -->
+    <div *ngIf="view === 'delete'" class="admin-card">
+      <h4>Delete Games</h4>
 
+      <input
+        type="text"
+        placeholder="Search by title or developer..."
+        [(ngModel)]="gameSearch"
+        (input)="filterGames()"
+        class="search-input"
+      >
+
+      <div *ngFor="let g of filteredGames" class="delete-row">
+        <span>{{ g.title }} — {{ g.developer }}</span>
+        <button (click)="deleteGame(g.id)">Delete</button>
+      </div>
+    </div>
+
+    <!-- =============================
+         USERS MANAGEMENT
+         ============================= -->
+    <div *ngIf="view === 'users'" class="admin-card">
+      <h4>User Management</h4>
+
+      <input
+        type="text"
+        placeholder="Search users..."
+        [(ngModel)]="userSearch"
+        (input)="filterUsers()"
+        class="search-input"
+      >
+
+      <table class="users-table">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+
+        <tr *ngFor="let u of filteredUsers">
+          <td>{{ u.fullName || u.username }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.role }}</td>
+          <td>{{ u.banned ? 'Banned' : 'Active' }}</td>
+
+          <td>
+            <button (click)="toggleRole(u.email)">
+              {{ u.role === 'admin' ? 'Demote' : 'Promote' }}
+            </button>
+
+            <button *ngIf="!u.banned" (click)="banUser(u.email)">Ban</button>
+            <button *ngIf="u.banned" (click)="unbanUser(u.email)">Unban</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </section>
 </div>
