@@ -1,0 +1,60 @@
+{
+  "games": [
+    {
+      "id": "d3a4",
+      "title": "Elden Ring",
+      "developer": "FromSoftware",
+      "price": 78,
+      "image": "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg",
+      "unitsSold": "30M",
+      "releaseDate": "2022-02-25",
+      "details": "THE CRITICALLY ACCLAIMED FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between",
+      "images": [
+        "https://www.gematsu.com/wp-content/uploads/2021/08/Elden-Ring_2021_08-27-21_002.jpg",
+        "https://i.redd.it/qh0c7oql084a1.jpg",
+        "https://img.playstationtrophies.org/images/monthly_2024_06/screenshots/8969/elden_ring-shadow-of-the-erdtree-screen-1_7f52cca4-6884-4676-96dd-4a10e2110d07.jpg",
+        "https://cdn.mos.cms.futurecdn.net/8gWTFzyHLQXnTGiVhRLeea.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=E3Huy2cdih0&t=46s",
+        "https://www.youtube.com/watch?v=K_03kFqWfqs"
+      ],
+      "categories": [
+        "rpg",
+        "open-world",
+        "adventure",
+        "action"
+      ],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "4207",
+      "title": "Red Dead Redemption 2",
+      "developer": "Rockstar Games",
+      "price": 69.99,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjEIOKO0F-fVxGw1aZJMr-gr1vnCXdvrFewu-qw2SJNw_bL68jzIYYDCdnoYQDX3C99ZeNOA&s=10",
+      "unitsSold": "79M",
+      "releaseDate": "2018-10-26",
+      "details": "Arthur Morgan and the Van der Linde Gang are outlaws on the run. With federal agents and bounty hunters massing on their heels, the gang must rob, steal, and fight their way across the rugged heartland in order to survive.",
+      "images": [
+        "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/e162d27c8c142a69c2787d1af643faec.jpg?im=Resize=1920",
+        "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/ef1e767fe0b8d6674ba0cad3ff856367.jpg?im=Resize=1920",
+        "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/e83396762fe1fbc6084e16d203dbb80e.jpg?im=Resize=1920",
+        "https://media-rockstargames-com.akamaized.net/mfe6/prod/__common/img/05733b4621e4d2512e3bd63d7d385567.jpg?im=Resize=1920"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=gmA6MrX81z4",
+        "https://www.youtube.com/watch?v=F63h3v9QV7w",
+        "https://www.youtube.com/watch?v=eaW0tYpxyp0"
+      ],
+      "categories": [
+        "action",
+        "adventure",
+        "open-world"
+      ],
+      "rating": null,
+      "popular": true
+    }
+  ]
+}

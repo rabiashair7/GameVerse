@@ -63,7 +63,7 @@ export class AdminComponent implements OnInit {
   }
 
   /* =============================
-     LOAD GAMES (FROM BACKEND)
+     LOAD GAMES
      ============================= */
   loadGames(): void {
     this.gameService.getGames().subscribe(games => {
@@ -77,6 +77,7 @@ export class AdminComponent implements OnInit {
      ============================= */
   setView(v: 'add' | 'edit' | 'delete' | 'users'): void {
     this.view = v;
+    this.editingGame = null;
 
     if (v === 'users') this.loadUsers();
     if (v === 'edit' || v === 'delete') {
@@ -141,7 +142,7 @@ export class AdminComponent implements OnInit {
   }
 
   /* =============================
-     ADD GAME (PERSISTENT)
+     ADD GAME
      ============================= */
   addGame(): void {
     if (!this.title || !this.developer || this.price === null) return;
@@ -160,7 +161,7 @@ export class AdminComponent implements OnInit {
     };
 
     this.gameService.addGame(newGame).subscribe(() => {
-      this.loadGames();   // 🔥 refresh from backend
+      this.loadGames();
       this.resetForm();
     });
   }
@@ -203,7 +204,7 @@ export class AdminComponent implements OnInit {
     };
 
     this.gameService.updateGame(updated).subscribe(() => {
-      this.loadGames();   // 🔥 refresh from backend
+      this.loadGames();
       this.editingGame = null;
       this.resetForm();
     });
@@ -212,9 +213,9 @@ export class AdminComponent implements OnInit {
   /* =============================
      DELETE GAME
      ============================= */
-  deleteGame(id: number): void {
+  deleteGame(id: string): void {
     this.gameService.deleteGame(id).subscribe(() => {
-      this.loadGames();   // 🔥 refresh from backend
+      this.loadGames();
     });
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +16,33 @@ export class GameService {
      ======================= */
 
   getGames(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map(games =>
+        games.map(g => ({
+          ...g,
+          popular: g.popular ?? this.isPopular(g.unitsSold),
+          rating: g.rating ?? null
+        }))
+      )
+    );
   }
 
-  getGameById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getGameById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+      map(game => ({
+        ...game,
+        popular: game.popular ?? this.isPopular(game.unitsSold),
+        rating: game.rating ?? null
+      }))
+    );
   }
 
   getPopularGames(limit: number = 6): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}?popular=true&_limit=${limit}`);
+    return this.getGames().pipe(
+      map(games =>
+        games.filter(g => g.popular).slice(0, limit)
+      )
+    );
   }
 
   /* =======================
@@ -32,8 +50,13 @@ export class GameService {
      ======================= */
 
   addGame(game: any): Observable<any> {
-    game.popular = this.isPopular(game.unitsSold);
-    return this.http.post<any>(this.apiUrl, game);
+    const payload = {
+      ...game,
+      rating: game.rating ?? null,
+      popular: this.isPopular(game.unitsSold)
+    };
+
+    return this.http.post<any>(this.apiUrl, payload);
   }
 
   /* =======================
@@ -41,16 +64,21 @@ export class GameService {
      ======================= */
 
   updateGame(game: any): Observable<any> {
-    game.popular = this.isPopular(game.unitsSold);
-    return this.http.put<any>(`${this.apiUrl}/${game.id}`, game);
+    const payload = {
+      ...game,
+      rating: game.rating ?? null,
+      popular: this.isPopular(game.unitsSold)
+    };
+
+    return this.http.put<any>(`${this.apiUrl}/${game.id}`, payload);
   }
 
   /* =======================
      DELETE
      ======================= */
 
-  deleteGame(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  deleteGame(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
   /* =======================
@@ -59,9 +87,8 @@ export class GameService {
 
   searchGames(query: string): Observable<any[]> {
     const q = query.trim();
-    if (!q) {
-      return this.getGames();
-    }
+    if (!q) return this.getGames();
+
     return this.http.get<any[]>(
       `${this.apiUrl}?q=${encodeURIComponent(q)}`
     );
@@ -71,11 +98,11 @@ export class GameService {
      BUSINESS LOGIC
      ======================= */
 
-  private isPopular(unitsSold: string): boolean {
+  private isPopular(unitsSold?: string): boolean {
     return this.parseUnitsSold(unitsSold) >= 10_000_000;
   }
 
-  private parseUnitsSold(value: string): number {
+  private parseUnitsSold(value?: string): number {
     if (!value) return 0;
 
     const v = value.trim().toUpperCase();

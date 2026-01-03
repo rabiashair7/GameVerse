@@ -1,74 +1,49 @@
+<!-- ⏳ LOADING -->
 <div *ngIf="loading" class="loading">
   Loading game...
 </div>
 
+<!-- ❌ ERROR -->
+<div *ngIf="!loading && error" class="error">
+  {{ error }}
+</div>
+
+<!-- 🎮 GAME CARD -->
 <div *ngIf="!loading && game" class="game-card-page">
 
   <h1>{{ game.title }}</h1>
   <p class="developer">{{ game.developer }}</p>
 
-  <img
-    class="cover"
-    [src]="game.image"
-    alt="{{ game.title }}"
-  >
-
-  <!-- ⭐ RATING -->
-  <div class="rating" *ngIf="game.rating !== undefined">
-    <span *ngFor="let s of [1,2,3,4,5]">
-      {{ s <= game.rating ? '⭐' : '☆' }}
-    </span>
-    <span class="rating-number">
-      ({{ game.rating }}/5)
-    </span>
+  <!-- 🖼 MAIN IMAGE -->
+  <div class="image-viewer">
+    <img [src]="selectedImage" class="main-image">
   </div>
 
-  <p class="price">
-    💰 ${{ game.price }}
-  </p>
-
-  <p class="release">
-    📅 Released: {{ game.releaseDate }}
-  </p>
-
-  <p class="sold">
-    📊 Units sold: {{ game.unitsSold }}
-  </p>
-
-  <p class="description">
-    {{ game.details }}
-  </p>
-
-  <!-- 🏷 CATEGORIES -->
-  <div class="categories">
-    <span
-      class="category"
-      *ngFor="let c of game.categories"
-    >
-      {{ c }}
-    </span>
-  </div>
-
-  <!-- 🖼 EXTRA IMAGES -->
-  <div *ngIf="game.images?.length" class="gallery">
-    <h3>Screenshots</h3>
+  <!-- 🖼 THUMBNAILS (STEAM STYLE) -->
+  <div class="thumbnails" *ngIf="allImages.length">
     <img
-      *ngFor="let img of game.images"
+      *ngFor="let img of allImages"
       [src]="img"
-      alt="Screenshot"
+      (click)="selectImage(img)"
+      [class.active]="img === selectedImage"
     >
+  </div>
+
+  <!-- INFO -->
+  <div class="info">
+    <p class="price">${{ game.price }}</p>
+    <p class="release">Released: {{ game.releaseDate }}</p>
+    <p class="description">{{ game.details }}</p>
   </div>
 
   <!-- 🎥 VIDEOS -->
-  <div *ngIf="game.videos?.length" class="videos">
-    <h3>Videos</h3>
-    <a
-      *ngFor="let v of game.videos"
-      [href]="v"
-      target="_blank"
-    >
-      ▶ Watch video
-    </a>
+  <div *ngIf="safeVideos.length" class="videos">
+    <iframe
+      *ngFor="let v of safeVideos"
+      [src]="v"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
   </div>
 
 </div>
