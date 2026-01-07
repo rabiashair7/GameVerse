@@ -20,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NotFoundComponent } from './notfound/notfound.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { RegisterComponent } from './register/register.component';
     AdminComponent,
     FooterComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

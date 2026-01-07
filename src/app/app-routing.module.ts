@@ -21,16 +21,16 @@ import { GameCardComponent } from './gamecard/gamecard.component';
 
 /* Info */
 import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-
-  /* Default */
+ /* Default */
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   /* Store */
   { path: 'home', component: HomeComponent },
   { path: 'category/:name', component: CategoryComponent },
-  { path: 'game/:id', component: GameCardComponent }, // 🔥 THIS LINE FIXES IT
+  { path: 'game/:id', component: GameCardComponent },
 
   /* User */
   { path: 'library', component: LibraryComponent },
@@ -46,9 +46,10 @@ const routes: Routes = [
   /* Admin */
   { path: 'admin', component: AdminComponent },
 
-  /* Fallback */
-  { path: '**', redirectTo: 'home' }
+  /* 404 – MUST BE LAST */
+  { path: '**', component: NotFoundComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
