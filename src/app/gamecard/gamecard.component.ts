@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../gameService.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -21,7 +21,8 @@ export class GameCardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router            // ✅ added
   ) {}
 
   ngOnInit(): void {
@@ -73,5 +74,10 @@ export class GameCardComponent implements OnInit {
 
       return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
     });
+  }
+
+  // ✅ BACK TO HOME (navigation via code, as required)
+  goHome(): void {
+    this.router.navigate(['/home']);
   }
 }

@@ -21,6 +21,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './notfound/notfound.component';
+import { CatalogComponent } from './catalog/catalog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { NotFoundComponent } from './notfound/notfound.component';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CatalogComponent
   ],
   imports: [
     BrowserModule,
