@@ -7,6 +7,24 @@
   border-radius: 14px;
 }
 
+/* BACK TO HOME BUTTON */
+.back-btn {
+  background: transparent;
+  color: #38bdf8;
+  border: 1px solid #38bdf8;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #38bdf8;
+  color: #020617;
+}
+
 /* IMAGE VIEWER */
 .image-viewer {
   background: #020617;

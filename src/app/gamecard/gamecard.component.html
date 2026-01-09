@@ -11,6 +11,11 @@
 <!-- 🎮 GAME CARD -->
 <div *ngIf="!loading && game" class="game-card-page">
 
+  <!-- ⬅ BACK TO HOME -->
+  <button class="back-btn" (click)="goHome()">
+    ⬅ Back to Home
+  </button>
+
   <h1>{{ game.title }}</h1>
   <p class="developer">{{ game.developer }}</p>
 
