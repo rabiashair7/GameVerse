@@ -142,6 +142,60 @@
       ],
       "rating": null,
       "popular": true
+    },
+    {
+      "id": "13bf",
+      "title": "EA Sports FC 24",
+      "developer": "EA Sports",
+      "price": 29.99,
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/583562178513315.64e908d8b1e0c.jpg",
+      "unitsSold": "6.8M",
+      "releaseDate": "2023-09-29",
+      "details": "EA SPORTS FC™ 24 is a football simulation game developed by EA Vancouver and EA Romania, released on September 29, 2023. It features HyperMotionV, PlayStyles, and an enhanced Frostbite™ Engine, providing a true-to-football experience with over 19,000 fully licensed players and 700+ teams. The game is available on multiple platforms, including Nintendo Switch, PlayStation 4, PlayStation 5, Windows, Xbox One, and Xbox Series X/S.",
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.TwCfymIVSsp4aTrB9VHiKwHaEY?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "https://5.imimg.com/data5/SELLER/Default/2023/10/352017418/TH/PG/ZI/110396315/fc24-ut-keyart-4x5-withlogos-1689004114401-500x500.png",
+        "https://eloutput.com/wp-content/uploads/2023/07/fc24-ultimate-team.jpg",
+        "https://tse3.mm.bing.net/th/id/OIP.M5S9q64pskdd1dQP4Mn8ZgHaD8?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "https://tse1.mm.bing.net/th/id/OIP.qh5MWEjB0yiCPNRj1bpSagAAAA?w=285&h=395&rs=1&pid=ImgDetMain&o=7&rm=3"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=-vL01jbgENE",
+        "https://www.youtube.com/watch?v=IpTyOJL59N0"
+      ],
+      "categories": [
+        "sports",
+        "strategy"
+      ],
+      "rating": null,
+      "popular": false
+    },
+    {
+      "id": "4a66",
+      "title": "Grand Theft Auto IV ",
+      "developer": "Rockstar Games",
+      "price": 29.9,
+      "image": "https://tse3.mm.bing.net/th/id/OIP.6Xrog4tqxzzBP8k8YxLcxQHaJP?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "unitsSold": "28M",
+      "releaseDate": "2008-04-29",
+      "details": "Niko Bellic, Johnny Klebitz and Luis Lopez all have one thing in common - they live in the worst city in America. Liberty City worships money and status, and is heaven for those who have them and a living nightmare for those who don't.",
+      "images": [
+        "https://tse3.mm.bing.net/th/id/OIP.3MQnkJeAfGro0hU_JO9u3QHaEo?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "https://th.bing.com/th/id/R.cc20207f817eaa2254a61f6163b5b061?rik=2NnKkEdGBnNirQ&riu=http%3a%2f%2fimages.bit-tech.net%2fcontent_images%2f2008%2f12%2fgrand-theft-auto-iv-pc%2fbvieh.jpg&ehk=Z4T71XPonrAszWDP4oS%2fWuZm43tp%2bdMoy7D3k7Nmsvo%3d&risl=&pid=ImgRaw&r=0",
+        "https://www.thegtaplace.com/images/gta4/screenshots/pc/gta-iv-pc-screenshot_038.jpg",
+        "https://gaming-cdn.com/images/products/354/screenshot/grand-theft-auto-iv-the-complete-edition-the-complete-edition-pc-game-rockstar-wallpaper-2.jpg?v=1744106891"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=M80K51DosFo",
+        "https://www.youtube.com/watch?v=kOZ8bRAO7YQ"
+      ],
+      "categories": [
+        "open-world",
+        "adventure",
+        "action"
+      ],
+      "rating": null,
+      "popular": true
     }
   ]
 }
