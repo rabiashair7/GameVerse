@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 /* Core pages */
 import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
-
+import { CatalogComponent } from './catalog/catalog.component';
 /* User pages */
 import { LibraryComponent } from './library/library.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
@@ -29,6 +29,7 @@ const routes: Routes = [
 
   /* Store */
   { path: 'home', component: HomeComponent },
+  { path: 'catalog', component: CatalogComponent},
   { path: 'category/:name', component: CategoryComponent },
   { path: 'game/:id', component: GameCardComponent },
 

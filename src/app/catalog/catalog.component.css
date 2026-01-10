@@ -1,0 +1,81 @@
+/* =========================
+   CATALOG CONTAINER
+   ========================= */
+.container-fluid {
+  max-width: 1400px;
+}
+
+/* =========================
+   SIDEBAR (CATEGORIES)
+   ========================= */
+aside {
+  min-height: calc(100vh - 70px); /* מתחת ל-navbar */
+  padding: 16px 12px;
+}
+
+aside h5 {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* =========================
+   MAIN CONTENT (GAMES)
+   ========================= */
+main {
+  padding: 20px 24px;
+}
+
+/* =========================
+   GAMES GRID
+   ========================= */
+main .row {
+  row-gap: 20px;
+}
+
+/* =========================
+   GAME CARD – BASE
+   ========================= */
+.card {
+  height: 100%;
+  border: 1px solid transparent;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  cursor: pointer;
+}
+
+/* =========================
+   GAME CARD – HOVER EFFECT
+   ========================= */
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #0d6efd; /* Bootstrap primary */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================
+   CARD IMAGE
+   ========================= */
+.card-img-top {
+  object-fit: cover;
+  height: 180px;
+}
+
+/* =========================
+   CARD BODY
+   ========================= */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card-body strong {
+  margin-top: auto;
+}
