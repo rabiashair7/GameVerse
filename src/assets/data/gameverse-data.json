@@ -8,6 +8,15 @@
       "fullName":"Rabia Shaier",
       "role": "admin",
       "banned": false
+    },
+    {
+      "id": 2,
+      "username": "mohmdsarhan@gameverse.com",
+      "password": "Admin@12345",
+      "email":"mohmdsarhan@gameverse.com",
+      "fullName":"Mohamd Sarhan",
+      "role": "admin",
+      "banned": false
     }
     
   ]
