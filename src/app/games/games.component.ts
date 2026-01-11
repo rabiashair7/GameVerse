@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,Output } from '@angular/core';
 import { GameService } from '../gameService.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { GameService } from '../gameService.service';
   styleUrls: ['./games.component.css']
 })
 export class GamesComponent implements OnInit {
-
+   @Input() category: string = 'all';
   games: any[] = [];
   filteredGames: any[] = [];
   search = '';

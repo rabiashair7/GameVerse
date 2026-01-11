@@ -54,22 +54,17 @@
 .categories:hover .dropdown {
   display: block;
 }
-
-/* ===============================
-   ALL GAMES LINK
-================================ */
-
-.dropdown .all {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 10px;
+.catalog-link {
+  margin-left: 12px;
   text-decoration: none;
-  color: var(--accent);
+  color: inherit;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.dropdown .all:hover {
-  text-decoration: underline;
-}
+
+
+
 
 /* ===============================
    GRID

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../gameService.service';
 
@@ -8,7 +8,8 @@ import { GameService } from '../gameService.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-
+   @Input() menuMode: boolean = false;   // 👈 בשביל Catalog
+  @Output() categorySelected = new EventEmitter<string>(); // 👈 בשביל Catalog
   category = '';
   games: any[] = [];
   filteredGames: any[] = [];

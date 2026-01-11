@@ -1,18 +1,25 @@
 <nav class="store-navbar">
+
+  <!-- LEFT SIDE -->
   <div class="categories">
+
+    <!-- CATEGORIES DROPDOWN -->
     <button
       class="categories-btn"
       (click)="toggleDropdown()"
-      type="button"
-    >
+      type="button">
       Categories ▾
     </button>
 
-    <div class="dropdown" *ngIf="isOpen">
-      <a routerLink="/games" class="all" (click)="closeDropdown()">
-        All Games
-      </a>
+    <!-- ✅ CATALOG LINK -->
+    <a
+      routerLink="/catalog"
+      class="catalog-link">
+      Catalog
+    </a>
 
+    <!-- DROPDOWN -->
+    <div class="dropdown" *ngIf="isOpen">
       <div class="grid">
         <a routerLink="/category/action" (click)="closeDropdown()">Action</a>
         <a routerLink="/category/adventure" (click)="closeDropdown()">Adventure</a>
@@ -23,12 +30,13 @@
         <a routerLink="/category/open-world" (click)="closeDropdown()">Open World</a>
       </div>
     </div>
+
   </div>
 
-
-
+  <!-- RIGHT SIDE -->
   <div class="icons">
     <a routerLink="/wishlist">❤️</a>
     <a routerLink="/cart">🛒</a>
   </div>
+
 </nav>
