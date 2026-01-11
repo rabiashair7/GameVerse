@@ -196,6 +196,40 @@
       ],
       "rating": null,
       "popular": true
+    },
+    {
+      "id": "4c2b",
+      "title": "Need For Speed Most Wanted (2005) ",
+      "developer": "EA ",
+      "price": 59.99,
+      "image": "https://fontmeme.com/images/most-wanted-nfs-font-370x459.jpg",
+      "unitsSold": "18M",
+      "releaseDate": "2005-11-22",
+      "details": "In \"Need for Speed: Most Wanted,\" players take on the role of a street racer who must compete against 15 elite racers known as the Blacklist. The main objective is to become the most wanted racer by defeating these opponents while evading the police. The game features a mix of racing events, including circuit races, sprints, and drag races, all set in an open-world environment.",
+      "images": [
+        "https://tse1.mm.bing.net/th/id/OIP.CeQkESzGKuqhiwayaXV0sQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "https://c4.wallpaperflare.com/wallpaper/392/116/1018/need-for-speed-most-wanted-video-games-render-hd-wallpaper-preview.jpg",
+        "https://i.pinimg.com/736x/5b/76/5c/5b765c5c2d5ea80c819defc64cc74e8d.jpg",
+        "https://alchetron.com/cdn/need-for-speed-most-wanted-2005-video-game-98c11cde-1382-43c2-be84-cd3d01e9f65-resize-750.jpeg",
+        "https://th.bing.com/th/id/OIP.z7AD9PDcAupk7FpTf9XJ6wHaEK?w=313&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        "https://tse2.mm.bing.net/th/id/OIP.Dv4sQ1-6BVtQYfFT_LzN7wHaED?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "https://pbs.twimg.com/media/EaOa6nuU0AIfaYg?format=jpg&name=4096x4096",
+        "https://i.ytimg.com/vi/sIfCdUS6tyk/maxresdefault.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Zz4wM8N0QEQ",
+        "https://www.youtube.com/watch?v=JdkZaxGD4tY",
+        "https://www.youtube.com/watch?v=vEVzGMKNiGE",
+        "https://www.youtube.com/watch?v=EFytqeYIXzM"
+      ],
+      "categories": [
+        "sports",
+        "racing",
+        "open-world",
+        "action"
+      ],
+      "rating": null,
+      "popular": true
     }
   ]
 }
