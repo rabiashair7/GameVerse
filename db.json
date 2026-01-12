@@ -230,6 +230,70 @@
       ],
       "rating": null,
       "popular": true
+    },
+    {
+      "id": "52c3",
+      "title": "Need For Speed PayBack",
+      "developer": " Ghost Games",
+      "price": 29.99,
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202211/2510/VOSSvGjCpMF0uj9qQtmW6AnH.png",
+      "unitsSold": "2.9M",
+      "releaseDate": "2017-11-10",
+      "details": "Set in the underworld of Fortune Valley, you and your crew were divided by betrayal and reunited by revenge to take down The House — a powerful cartel controlling the city’s casinos, criminals, and cops. In this gambler’s paradise, the stakes are high and The House always wins.\n\nIn this action-driving adventure you can:\n- Customize cars deeply: Build and tune vehicles in five classes (Race, Drift, Off-Road, Drag, Runner)\n- Play as three characters: Each with unique roles working together for revenge\n- Face epic police chases: Fight intense pursuits with dynamic cop encounters\n- Drive on and off-road: Races and challenges span desert, canyon & city environments\n- Compete online: Leaderboards, co-op, PvP & Autolog competitive features\n",
+      "images": [
+        "https://th.bing.com/th/id/R.efc516b9105573b81af2822e311b6939?rik=6SMM%2bwRNFDOXyg&pid=ImgRaw&r=0",
+        "https://www.arealgamer.net/wp-content/uploads/2021/12/Need-for-Speed-Payback-Screenshot-3.jpg",
+        "https://tse3.mm.bing.net/th/id/OIF.cRfaW0eOR0nHlhrKi2CfYA?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "https://static0.srcdn.com/wordpress/wp-content/uploads/2021/02/Need-For-Speed-Payback.jpg?q=50&fit=crop&w=825&dpr=1.5",
+        "https://i.ytimg.com/vi/JdA9pvs7lHE/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/MaMZa-tknqs/maxresdefault.jpg",
+        "https://i.imgur.com/nqwbDWc.png",
+        "https://www.gamespew.com/wp-content/uploads/2017/10/Need-for-Speed-Payback-Header-2-min.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=kc-OcOduEx0",
+        "https://www.youtube.com/watch?v=l6EjYuUSn1Y&t=310s",
+        "https://www.youtube.com/watch?v=kf2qDAEZc2w"
+      ],
+      "categories": [
+        "open-world",
+        "racing",
+        "sports",
+        "action"
+      ],
+      "rating": null,
+      "popular": false
+    },
+    {
+      "id": "3c32",
+      "title": "Grand Theft Auto San Andreas",
+      "developer": "Rockstar Games",
+      "price": 35.99,
+      "image": "https://tse4.mm.bing.net/th/id/OIP.iNcRIaquuXPuVjtB1WskxwAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "unitsSold": "2.06M",
+      "releaseDate": "2004-10-10",
+      "details": "Grand Theft Auto: San Andreas is an action-adventure game played from a third-person view. Players control criminal Carl \"CJ\" Johnson and complete missions—linear scenarios with set objectives—to progress through the story. Outside of missions, players can freely roam the game's open world and complete optional side missions. \n\nA multiplayer mode allows two players to roam the world. The fictional state of San Andreas, which makes up the open world, comprises three metropolitan cities: Los Santos, San Fierro, and Las Venturas. The cities are unlocked as the story progresses, and airports allow fast travel between them.\n",
+      "images": [
+        "https://lodosgamers.com/wp-content/uploads/2025/03/Grand-Theft-Auto-San-Andreas.jpeg",
+        "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/10/_grand-theft-auto-san-andreas-three-cities-different-maps-canceled-plan.jpg",
+        "https://cdn2.unrealengine.com/egs-grandtheftautosanandreasthedefinitiveedition-rockstargames-g1a-00-1920x1080-db31e491c234.jpg",
+        "https://static.wikigta.org/en/images/thumb/e/ec/Ex-Remington.JPG/1200px-Ex-Remington.JPG",
+        "https://cs2.gtaall.com/screenshots/4dc09/2014-01/original/7c9c54b30f0cb44403e508bf1cc580840d5bd707/153075--.jpg",
+        "https://cdn.quotesgram.com/img/42/59/996963991-150570-Grand_Theft_Auto_-_San_Andreas__USA___v3_00_-4.png",
+        "https://media.imgcdn.org/repo/2025/03/grand-theft-auto-san-andreas/67d07420d79c6-grand-theft-auto-san-andreas-the-definitive-editio-screenshot2.webp"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Pze6mdhnBLM",
+        "https://www.youtube.com/watch?v=GHzG0bKTa1g",
+        "https://www.youtube.com/watch?v=sOvyNa9-39c&list=RDsOvyNa9-39c&start_radio=1"
+      ],
+      "categories": [
+        "open-world",
+        "strategy",
+        "action"
+      ],
+      "rating": null,
+      "popular": false
     }
   ]
 }
