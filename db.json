@@ -327,6 +327,40 @@
       ],
       "rating": null,
       "popular": true
+    },
+    {
+      "id": "fdd4",
+      "title": "Roblex",
+      "developer": "Roblox Corporation",
+      "price": 0,
+      "image": "https://images.rbxcdn.com/5348266ea6c5e67b19d6a814cbbb70f6.jpg",
+      "unitsSold": "1B",
+      "releaseDate": "2004-09-01",
+      "details": "Roblox is a free online gaming platform where players can play millions of games created by other users, or create their own games. It offers action, adventure, role-play, racing, simulator, and many other game types in one place.",
+      "images": [
+        "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/10/roblox-city-character-artwork-with-game-logo.jpg",
+        "https://www.gaming.net/wp-content/uploads/2022/10/Roblox-1.jpg",
+        "https://www.findingdulcinea.com/wp-content/uploads/2026/01/Roblox-The-Forge-Wiki.jpeg",
+        "https://staticg.sportskeeda.com/editor/2022/04/bb303-16503113730609-1920.jpg",
+        "https://cdnb.artstation.com/p/assets/images/images/025/603/347/large/ripper-gfx-gladiator-thumbnail-png-finished.jpg?1586327193",
+        "https://www.atarita.com/wp-content/uploads/2024/03/Roblox-kiyafet-kodlari-747x420.jpg",
+        "https://i.ytimg.com/vi/9So5wSK7wNI/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGCMgZSg1MA8=&rs=AOn4CLD1-yv4bwwKFSsApbXQA96YdIDi0Q"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=sme76WoJ_-U",
+        "https://www.youtube.com/watch?v=DZo6u0c7DWk",
+        "https://www.youtube.com/watch?v=la9jp9nqdm8"
+      ],
+      "categories": [
+        "open-world",
+        "strategy",
+        "racing",
+        "sports",
+        "adventure",
+        "action"
+      ],
+      "rating": null,
+      "popular": true
     }
   ]
 }
