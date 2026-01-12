@@ -270,7 +270,7 @@
       "developer": "Rockstar Games",
       "price": 35.99,
       "image": "https://tse4.mm.bing.net/th/id/OIP.iNcRIaquuXPuVjtB1WskxwAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
-      "unitsSold": "2.06M",
+      "unitsSold": "27.5M",
       "releaseDate": "2004-10-10",
       "details": "Grand Theft Auto: San Andreas is an action-adventure game played from a third-person view. Players control criminal Carl \"CJ\" Johnson and complete missions—linear scenarios with set objectives—to progress through the story. Outside of missions, players can freely roam the game's open world and complete optional side missions. \n\nA multiplayer mode allows two players to roam the world. The fictional state of San Andreas, which makes up the open world, comprises three metropolitan cities: Los Santos, San Fierro, and Las Venturas. The cities are unlocked as the story progresses, and airports allow fast travel between them.\n",
       "images": [
@@ -293,7 +293,40 @@
         "action"
       ],
       "rating": null,
-      "popular": false
+      "popular": true
+    },
+    {
+      "id": "75b5",
+      "title": "Grand Theft Auto Vice City",
+      "developer": "Rocstar Games",
+      "price": 24.99,
+      "image": "https://lparchive.org/Grand-Theft-Auto-Vice-City/Images/1-title.jpg",
+      "unitsSold": "17.5m",
+      "releaseDate": "2002-10-27",
+      "details": "Grand Theft Auto: Vice City is a 2002 open-world action-adventure game developed by Rockstar North, where players control Tommy Vercetti to build a criminal empire in the 1980s Vice City setting inspired by Miami.",
+      "images": [
+        "https://d1lss44hh2trtw.cloudfront.net/assets/article/2021/08/12/gta-vice-city_feature.jpg",
+        "https://wallpapers.com/images/hd/grand-theft-auto-vice-city-mpyfb1zi3im4l4r3.jpg",
+        "https://imag.malavida.com/mvimgbig/download-fs/gta-vice-city-11647-12.jpg",
+        "https://cdn.mos.cms.futurecdn.net/923b7e3310502182312fc4cb45248ae5-1024-80.jpg",
+        "https://gtaforums.com/uploads/monthly_2024_06/GrandTheftAuto_ViceCityTheDefinitiveEdition25_06_202415_54_53.thumb.png.9bed96faf309388c33cbf9404141c8ef.png",
+        "https://gtaspot.com/wp-content/uploads/2025/02/24-image-by-GTASpot-Community_5_11zon-1044x587.jpeg",
+        "https://media.indiedb.com/cache/images/members/1/372/371697/thumb_620x2000/dddddddd.jpg",
+        "https://tse3.mm.bing.net/th/id/OIP._cfHiTYMjVzlcJqL0bD8WwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Ag6H1e1rXJ0&list=RDAg6H1e1rXJ0&start_radio=1",
+        "https://www.youtube.com/watch?v=IlZZDQIYRyg",
+        "https://www.youtube.com/watch?v=m8oQllwqw_I",
+        "https://www.youtube.com/watch?v=BcqMaYdYow0"
+      ],
+      "categories": [
+        "open-world",
+        "adventure",
+        "action"
+      ],
+      "rating": null,
+      "popular": true
     }
   ]
 }
