@@ -1,8 +1,11 @@
+/* ===== TITLE ===== */
 .title {
   color: var(--text-main);
   margin: 20px;
+  font-weight: 600;
 }
 
+/* ===== SEARCH & SORT ===== */
 .search-sort {
   display: flex;
   gap: 12px;
@@ -18,9 +21,92 @@
   color: var(--text-main);
 }
 
+/* ===== GRID ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   padding: 20px;
+}
+
+/* ============================= */
+/* 🎮 GAME CARD (MATCHES HOME) */
+/* ============================= */
+.game-card {
+  position: relative;
+  background: var(--bg);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* IMAGE */
+.game-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* TITLE */
+.game-card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 6px 0 4px;
+}
+
+/* DEVELOPER */
+.game-card .developer {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* PRICE */
+.game-card .price {
+  margin-top: auto;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* 🔥 POPULAR BADGE */
+.popular-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--accent);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ===== HOVER EFFECT (HOME STYLE) ===== */
+.game-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* CLICK FEEDBACK */
+.game-card:active {
+  transform: scale(0.98);
+}
+
+/* EMPTY STATE */
+.empty {
+  text-align: center;
+  opacity: 0.7;
+  margin-top: 40px;
 }
