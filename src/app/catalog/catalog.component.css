@@ -1,81 +1,77 @@
 /* =========================
-   CATALOG CONTAINER
-   ========================= */
-.container-fluid {
-  max-width: 1400px;
+   LAYOUT
+========================= */
+
+.catalog-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  gap: 16px;
 }
 
 /* =========================
-   SIDEBAR (CATEGORIES)
-   ========================= */
-aside {
-  min-height: calc(100vh - 70px); /* מתחת ל-navbar */
-  padding: 16px 12px;
-}
+   SIDEBAR (FIXED)
+========================= */
 
-aside h5 {
-  font-weight: 600;
-  margin-bottom: 16px;
-}
+.catalog-sidebar {
+  width: 280px;          /* FIX: enough width */
+  min-width: 280px;      /* FIX: prevent shrinking */
+  flex-shrink: 0;        /* FIX: do NOT collapse */
+  padding: 20px;
 
-/* =========================
-   MAIN CONTENT (GAMES)
-   ========================= */
-main {
-  padding: 20px 24px;
-}
-
-/* =========================
-   GAMES GRID
-   ========================= */
-main .row {
-  row-gap: 20px;
-}
-
-/* =========================
-   GAME CARD – BASE
-   ========================= */
-.card {
-  height: 100%;
-  border: 1px solid transparent;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
-  cursor: pointer;
-}
-
-/* =========================
-   GAME CARD – HOVER EFFECT
-   ========================= */
-.card:hover {
-  transform: translateY(-6px);
-  border-color: #0d6efd; /* Bootstrap primary */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-/* =========================
-   CARD IMAGE
-   ========================= */
-.card-img-top {
-  object-fit: cover;
-  height: 180px;
-}
-
-/* =========================
-   CARD BODY
-   ========================= */
-.card-body {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.card-title {
-  font-size: 0.95rem;
+/* TITLE */
+.catalog-sidebar h5 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
   font-weight: 600;
+  color: var(--text-main);
+
+  white-space: nowrap;   /* FIX: keep word in one line */
 }
 
-.card-body strong {
-  margin-top: auto;
+/* =========================
+   LINKS
+========================= */
+
+.catalog-sidebar a {
+  display: flex;
+  align-items: center;
+  height: 40px;
+
+  padding: 0 12px;
+  margin-bottom: 6px;
+
+  border-radius: 6px;
+  text-decoration: none;
+
+  white-space: nowrap;   /* FIX: one line */
+  color: var(--text-main);
+
+  transition: background 0.2s ease;
+}
+
+.catalog-sidebar a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.catalog-content {
+  flex: 1;
+  min-width: 0;          /* FIX: allow content to shrink, not sidebar */
+  padding: 0;
+}
+
+/* =========================
+   DARK MODE HOVER
+========================= */
+
+.app-root.dark .catalog-sidebar a:hover {
+  background: rgba(255, 255, 255, 0.08);
 }

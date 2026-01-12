@@ -22,10 +22,10 @@ html, body {
 
   /* ---------- LIGHT MODE ---------- */
   --bg-main: #f8fafc;        /* page content */
-  --bg-shell: #ffffff;      /* navbar + footer */
+  --bg-shell: #ffffff;       /* navbar + footer */
 
-  --text-main: #0f172a;     /* main content text */
-  --text-shell: #0f172a;    /* navbar + footer text */
+  --text-main: #0f172a;      /* main content text */
+  --text-shell: #0f172a;     /* navbar + footer text */
   --text-muted: #475569;
 
   --border: #e5e7eb;
@@ -42,10 +42,10 @@ html, body {
 =========================== */
 .app-root.dark {
   --bg-main: #0b1220;        /* page content */
-  --bg-shell: #111827;      /* navbar + footer */
+  --bg-shell: #111827;       /* navbar + footer */
 
-  --text-main: #e5e7eb;     /* main content text */
-  --text-shell: #e5e7eb;    /* navbar + footer text */
+  --text-main: #e5e7eb;      /* main content text */
+  --text-shell: #e5e7eb;     /* navbar + footer text */
   --text-muted: #94a3b8;
 
   --border: #1f2933;
@@ -95,4 +95,17 @@ button {
 
 button:hover {
   opacity: 0.9;
+}
+
+/* ✅ Inputs (so search box isn’t white in dark mode) */
+input, select, textarea {
+  background: var(--bg-shell);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
 }

@@ -1,33 +1,23 @@
-<!-- ===== NAVBAR ===== -->
 <app-navbar></app-navbar>
 
-<!-- ===== CATALOG LAYOUT ===== -->
-<div class="container-fluid mt-4">
+<div class="catalog-wrapper">
 
-  <div class="row">
+  <!-- LEFT SIDEBAR -->
+  <aside class="catalog-sidebar card">
+    <h5>Categories</h5>
 
-    <!-- LEFT SIDE: CATEGORIES -->
-    <aside class="col-md-3 col-lg-2 border-end">
+    <a routerLink="/category/action">Action</a>
+    <a routerLink="/category/adventure">Adventure</a>
+    <a routerLink="/category/sports">Sports</a>
+    <a routerLink="/category/rpg">RPG</a>
+    <a routerLink="/category/racing">Racing</a>
+    <a routerLink="/category/strategy">Strategy</a>
+    <a routerLink="/category/open-world">Open World</a>
+  </aside>
 
-      <h5 class="mb-3">Categories</h5>
+  <!-- RIGHT CONTENT -->
+  <main class="catalog-content">
+    <app-games></app-games>
+  </main>
 
-      <app-category
-        [menuMode]="true"
-        (categorySelected)="onCategoryChange($event)">
-      </app-category>
-
-    </aside>
-
-    <!-- RIGHT SIDE: GAMES -->
-    <main class="col-md-9 col-lg-10">
-
-      <h4 class="mb-3">All Games</h4>
-
-      <app-games
-        [category]="selectedCategory">
-      </app-games>
-
-    </main>
-
-  </div>
 </div>
