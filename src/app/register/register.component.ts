@@ -10,7 +10,6 @@ import { UserService } from '../userService.service';
 })
 export class RegisterComponent {
 
-  // ===== DATE LIMIT (blocks future dates in UI) =====
   today = new Date().toISOString().split('T')[0];
 
   constructor(
@@ -19,36 +18,22 @@ export class RegisterComponent {
     private userService: UserService
   ) {}
 
-  // ===== REGISTER FORM =====
   registerForm = this.fb.group({
-    name: ['', [
-      Validators.required,
-      Validators.minLength(2)
-    ]],
-
-    dob: ['', [
-      Validators.required,
-      this.noFutureDate
-    ]],
-
-    email: ['', [
-      Validators.required,
-      Validators.email
-    ]],
-
+    fullName: ['', [Validators.required, Validators.minLength(2)]],
+    dob: ['', [Validators.required, this.noFutureDate]],
+    gender: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [
       Validators.required,
       Validators.minLength(8),
       this.strongPassword
     ]],
+    confirmPassword: ['', Validators.required]
+  }, { validators: this.passwordsMatch });
 
-    phone: ['', [
-      Validators.pattern(/^\+?[0-9]{9,15}$/)
-    ]]
-  });
-
-  // ===== VALIDATORS =====
-
+  /* =============================
+     VALIDATORS
+     ============================= */
   noFutureDate(control: AbstractControl) {
     if (!control.value) return null;
     return new Date(control.value) > new Date()
@@ -58,44 +43,49 @@ export class RegisterComponent {
 
   strongPassword(control: AbstractControl) {
     const v = control.value || '';
-    const valid =
+    const ok =
       /[A-Z]/.test(v) &&
       /[a-z]/.test(v) &&
       /[0-9]/.test(v) &&
       /[^A-Za-z0-9]/.test(v);
-    return valid ? null : { weakPassword: true };
+    return ok ? null : { weakPassword: true };
   }
 
-  // ===== ACTION =====
+  passwordsMatch(group: AbstractControl) {
+    const p = group.get('password')?.value;
+    const c = group.get('confirmPassword')?.value;
+    return p === c ? null : { passwordMismatch: true };
+  }
 
+  /* =============================
+     ACTION
+     ============================= */
   submitRegister(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
 
-    // REGISTER USER (NO VERIFICATION STEP)
-    this.userService.register({
-      username: this.registerForm.value.email!, // login identifier
-      fullName: this.registerForm.value.name!,
+    const success = this.userService.register({
+      fullName: this.registerForm.value.fullName!,
       email: this.registerForm.value.email!,
       password: this.registerForm.value.password!,
-      role: 'user',
-      banned: false
+      gender: this.registerForm.value.gender as 'male' | 'female'
     });
 
-    // Redirect after successful registration
+    if (!success) {
+      alert('Email already exists');
+      return;
+    }
+
     this.router.navigate(['/login']);
   }
 
-  // ===== HELPERS =====
-
-  isInvalid(controlName: string): boolean {
-    const c = this.registerForm.get(controlName);
+  /* =============================
+     HELPERS
+     ============================= */
+  isInvalid(name: string): boolean {
+    const c = this.registerForm.get(name);
     return !!(c && c.invalid && c.touched);
-  }
-
-  passwordStrong(): boolean {
-    return !this.registerForm.get('password')?.errors;
   }
 }

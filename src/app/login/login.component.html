@@ -1,105 +1,39 @@
 <div class="container mt-5">
   <div class="card p-4 shadow mx-auto" style="max-width: 420px;">
 
-    <!-- ================= LOGIN ================= -->
-    <form *ngIf="forgotStep === 'login'" (ngSubmit)="login()">
+    <h3 class="text-center mb-4">Login</h3>
 
-      <h3 class="text-center mb-4">Login</h3>
+    <form (ngSubmit)="login()">
 
-      <input type="text"
-             [(ngModel)]="username"
-             name="username"
-             class="form-control mb-3"
-             placeholder="Username"
-             required>
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        class="form-control mb-3"
+        placeholder="Email"
+        required
+      >
 
-      <input type="password"
-             [(ngModel)]="password"
-             name="password"
-             class="form-control mb-2"
-             placeholder="Password"
-             required>
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        class="form-control mb-2"
+        placeholder="Password"
+        required
+      >
 
       <div class="text-danger mb-2">{{ error }}</div>
 
-      <button class="btn btn-primary w-100 mb-2">
+      <button class="btn btn-primary w-100">
         Login
       </button>
 
-      <!-- Forgot Password -->
-      <div class="text-center">
-        <button type="button"
-                class="btn btn-link p-0"
-                (click)="openForgotPassword()">
-          Forgot password?
-        </button>
-      </div>
-
-      <!-- Register -->
       <div class="text-center mt-3">
-        <span class="text-muted">You don’t have an account?</span>
+        <span class="text-muted">Don’t have an account?</span>
         <a routerLink="/register" class="fw-bold ms-1">Register</a>
       </div>
 
-    </form>
-
-    <!-- ================= ENTER EMAIL ================= -->
-    <div *ngIf="forgotStep === 'email'">
-      <h5 class="text-center mb-3">Reset Password</h5>
-
-      <input type="email"
-             [(ngModel)]="resetEmail"
-             name="resetEmail"
-             class="form-control mb-3"
-             placeholder="Enter your email">
-
-      <button class="btn btn-primary w-100 mb-2"
-              (click)="sendResetCode()">
-        Send Reset Code
-      </button>
-
-      <button class="btn btn-secondary w-100"
-              (click)="resetState()">
-        Cancel
-      </button>
-    </div>
-
-    <!-- ================= VERIFY CODE ================= -->
-    <div *ngIf="forgotStep === 'code'">
-      <h5 class="text-center mb-3">Enter Reset Code</h5>
-
-      <input type="text"
-             [(ngModel)]="resetCode"
-             name="resetCode"
-             class="form-control mb-3"
-             placeholder="6-digit code">
-
-      <button class="btn btn-primary w-100 mb-2"
-              (click)="verifyResetCode()">
-        Verify Code
-      </button>
-    </div>
-
-    <!-- ================= NEW PASSWORD ================= -->
-    <form *ngIf="forgotStep === 'newPassword'"
-          [formGroup]="newPasswordForm"
-          (ngSubmit)="saveNewPassword()">
-
-      <h5 class="text-center mb-3">Create New Password</h5>
-
-      <input type="password"
-             formControlName="password"
-             class="form-control mb-2"
-             placeholder="New password"
-             [class.is-invalid]="newPasswordForm.invalid && newPasswordForm.touched">
-
-      <div class="invalid-feedback">
-        Password must include uppercase, lowercase, number & special character
-      </div>
-
-      <button class="btn btn-success w-100">
-        Save New Password
-      </button>
     </form>
 
   </div>

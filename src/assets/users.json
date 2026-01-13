@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Rabia Shaier",
+      "email": "rabiashair7@gameverse.com",
+      "password": "Admin@14920",
+      "gender": "male",
+      "role": "admin",
+      "banned": false,
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "fullName": "Mohamd Sarhan",
+      "email": "mohmdsarhan@gameverse.com",
+      "password": "Admin@12345",
+      "gender": "male",
+      "role": "admin",
+      "banned": false,
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    }
+  ]
+}
