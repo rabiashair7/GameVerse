@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "fullName": "Rabia Shaier",
       "email": "rabiashair7@gameverse.com",
       "password": "Admin@14920",
@@ -11,7 +11,7 @@
       "createdAt": "2025-01-01T00:00:00.000Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "fullName": "Mohamd Sarhan",
       "email": "mohmdsarhan@gameverse.com",
       "password": "Admin@12345",
@@ -19,6 +19,16 @@
       "role": "admin",
       "banned": false,
       "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "fullName": "rabia shaier",
+      "email": "rabiashaier@gameverse.com",
+      "password": "User@1234",
+      "gender": "male",
+      "role": "user",
+      "banned": false,
+      "createdAt": "2026-01-14T15:28:08.200Z"
     }
   ]
 }

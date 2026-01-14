@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { CatalogComponent } from './catalog/catalog.component';
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
-    CatalogComponent
+    CatalogComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

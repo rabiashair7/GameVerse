@@ -1,49 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from './modules/users';
 
-interface User {
-  id: number;
-  fullName: string;
-  email: string;
-  password: string;
-  gender: 'male' | 'female';
-  role: 'admin' | 'user';
-  banned: boolean;
-  createdAt: string;
-}
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private darkMode = false; 
-    toggleTheme(): void {    
-      this.darkMode = !this.darkMode;  
-      document.body.classList.toggle('dark-theme', this.darkMode); 
-    }  
-    isDarkMode(): boolean {
-      return this.darkMode;   }
 
+  /* =============================
+     THEME
+     ============================= */
+  private darkMode = false;
+
+  toggleTheme(): void {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle('dark-theme', this.darkMode);
+  }
+
+  isDarkMode(): boolean {
+    return this.darkMode;
+  }
+
+  /* =============================
+     USERS STATE
+     ============================= */
   private users: User[] = [];
   private currentUser: User | null = null;
 
-  private dataUrl = 'assets/users.json';
+  private dataUrl = 'http://localhost:3001/users';
 
   constructor(private http: HttpClient) {
     this.loadUsers();
   }
 
   /* =============================
-     LOAD USERS (READ-ONLY)
+     LOAD USERS
      ============================= */
   private loadUsers(): void {
-    this.http.get<{ users: User[] }>(this.dataUrl)
-      .subscribe(data => {
-        this.users = data.users || [];
-      });
+    this.http.get<User[]>(this.dataUrl).subscribe(users => {
+      this.users = users.map(u => new User(u));
+    });
   }
 
   /* =============================
-     LOGIN (EMAIL BASED)
+     AUTH
      ============================= */
   login(email: string, password: string): boolean {
     const user = this.users.find(
@@ -64,18 +64,12 @@ export class UserService {
     return !!this.currentUser;
   }
 
-  isAdmin(): boolean {
-    return this.currentUser?.role === 'admin';
-  }
-
-  getCurrentUser(): Omit<User, 'password'> | null {
-    if (!this.currentUser) return null;
-    const { password, ...safe } = this.currentUser;
-    return safe;
+  getCurrentUser(): User | null {
+    return this.currentUser;
   }
 
   /* =============================
-     REGISTER (IN MEMORY ONLY)
+     REGISTER (PERMANENT)
      ============================= */
   register(data: {
     fullName: string;
@@ -84,13 +78,10 @@ export class UserService {
     gender: 'male' | 'female';
   }): boolean {
 
-    const emailExists = this.users.some(
-      u => u.email === data.email
-    );
-
+    const emailExists = this.users.some(u => u.email === data.email);
     if (emailExists) return false;
 
-    const newUser: User = {
+    const newUser = new User({
       id: this.users.length
         ? Math.max(...this.users.map(u => u.id)) + 1
         : 1,
@@ -101,48 +92,67 @@ export class UserService {
       role: 'user',
       banned: false,
       createdAt: new Date().toISOString()
-    };
+    });
 
-    this.users.push(newUser);
-    this.currentUser = newUser;
+    this.http.post<User>(this.dataUrl, newUser).subscribe(savedUser => {
+      const user = new User(savedUser);
+      this.users.push(user);
+      this.currentUser = user;
+    });
+
     return true;
   }
 
   /* =============================
-     ADMIN HELPERS (IN MEMORY)
+     ADMIN HELPERS
      ============================= */
-  getAllUsers(): Omit<User, 'password'>[] {
-    return this.users.map(({ password, ...safe }) => safe);
+  getAllUsers(): User[] {
+    return this.users;
   }
 
   toggleRole(email: string): void {
     const user = this.users.find(u => u.email === email);
     if (!user) return;
 
-    const adminsCount = this.users.filter(
+    const activeAdmins = this.users.filter(
       u => u.role === 'admin' && !u.banned
     ).length;
 
-    if (user.role === 'admin' && adminsCount === 1) return;
+    if (user.role === 'admin' && activeAdmins === 1) return;
 
-    user.role = user.role === 'admin' ? 'user' : 'admin';
+    const newRole = user.role === 'admin' ? 'user' : 'admin';
+    user.role = newRole;
+
+    this.http
+      .patch(`${this.dataUrl}/${user.id}`, { role: newRole })
+      .subscribe();
   }
 
   banUser(email: string): void {
     const user = this.users.find(u => u.email === email);
     if (!user) return;
 
-    const adminsCount = this.users.filter(
+    const activeAdmins = this.users.filter(
       u => u.role === 'admin' && !u.banned
     ).length;
 
-    if (user.role === 'admin' && adminsCount === 1) return;
+    if (user.role === 'admin' && activeAdmins === 1) return;
 
     user.banned = true;
+
+    this.http
+      .patch(`${this.dataUrl}/${user.id}`, { banned: true })
+      .subscribe();
   }
 
   unbanUser(email: string): void {
     const user = this.users.find(u => u.email === email);
-    if (user) user.banned = false;
+    if (!user) return;
+
+    user.banned = false;
+
+    this.http
+      .patch(`${this.dataUrl}/${user.id}`, { banned: false })
+      .subscribe();
   }
 }

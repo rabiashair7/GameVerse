@@ -1,14 +1,12 @@
-// src/app/modules/users.ts
-
 export class User {
   id!: number;
   fullName!: string;
   email!: string;
   password!: string;
+  gender!: 'male' | 'female';
   role!: 'admin' | 'user';
-  birthDate!: string;
+  banned!: boolean;
   createdAt!: string;
-  isBlocked!: boolean;
 
   constructor(data?: Partial<User>) {
     Object.assign(this, data);

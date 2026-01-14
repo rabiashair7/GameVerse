@@ -20,7 +20,7 @@
 
       <!-- Library (hidden for admin) -->
       <a
-        *ngIf="!userService.isAdmin()"
+        *ngIf="userService.getCurrentUser() && !userService.getCurrentUser()!.isAdmin()"
         routerLink="/library"
         routerLinkActive="active"
       >
@@ -29,7 +29,7 @@
 
       <!-- Profile (user only) -->
       <a
-        *ngIf="userService.isLoggedIn() && !userService.isAdmin()"
+        *ngIf="userService.isLoggedIn() && !userService.getCurrentUser()!.isAdmin()"
         routerLink="/profile"
         routerLinkActive="active"
       >
@@ -38,7 +38,7 @@
 
       <!-- Admin (admin only) -->
       <a
-        *ngIf="userService.isLoggedIn() && userService.isAdmin()"
+        *ngIf="userService.isLoggedIn() && userService.getCurrentUser()!.isAdmin()"
         routerLink="/admin"
         routerLinkActive="active"
       >

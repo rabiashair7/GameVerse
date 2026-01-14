@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../userService.service';
@@ -8,8 +8,26 @@ import { UserService } from '../userService.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
+   ngOnInit(): void {
+    this.loadUser();
+  }
+   loadUser(): void {
+    this.users = this.userService.getAllUsers();
+    this.filteredUsers = [...this.users];
+  }
 
+   filterUsers(): void {
+    const value = this.userSearch.toLowerCase().trim();
+    this.filteredUsers = this.users.filter(user =>
+      user.fullName?.toLowerCase().includes(value) ||
+      user.email?.toLowerCase().includes(value) ||
+      user.role?.toLowerCase().includes(value)
+    );
+  }
+  users: any[] = [];
+  filteredUsers: any[] = [];
+  userSearch = '';
   today = new Date().toISOString().split('T')[0];
 
   constructor(
