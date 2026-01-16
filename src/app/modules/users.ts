@@ -4,6 +4,7 @@ export class User {
   email!: string;
   password!: string;
   gender!: 'male' | 'female';
+  dob!: string;
   role!: 'admin' | 'user';
   banned!: boolean;
   createdAt!: string;

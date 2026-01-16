@@ -1,1 +1,33 @@
-<p>profile works!</p>
+<div class="profile-layout">
+
+  <!-- SIDE MENU -->
+  <aside class="profile-sidebar">
+    <h4>My Account</h4>
+
+    <a
+      routerLink="details"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      👤 User Details
+    </a>
+
+    <a
+      routerLink="wishlist"
+      routerLinkActive="active"
+    >
+      ❤️ Wishlist
+    </a>
+
+    <a 
+      routerLink="cart"
+      routerLinkActive="active"
+    > Cart</a>  
+  </aside>
+
+  <!-- CONTENT AREA -->
+  <main class="profile-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

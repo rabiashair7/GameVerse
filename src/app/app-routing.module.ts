@@ -10,7 +10,7 @@ import { LibraryComponent } from './library/library.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { UserDetailsComponent } from './user-details/user-details.component';
 /* Admin & auth */
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
@@ -37,8 +37,16 @@ const routes: Routes = [
   { path: 'library', component: LibraryComponent },
   { path: 'wishlist', component: WishlistComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'profile', component: ProfileComponent },
-
+  {
+  path: 'profile',
+  component: ProfileComponent,
+  children: [
+    { path: '', redirectTo: 'details', pathMatch: 'full' },
+    { path: 'details', component: UserDetailsComponent },
+    { path: 'wishlist', component: WishlistComponent },
+    { path: 'cart', component: CartComponent}
+  ]
+},
   /* Info */
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },

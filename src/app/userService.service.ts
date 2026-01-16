@@ -45,15 +45,17 @@ export class UserService {
   /* =============================
      AUTH
      ============================= */
-  login(email: string, password: string): boolean {
+  login(email: string, password: string): User | null {
     const user = this.users.find(
       u => u.email === email && u.password === password
     );
 
-    if (!user || user.banned) return false;
+    if (!user || user.banned) {
+      return null;
+    }
 
     this.currentUser = user;
-    return true;
+    return user;
   }
 
   logout(): void {
@@ -76,6 +78,7 @@ export class UserService {
     email: string;
     password: string;
     gender: 'male' | 'female';
+    dob: string;
   }): boolean {
 
     const emailExists = this.users.some(u => u.email === data.email);
@@ -89,16 +92,70 @@ export class UserService {
       email: data.email,
       password: data.password,
       gender: data.gender,
+      dob: data.dob,
       role: 'user',
       banned: false,
       createdAt: new Date().toISOString()
     });
 
-    this.http.post<User>(this.dataUrl, newUser).subscribe(savedUser => {
-      const user = new User(savedUser);
+    this.http.post<User>(this.dataUrl, newUser).subscribe(saved => {
+      const user = new User(saved);
       this.users.push(user);
       this.currentUser = user;
     });
+
+    return true;
+  }
+
+  /* =============================
+     PROFILE UPDATE (PERMANENT)
+     ============================= */
+  updateProfile(data: {
+    fullName: string;
+    gender: 'male' | 'female';
+    dob: string;
+  }): boolean {
+    if (!this.currentUser) return false;
+
+    const id = this.currentUser.id;
+
+    const payload = {
+      fullName: data.fullName,
+      gender: data.gender,
+      dob: data.dob
+    };
+
+    // update local state
+    this.currentUser.fullName = data.fullName;
+    this.currentUser.gender = data.gender;
+    this.currentUser.dob = data.dob;
+
+    // persist to backend
+    this.http.patch(`${this.dataUrl}/${id}`, payload).subscribe();
+
+    return true;
+  }
+
+  /* =============================
+     PASSWORD CHANGE (PERMANENT)
+     ============================= */
+  changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): boolean {
+    if (!this.currentUser) return false;
+
+    if (this.currentUser.password !== currentPassword) {
+      return false;
+    }
+
+    const id = this.currentUser.id;
+
+    this.currentUser.password = newPassword;
+
+    this.http
+      .patch(`${this.dataUrl}/${id}`, { password: newPassword })
+      .subscribe();
 
     return true;
   }

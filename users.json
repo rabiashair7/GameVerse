@@ -21,14 +21,15 @@
       "createdAt": "2025-01-01T00:00:00.000Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "fullName": "rabia shaier",
       "email": "rabiashaier@gameverse.com",
       "password": "User@1234",
       "gender": "male",
       "role": "user",
       "banned": false,
-      "createdAt": "2026-01-14T15:28:08.200Z"
+      "createdAt": "2026-01-14T15:28:08.200Z",
+      "dob": "2001-09-14"
     }
   ]
 }

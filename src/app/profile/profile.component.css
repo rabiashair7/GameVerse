@@ -1,0 +1,32 @@
+.profile-layout {
+  display: flex;
+  min-height: calc(100vh - 80px);
+}
+
+.profile-sidebar {
+  width: 260px;
+  padding: 20px;
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-sidebar a {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--text-main);
+}
+
+.profile-sidebar a:hover,
+.profile-sidebar a.active {
+  background: var(--primary-soft);
+}
+
+.profile-content {
+  flex: 1;
+  padding: 24px;
+}

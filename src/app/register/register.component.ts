@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../userService.service';
@@ -8,26 +8,13 @@ import { UserService } from '../userService.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit{
-   ngOnInit(): void {
-    this.loadUser();
-  }
-   loadUser(): void {
-    this.users = this.userService.getAllUsers();
-    this.filteredUsers = [...this.users];
-  }
+export class RegisterComponent implements OnInit {
 
-   filterUsers(): void {
-    const value = this.userSearch.toLowerCase().trim();
-    this.filteredUsers = this.users.filter(user =>
-      user.fullName?.toLowerCase().includes(value) ||
-      user.email?.toLowerCase().includes(value) ||
-      user.role?.toLowerCase().includes(value)
-    );
-  }
   users: any[] = [];
   filteredUsers: any[] = [];
   userSearch = '';
+
+  // max date for DOB (today)
   today = new Date().toISOString().split('T')[0];
 
   constructor(
@@ -36,24 +23,60 @@ export class RegisterComponent implements OnInit{
     private userService: UserService
   ) {}
 
-  registerForm = this.fb.group({
-    fullName: ['', [Validators.required, Validators.minLength(2)]],
-    dob: ['', [Validators.required, this.noFutureDate]],
-    gender: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [
-      Validators.required,
-      Validators.minLength(8),
-      this.strongPassword
-    ]],
-    confirmPassword: ['', Validators.required]
-  }, { validators: this.passwordsMatch });
+  /* =============================
+     INIT
+     ============================= */
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.users = this.userService.getAllUsers();
+    this.filteredUsers = [...this.users];
+  }
+
+  /* =============================
+     SEARCH (optional / admin use)
+     ============================= */
+  filterUsers(): void {
+    const value = this.userSearch.toLowerCase().trim();
+    this.filteredUsers = this.users.filter(user =>
+      user.fullName?.toLowerCase().includes(value) ||
+      user.email?.toLowerCase().includes(value) ||
+      user.role?.toLowerCase().includes(value)
+    );
+  }
+
+  /* =============================
+     FORM
+     ============================= */
+  registerForm = this.fb.group(
+    {
+      fullName: ['', [Validators.required, Validators.minLength(2)]],
+
+      dob: ['', [Validators.required, this.noFutureDate]],
+
+      gender: ['', Validators.required],
+
+      email: ['', [Validators.required, Validators.email]],
+
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        this.strongPassword
+      ]],
+
+      confirmPassword: ['', Validators.required]
+    },
+    { validators: this.passwordsMatch }
+  );
 
   /* =============================
      VALIDATORS
      ============================= */
   noFutureDate(control: AbstractControl) {
     if (!control.value) return null;
+
     return new Date(control.value) > new Date()
       ? { futureDate: true }
       : null;
@@ -66,6 +89,7 @@ export class RegisterComponent implements OnInit{
       /[a-z]/.test(v) &&
       /[0-9]/.test(v) &&
       /[^A-Za-z0-9]/.test(v);
+
     return ok ? null : { weakPassword: true };
   }
 
@@ -88,7 +112,8 @@ export class RegisterComponent implements OnInit{
       fullName: this.registerForm.value.fullName!,
       email: this.registerForm.value.email!,
       password: this.registerForm.value.password!,
-      gender: this.registerForm.value.gender as 'male' | 'female'
+      gender: this.registerForm.value.gender as 'male' | 'female',
+      dob: this.registerForm.value.dob!              // ✅ DOB SAVED
     });
 
     if (!success) {
