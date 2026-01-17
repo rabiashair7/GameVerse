@@ -96,7 +96,8 @@ export class UserService {
       role: 'user',
       banned: false,
       createdAt: new Date().toISOString(),
-      wishlist: []
+      wishlist: [],
+      profileImage: null
     });
 
     this.http.post<User>(this.dataUrl, newUser).subscribe(saved => {
@@ -131,6 +132,23 @@ export class UserService {
     this.currentUser.dob = data.dob;
 
     this.http.patch(`${this.dataUrl}/${id}`, payload).subscribe();
+
+    return true;
+  }
+
+  /* =============================
+     PROFILE IMAGE (PERMANENT)
+     ============================= */
+  updateProfileImage(base64Image: string): boolean {
+    if (!this.currentUser) return false;
+
+    const id = this.currentUser.id;
+
+    this.currentUser.profileImage = base64Image;
+
+    this.http
+      .patch(`${this.dataUrl}/${id}`, { profileImage: base64Image })
+      .subscribe();
 
     return true;
   }
@@ -216,12 +234,12 @@ export class UserService {
      ❤️ WISHLIST (PERMANENT)
      ============================= */
 
-  isInWishlist(gameId: number): boolean {
+  isInWishlist(gameId: string): boolean {
     if (!this.currentUser) return false;
     return this.currentUser.wishlist.includes(gameId);
   }
 
-  toggleWishlist(gameId: number): void {
+  toggleWishlist(gameId: string): void {
     if (!this.currentUser) return;
 
     if (this.isInWishlist(gameId)) {
@@ -231,7 +249,7 @@ export class UserService {
     }
   }
 
-  addToWishlist(gameId: number): void {
+  addToWishlist(gameId: string): void {
     if (!this.currentUser) return;
     if (this.currentUser.wishlist.includes(gameId)) return;
 
@@ -244,7 +262,7 @@ export class UserService {
       .subscribe();
   }
 
-  removeFromWishlist(gameId: number): void {
+  removeFromWishlist(gameId: string): void {
     if (!this.currentUser) return;
 
     this.currentUser.wishlist =

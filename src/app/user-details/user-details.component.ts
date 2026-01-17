@@ -29,16 +29,54 @@ export class UserDetailsComponent implements OnInit {
     const u = this.userService.getCurrentUser();
     if (!u) return;
 
-    this.user = new User(u); // ✅ FIX
+    this.user = new User(u);
   }
 
   /* =============================
-     AVATAR (GENDER BASED)
+     PROFILE IMAGE
      ============================= */
   get avatarSrc(): string {
+    // 1️⃣ Custom uploaded image (permanent)
+    if (this.user.profileImage) {
+      return this.user.profileImage;
+    }
+
+    // 2️⃣ Fallback to gender avatar
     return this.user.gender === 'male'
-      ? 'assets/avatars/avatar-male.png'
-      : 'assets/avatars/avatar-female.png';
+      ? 'assets/avatar male.webp'
+      : 'assets/avatar female.webp';
+  }
+
+  onImageUpload(event: Event): void {
+    this.clearMessages();
+
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+
+    const file = input.files[0];
+
+    if (!file.type.startsWith('image/')) {
+      this.error = 'Please select a valid image file';
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64 = reader.result as string;
+
+      const ok = this.userService.updateProfileImage(base64);
+
+      if (!ok) {
+        this.error = 'Failed to update profile image';
+        return;
+      }
+
+      this.user.profileImage = base64;
+      this.success = 'Profile image updated successfully';
+    };
+
+    reader.readAsDataURL(file);
   }
 
   /* =============================
@@ -65,7 +103,7 @@ export class UserDetailsComponent implements OnInit {
   cancelEdit(): void {
     const u = this.userService.getCurrentUser();
     if (u) {
-      this.user = new User(u); // ✅ FIX
+      this.user = new User(u);
     }
     this.editMode = false;
     this.clearMessages();

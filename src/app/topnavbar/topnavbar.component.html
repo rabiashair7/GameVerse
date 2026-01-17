@@ -20,20 +20,11 @@
 
       <!-- Library (hidden for admin) -->
       <a
-        *ngIf="userService.getCurrentUser() && !userService.getCurrentUser()!.isAdmin()"
+        *ngIf="userService.isLoggedIn() && !userService.getCurrentUser()!.isAdmin()"
         routerLink="/library"
         routerLinkActive="active"
       >
         Library
-      </a>
-
-      <!-- Profile (user only) -->
-      <a
-        *ngIf="userService.isLoggedIn() && !userService.getCurrentUser()!.isAdmin()"
-        routerLink="/profile"
-        routerLinkActive="active"
-      >
-        Profile
       </a>
 
       <!-- Admin (admin only) -->
@@ -54,6 +45,41 @@
       {{ userService.isDarkMode() ? '☀️' : '🌙' }}
     </button>
 
+    <!-- 👤 PROFILE DROPDOWN (user + admin) -->
+    <div
+      *ngIf="userService.isLoggedIn() && avatarSrc"
+      class="navbar-avatar-wrapper"
+    >
+      <img
+        [src]="avatarSrc"
+        alt="Profile"
+        class="navbar-avatar"
+        (click)="toggleDropdown()"
+      >
+
+      <!-- 🛡 ADMIN BADGE -->
+      <span
+        *ngIf="userService.getCurrentUser()?.isAdmin()"
+        class="admin-badge"
+      >
+        ADMIN
+      </span>
+
+      <!-- ⬇️ DROPDOWN -->
+      <div
+        class="profile-dropdown"
+        *ngIf="dropdownOpen"
+      >
+        <button (click)="goToProfile()">
+          Profile
+        </button>
+
+        <button (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+
     <!-- Login (guest only) -->
     <a
       *ngIf="!userService.isLoggedIn()"
@@ -62,14 +88,5 @@
     >
       Login
     </a>
-
-    <!-- Logout (logged in only) -->
-    <button
-      *ngIf="userService.isLoggedIn()"
-      class="logout"
-      (click)="logout()"
-    >
-      Logout
-    </button>
   </div>
 </header>

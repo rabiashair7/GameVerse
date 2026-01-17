@@ -76,10 +76,10 @@ export class GameCardComponent implements OnInit {
     });
   }
 
-  // ❤️ WISHLIST
+  // ❤️ WISHLIST (FIXED)
   addToWishlist(): void {
     if (!this.game) return;
-    this.userService.addToWishlist(this.game.id);
+    this.userService.addToWishlist(this.game); // ✅ PASS FULL GAME
   }
 
   isInWishlist(): boolean {

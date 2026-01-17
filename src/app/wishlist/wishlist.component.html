@@ -41,8 +41,10 @@
       tabindex="0"
     >
 
+      <!-- COVER -->
       <div class="cover">
-        <img [src]="g.coverImage" [alt]="g.title" />
+        <img [src]="g.image" [alt]="g.title" />
+
         <button
           class="remove-btn"
           type="button"
@@ -53,6 +55,7 @@
         </button>
       </div>
 
+      <!-- INFO -->
       <div class="info">
         <div class="top">
           <h4 class="name">{{ g.title }}</h4>
@@ -65,18 +68,26 @@
         <div class="sub">
           <span class="dev">{{ g.developer }}</span>
           <span class="dot">•</span>
-          <span class="cat">{{ g.category }}</span>
+          <span class="cat">{{ g.categories?.join(', ') }}</span>
         </div>
 
         <p class="desc">
-          {{ g.description }}
+          {{ g.details }}
         </p>
 
         <div class="actions">
-          <button class="btn-outline" type="button" (click)="viewGame(g); $event.stopPropagation()">
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="viewGame(g); $event.stopPropagation()"
+          >
             View
           </button>
-          <button class="btn-danger" type="button" (click)="remove(g.id, $event)">
+          <button
+            class="btn-danger"
+            type="button"
+            (click)="remove(g.id, $event)"
+          >
             Remove
           </button>
         </div>

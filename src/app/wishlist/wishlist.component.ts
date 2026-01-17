@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { GameService } from '../gameService.service';
 import { UserService } from '../userService.service';
-import { Game } from '../modules/games'; // adjust path if needed
 
 @Component({
   selector: 'app-wishlist',
@@ -15,8 +14,11 @@ export class WishlistComponent implements OnInit {
   loading = true;
   error = '';
 
-  wishlistIds: number[] = [];
-  wishlistGames: Game[] = [];
+  // ✅ IDs are STRINGS (db.json source of truth)
+  wishlistIds: string[] = [];
+
+  // ✅ NO Game model / interface
+  wishlistGames: any[] = [];
 
   constructor(
     private gameService: GameService,
@@ -31,18 +33,25 @@ export class WishlistComponent implements OnInit {
       return;
     }
 
-    this.wishlistIds = Array.isArray(user.wishlist) ? [...user.wishlist] : [];
+    // ✅ enforce string[]
+    this.wishlistIds = Array.isArray(user.wishlist)
+      ? [...user.wishlist]
+      : [];
 
-    // ✅ use existing GameService API
     this.gameService.getGames().subscribe({
-      next: (games: Game[]) => {
+      next: (games: any[]) => {
         const idSet = new Set(this.wishlistIds);
 
-        this.wishlistGames = (games || []).filter(g => idSet.has(g.id));
+        // map IDs → full game objects
+        this.wishlistGames = (games || []).filter(g =>
+          idSet.has(g.id)
+        );
 
-        // keep wishlist order stable
+        // preserve wishlist order
         this.wishlistGames.sort(
-          (a, b) => this.wishlistIds.indexOf(a.id) - this.wishlistIds.indexOf(b.id)
+          (a, b) =>
+            this.wishlistIds.indexOf(a.id) -
+            this.wishlistIds.indexOf(b.id)
         );
 
         this.loading = false;
@@ -54,22 +63,22 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-  viewGame(game: Game): void {
+  viewGame(game: any): void {
     this.router.navigate(['/game', game.id]);
   }
 
-  remove(gameId: number, ev?: Event): void {
+  remove(gameId: string, ev?: Event): void {
     ev?.stopPropagation();
 
     // optimistic UI
     this.wishlistIds = this.wishlistIds.filter(id => id !== gameId);
     this.wishlistGames = this.wishlistGames.filter(g => g.id !== gameId);
 
-    // persistence remains ONLY in UserService
+    // persist
     this.userService.removeFromWishlist(gameId);
   }
 
-  trackByGameId(_: number, g: Game): number {
+  trackByGameId(_: number, g: any): string {
     return g.id;
   }
 }

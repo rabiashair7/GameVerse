@@ -1,18 +1,21 @@
 export class Game {
 
   constructor(
-    public id: number,
+    public id: string,
     public title: string,
-    public description: string,
     public developer: string,
     public price: number,
-    public category: string,
-    public releaseDate: string,
-    public coverImage: string,
-    public unitsSold: number,
-    public rating: number,
-    public tags: string[],
-    public createdAt: string
+                  
+    public image: string,
+    public images: string[] = [],
+    public videos: string[] = [],
+    public categories: string[] = [],
+
+    public details: string = '',
+    public releaseDate: string = '',
+    public unitsSold: string = '',
+    public rating: number | null = null,
+    public popular: boolean = false
   ) {}
 
   isFree(): boolean {

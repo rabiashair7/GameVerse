@@ -9,8 +9,11 @@ export class User {
   banned!: boolean;
   createdAt!: string;
 
-  // ❤️ WISHLIST (game IDs)
-  wishlist: number[] = [];
+  // 🖼️ PROFILE IMAGE (Base64)
+  profileImage?: string | null;
+
+  // ❤️ WISHLIST (game IDs — MUST be strings)
+  wishlist: string[] = [];
 
   constructor(data?: Partial<User>) {
     Object.assign(this, data);

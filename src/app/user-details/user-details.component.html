@@ -5,6 +5,17 @@
        ============================= -->
   <div class="avatar">
     <img [src]="avatarSrc" alt="User Avatar">
+
+    <!-- 📷 CHANGE IMAGE -->
+    <label class="upload-btn">
+      Change photo
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onImageUpload($event)"
+        hidden
+      >
+    </label>
   </div>
 
   <!-- =============================
