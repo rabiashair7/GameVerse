@@ -83,6 +83,17 @@
           >
             View
           </button>
+
+          <!-- 🛒 ADD TO CART (NEW) -->
+          <button
+            class="btn-outline"
+            type="button"
+            (click)="addToCart(g); $event.stopPropagation()"
+            [disabled]="isInCart(g.id)"
+          >
+            {{ isInCart(g.id) ? 'In Cart' : 'Add to Cart' }}
+          </button>
+
           <button
             class="btn-danger"
             type="button"

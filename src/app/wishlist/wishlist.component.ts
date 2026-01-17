@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { GameService } from '../gameService.service';
 import { UserService } from '../userService.service';
+import { CartService } from '../cart.service'; 
 
 @Component({
   selector: 'app-wishlist',
@@ -23,6 +24,7 @@ export class WishlistComponent implements OnInit {
   constructor(
     private gameService: GameService,
     private userService: UserService,
+    private cartService: CartService, // ✅ NEW
     private router: Router
   ) {}
 
@@ -44,14 +46,14 @@ export class WishlistComponent implements OnInit {
 
         // map IDs → full game objects
         this.wishlistGames = (games || []).filter(g =>
-          idSet.has(g.id)
+          idSet.has(String(g.id)) // ✅ make sure it's string
         );
 
         // preserve wishlist order
         this.wishlistGames.sort(
           (a, b) =>
-            this.wishlistIds.indexOf(a.id) -
-            this.wishlistIds.indexOf(b.id)
+            this.wishlistIds.indexOf(String(a.id)) -
+            this.wishlistIds.indexOf(String(b.id))
         );
 
         this.loading = false;
@@ -70,15 +72,42 @@ export class WishlistComponent implements OnInit {
   remove(gameId: string, ev?: Event): void {
     ev?.stopPropagation();
 
+    const id = String(gameId);
+
     // optimistic UI
-    this.wishlistIds = this.wishlistIds.filter(id => id !== gameId);
-    this.wishlistGames = this.wishlistGames.filter(g => g.id !== gameId);
+    this.wishlistIds = this.wishlistIds.filter(x => x !== id);
+    this.wishlistGames = this.wishlistGames.filter(g => String(g.id) !== id);
 
     // persist
-    this.userService.removeFromWishlist(gameId);
+    this.userService.removeFromWishlist(id);
   }
 
   trackByGameId(_: number, g: any): string {
-    return g.id;
+    return String(g.id);
+  }
+
+  /* =============================
+     🛒 CART (NEW LOGIC)
+     ============================= */
+
+  addToCart(game: any, ev?: Event): void {
+    ev?.stopPropagation();
+
+    // optional: force login
+    if (!this.userService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.cartService.addToCart({
+      gameId: String(game.id),
+      title: game.title,
+      price: Number(game.price) || 0,
+      image: game.image
+    }, 1);
+  }
+
+  isInCart(gameId: string): boolean {
+    return this.cartService.isInCart(String(gameId));
   }
 }

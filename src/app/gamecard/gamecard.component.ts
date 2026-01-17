@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../gameService.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { UserService } from '../userService.service';
+import { CartService } from '../cart.service'; // ✅ NEW
 
 @Component({
   selector: 'app-gamecard',
@@ -24,7 +25,8 @@ export class GameCardComponent implements OnInit {
     private gameService: GameService,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private cartService: CartService // ✅ NEW
   ) {}
 
   ngOnInit(): void {
@@ -76,10 +78,31 @@ export class GameCardComponent implements OnInit {
     });
   }
 
-  // ❤️ WISHLIST (FIXED)
+  /* =============================
+     🛒 CART
+     ============================= */
+  addToCart(): void {
+    if (!this.game) return;
+
+    this.cartService.addToCart({
+      gameId: String(this.game.id),
+      title: this.game.title,
+      price: this.game.price,
+      image: this.game.image
+    }, 1);
+  }
+
+  isInCart(): boolean {
+    if (!this.game) return false;
+    return this.cartService.isInCart(String(this.game.id));
+  }
+
+  /* =============================
+     ❤️ WISHLIST
+     ============================= */
   addToWishlist(): void {
     if (!this.game) return;
-    this.userService.addToWishlist(this.game); // ✅ PASS FULL GAME
+    this.userService.addToWishlist(this.game.id); // keep existing logic
   }
 
   isInWishlist(): boolean {
@@ -87,7 +110,9 @@ export class GameCardComponent implements OnInit {
     return this.userService.isInWishlist(this.game.id);
   }
 
-  // ⬅ BACK TO HOME
+  /* =============================
+     ⬅ NAVIGATION
+     ============================= */
   goHome(): void {
     this.router.navigate(['/home']);
   }

@@ -40,6 +40,15 @@
     <p class="release">Released: {{ game.releaseDate }}</p>
     <p class="description">{{ game.details }}</p>
 
+    <!-- 🛒 ADD TO CART BUTTON (NEW) -->
+    <button
+      class="cart-btn"
+      (click)="addToCart()"
+      [disabled]="isInCart()"
+    >
+      {{ isInCart() ? 'In Cart' : 'Add to Cart' }}
+    </button>
+
     <!-- ❤️ WISHLIST BUTTON -->
     <button
       class="wishlist-btn"
