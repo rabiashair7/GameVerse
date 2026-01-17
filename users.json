@@ -8,7 +8,9 @@
       "gender": "male",
       "role": "admin",
       "banned": false,
-      "createdAt": "2025-01-01T00:00:00.000Z"
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "dob": "2001-09-14",
+      "wishlist": []
     },
     {
       "id": "2",
@@ -18,18 +20,21 @@
       "gender": "male",
       "role": "admin",
       "banned": false,
-      "createdAt": "2025-01-01T00:00:00.000Z"
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "dob": "2001-09-14",
+      "wishlist": []
     },
     {
       "id": "3",
       "fullName": "rabia shaier",
       "email": "rabiashaier@gameverse.com",
-      "password": "User@1234",
+      "password": "User@12345",
       "gender": "male",
       "role": "user",
       "banned": false,
       "createdAt": "2026-01-14T15:28:08.200Z",
-      "dob": "2001-09-14"
+      "dob": "2001-09-14",
+      "wishlist": []
     }
   ]
 }

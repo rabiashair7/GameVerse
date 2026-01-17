@@ -24,7 +24,7 @@
     <img [src]="selectedImage" class="main-image">
   </div>
 
-  <!-- 🖼 THUMBNAILS (STEAM STYLE) -->
+  <!-- 🖼 THUMBNAILS -->
   <div class="thumbnails" *ngIf="allImages.length">
     <img
       *ngFor="let img of allImages"
@@ -39,6 +39,15 @@
     <p class="price">${{ game.price }}</p>
     <p class="release">Released: {{ game.releaseDate }}</p>
     <p class="description">{{ game.details }}</p>
+
+    <!-- ❤️ WISHLIST BUTTON -->
+    <button
+      class="wishlist-btn"
+      (click)="addToWishlist()"
+      [disabled]="isInWishlist()"
+    >
+      {{ isInWishlist() ? 'In Wishlist' : 'Add to Wishlist' }}
+    </button>
   </div>
 
   <!-- 🎥 VIDEOS -->

@@ -9,8 +9,16 @@ export class User {
   banned!: boolean;
   createdAt!: string;
 
+  // ❤️ WISHLIST (game IDs)
+  wishlist: number[] = [];
+
   constructor(data?: Partial<User>) {
     Object.assign(this, data);
+
+    // ✅ Ensure wishlist is always initialized
+    if (!this.wishlist) {
+      this.wishlist = [];
+    }
   }
 
   isAdmin(): boolean {

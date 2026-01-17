@@ -1,1 +1,88 @@
-<p>wishlist works!</p>
+<div class="wishlist-page">
+
+  <div class="wishlist-header">
+    <div>
+      <h2 class="title">My Wishlist</h2>
+      <p class="subtitle">Games you saved for later.</p>
+    </div>
+
+    <div class="meta" *ngIf="!loading && !error">
+      <span class="count">{{ wishlistGames.length }}</span>
+      <span class="label">items</span>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="state loading">
+    <div class="spinner"></div>
+    <div>Loading wishlist...</div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!loading && error" class="state error">
+    {{ error }}
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && !error && wishlistGames.length === 0" class="state empty">
+    <div class="empty-icon">☆</div>
+    <h3>Your wishlist is empty</h3>
+    <p>Browse games and tap the wishlist button to save them here.</p>
+    <button class="btn-primary" routerLink="/catalog">Go to Catalog</button>
+  </div>
+
+  <!-- Grid -->
+  <div *ngIf="!loading && !error && wishlistGames.length > 0" class="grid">
+    <div
+      class="wish-card"
+      *ngFor="let g of wishlistGames; trackBy: trackByGameId"
+      (click)="viewGame(g)"
+      role="button"
+      tabindex="0"
+    >
+
+      <div class="cover">
+        <img [src]="g.coverImage" [alt]="g.title" />
+        <button
+          class="remove-btn"
+          type="button"
+          title="Remove from wishlist"
+          (click)="remove(g.id, $event)"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="info">
+        <div class="top">
+          <h4 class="name">{{ g.title }}</h4>
+          <div class="price">
+            <span *ngIf="g.price === 0; else paid">Free</span>
+            <ng-template #paid>\${{ g.price }}</ng-template>
+          </div>
+        </div>
+
+        <div class="sub">
+          <span class="dev">{{ g.developer }}</span>
+          <span class="dot">•</span>
+          <span class="cat">{{ g.category }}</span>
+        </div>
+
+        <p class="desc">
+          {{ g.description }}
+        </p>
+
+        <div class="actions">
+          <button class="btn-outline" type="button" (click)="viewGame(g); $event.stopPropagation()">
+            View
+          </button>
+          <button class="btn-danger" type="button" (click)="remove(g.id, $event)">
+            Remove
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

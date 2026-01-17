@@ -95,7 +95,8 @@ export class UserService {
       dob: data.dob,
       role: 'user',
       banned: false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      wishlist: []
     });
 
     this.http.post<User>(this.dataUrl, newUser).subscribe(saved => {
@@ -125,12 +126,10 @@ export class UserService {
       dob: data.dob
     };
 
-    // update local state
     this.currentUser.fullName = data.fullName;
     this.currentUser.gender = data.gender;
     this.currentUser.dob = data.dob;
 
-    // persist to backend
     this.http.patch(`${this.dataUrl}/${id}`, payload).subscribe();
 
     return true;
@@ -210,6 +209,51 @@ export class UserService {
 
     this.http
       .patch(`${this.dataUrl}/${user.id}`, { banned: false })
+      .subscribe();
+  }
+
+  /* =============================
+     ❤️ WISHLIST (PERMANENT)
+     ============================= */
+
+  isInWishlist(gameId: number): boolean {
+    if (!this.currentUser) return false;
+    return this.currentUser.wishlist.includes(gameId);
+  }
+
+  toggleWishlist(gameId: number): void {
+    if (!this.currentUser) return;
+
+    if (this.isInWishlist(gameId)) {
+      this.removeFromWishlist(gameId);
+    } else {
+      this.addToWishlist(gameId);
+    }
+  }
+
+  addToWishlist(gameId: number): void {
+    if (!this.currentUser) return;
+    if (this.currentUser.wishlist.includes(gameId)) return;
+
+    this.currentUser.wishlist.push(gameId);
+
+    this.http
+      .patch(`${this.dataUrl}/${this.currentUser.id}`, {
+        wishlist: this.currentUser.wishlist
+      })
+      .subscribe();
+  }
+
+  removeFromWishlist(gameId: number): void {
+    if (!this.currentUser) return;
+
+    this.currentUser.wishlist =
+      this.currentUser.wishlist.filter(id => id !== gameId);
+
+    this.http
+      .patch(`${this.dataUrl}/${this.currentUser.id}`, {
+        wishlist: this.currentUser.wishlist
+      })
       .subscribe();
   }
 }

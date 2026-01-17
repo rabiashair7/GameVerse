@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from '../gameService.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { UserService } from '../userService.service';
 
 @Component({
   selector: 'app-gamecard',
@@ -22,7 +23,8 @@ export class GameCardComponent implements OnInit {
     private route: ActivatedRoute,
     private gameService: GameService,
     private sanitizer: DomSanitizer,
-    private router: Router            // ✅ added
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -42,14 +44,12 @@ export class GameCardComponent implements OnInit {
         next: game => {
           this.game = game;
 
-          // 🔥 Prepare images (STEAM STYLE)
           this.allImages = [
             game.image,
             ...(game.images || [])
           ];
 
           this.selectedImage = this.allImages[0];
-
           this.prepareVideos(game.videos);
           this.loading = false;
         },
@@ -76,7 +76,18 @@ export class GameCardComponent implements OnInit {
     });
   }
 
-  // ✅ BACK TO HOME (navigation via code, as required)
+  // ❤️ WISHLIST
+  addToWishlist(): void {
+    if (!this.game) return;
+    this.userService.addToWishlist(this.game.id);
+  }
+
+  isInWishlist(): boolean {
+    if (!this.game) return false;
+    return this.userService.isInWishlist(this.game.id);
+  }
+
+  // ⬅ BACK TO HOME
   goHome(): void {
     this.router.navigate(['/home']);
   }
