@@ -1,111 +1,181 @@
-/* ===========================
-   BASE RESET
-=========================== */
-* {
-  box-sizing: border-box;
+/* LIGHT */
+:root {
+  --bg: #f5f5f5;
+  --text: #111;
+  --card: #ffffff;
+  --border: #e6e6e6;
+  --nav: #ffffff;
+  --link: #111;
+
+  /* extra (ADD ONLY) */
+  --muted: rgba(0,0,0,0.65);
+  --soft: rgba(0,0,0,0.06);
+  --soft2: rgba(0,0,0,0.10);
+}
+
+/* DARK (class on <html>) */
+html.dark-theme {
+  --bg: #121212;
+  --text: #f5f5f5;
+  --card: #1c1c1c;
+  --border: #333;
+  --nav: #1e1e1e;
+  --link: #f5f5f5;
+
+  /* extra (ADD ONLY) */
+  --muted: rgba(255,255,255,0.75);
+  --soft: rgba(255,255,255,0.06);
+  --soft2: rgba(255,255,255,0.12);
 }
 
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.25s, color 0.25s;
 }
 
-/* ===========================
-   APP ROOT (THEME VARIABLES)
-=========================== */
-.app-root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Navbar */
+.store-navbar {
+  background: var(--nav);
+  border-bottom: 1px solid var(--border);
+}
+.store-navbar a { color: var(--link); }
 
-  /* ---------- LIGHT MODE ---------- */
-  --bg-main: #f8fafc;        /* page content */
-  --bg-shell: #ffffff;       /* navbar + footer */
-
-  --text-main: #0f172a;      /* main content text */
-  --text-shell: #0f172a;     /* navbar + footer text */
-  --text-muted: #475569;
-
-  --border: #e5e7eb;
-  --accent: #2563eb;
-
-  background: var(--bg-main);
-  color: var(--text-main);
-
-  transition: background 0.3s ease, color 0.3s ease;
+/* Common surfaces */
+.page-content,
+.cart-page,
+.cart-item,
+.game-card,
+.catalog {
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* ===========================
-   DARK MODE
-=========================== */
-.app-root.dark {
-  --bg-main: #0b1220;        /* page content */
-  --bg-shell: #111827;       /* navbar + footer */
-
-  --text-main: #e5e7eb;      /* main content text */
-  --text-shell: #e5e7eb;     /* navbar + footer text */
-  --text-muted: #94a3b8;
-
-  --border: #1f2933;
-  --accent: #22c55e;
+.cart-item,
+.game-card {
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 
-/* ===========================
-   MAIN CONTENT AREA
-=========================== */
-main,
-.page-content {
-  background: var(--bg-main);
-  color: var(--text-main);
-  flex: 1;
-  padding: 24px;
+/* Toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 9999;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
-/* ===========================
-   SHELL ELEMENTS (NAVBAR / FOOTER)
-=========================== */
-header,
-nav,
-footer {
-  background: var(--bg-shell);
-  color: var(--text-shell);
+/* =========================
+   ADD ONLY: Sidebar categories
+   ========================= */
+.catalog-sidebar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
 }
 
-/* ===========================
-   SHARED UI
-=========================== */
-.card {
-  background: var(--bg-shell);
+.catalog-sidebar h5 {
+  color: var(--text);
+  margin: 0 0 10px;
+}
+
+.catalog-sidebar a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--link);
+  margin-bottom: 6px;
+  background: transparent;
+}
+
+.catalog-sidebar a:hover {
+  background: var(--soft);
+}
+
+/* =========================
+   ADD ONLY: Search input
+   ========================= */
+.search-input {
+  width: 100%;
+  max-width: 520px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--muted);
+}
+
+/* =========================
+   ADD ONLY: Buttons (cart, checkout, etc.)
+   ========================= */
+button,
+.cart-page button,
+.cart-item button,
+.actions button {
+  background: var(--card);
+  color: var(--text);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 16px;
-  color: var(--text-main);
-}
-
-button {
-  background: var(--accent);
-  color: #ffffff;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 8px 12px;
   cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
 }
 
-button:hover {
-  opacity: 0.9;
+button:hover,
+.cart-page button:hover,
+.cart-item button:hover,
+.actions button:hover {
+  background: var(--soft);
 }
 
-/* ✅ Inputs (so search box isn’t white in dark mode) */
-input, select, textarea {
-  background: var(--bg-shell);
-  color: var(--text-main);
+button:active {
+  transform: scale(0.98);
+}
+
+/* Special buttons you already use */
+button.checkout {
+  background: var(--soft2);
+  font-weight: 700;
+}
+
+button.clear {
+  background: var(--soft);
+}
+
+button.remove {
+  background: rgba(255, 0, 0, 0.10);
+  border-color: rgba(255, 0, 0, 0.18);
+}
+
+/* qty buttons look same in dark */
+.qty button {
+  min-width: 34px;
+  padding: 6px 10px;
+}
+
+/* Cart footer surfaces */
+.cart-footer {
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 8px 10px;
+  border-radius: 14px;
+  padding: 12px;
+  margin-top: 12px;
 }
 
-input::placeholder, textarea::placeholder {
-  color: var(--text-muted);
+/* Small text in dark */
+.developer {
+  color: var(--muted);
 }

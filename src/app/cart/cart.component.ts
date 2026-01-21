@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+// ✅ src/app/cart/cart.component.ts (FULL - LIVE)
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CartService, CartItem } from '../cart.service';
 import { UserService } from '../userService.service';
 
@@ -8,11 +10,13 @@ import { UserService } from '../userService.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
 
   cartItems: CartItem[] = [];
   total = 0;
   isLoggedIn = false;
+
+  private sub?: Subscription;
 
   constructor(
     private cartService: CartService,
@@ -24,7 +28,15 @@ export class CartComponent implements OnInit {
     this.isLoggedIn = this.userService.isLoggedIn();
     if (!this.isLoggedIn) return;
 
+    // ✅ initial
     this.refresh();
+
+    // ✅ LIVE: update when cart changes from any page
+    this.sub = this.cartService.cart$.subscribe(() => this.refresh());
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   private refresh(): void {
@@ -34,27 +46,43 @@ export class CartComponent implements OnInit {
 
   increase(gameId: string): void {
     this.cartService.increaseQty(gameId);
-    this.refresh();
   }
 
   decrease(gameId: string): void {
     this.cartService.decreaseQty(gameId);
-    this.refresh();
   }
 
   remove(gameId: string): void {
     this.cartService.removeFromCart(gameId);
-    this.refresh();
   }
 
   clearCart(): void {
     this.cartService.clearCart();
-    this.refresh();
   }
 
   checkout(): void {
-    // placeholder for now
-    alert('Checkout coming soon!');
+    // ✅ ADD ONLY: move cart games to Library, then clear cart, then go to library
+    if (!this.userService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    if (!this.cartItems.length) {
+      alert('Your cart is empty.');
+      return;
+    }
+
+    // ✅ add every cart game to library
+    for (const item of this.cartItems) {
+      this.userService.addToLibrary(String(item.gameId));
+    }
+
+    // ✅ clear cart
+    this.clearCart();
+    this.refresh();
+
+    alert('✅ Purchased! Games added to your Library.');
+    this.router.navigate(['/library']);
   }
 
   goHome(): void {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { UserService } from './userService.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -9,24 +9,17 @@ import { UserService } from './userService.service';
 })
 export class AppComponent {
 
-  showStoreNavbar = false;
+  showStoreNavbar = true;
 
-  constructor(
-    private router: Router,
-    public userService: UserService
-  ) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.showStoreNavbar =
-          event.url.startsWith('/home') ||
-          event.url.startsWith('/games') ||
-          event.url.startsWith('/category');
-      }
-    });
-  }
+  private hideNavbarOn: string[] = ['/login', '/register', '/admin'];
 
-
-  get isDarkMode(): boolean {
-    return this.userService.isDarkMode();
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((e: NavigationEnd) => {
+        const url = e.urlAfterRedirects.split('?')[0];
+        this.showStoreNavbar = !this.hideNavbarOn.some(x => url.startsWith(x));
+      });
   }
 }
+

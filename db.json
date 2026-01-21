@@ -361,6 +361,36 @@
       ],
       "rating": null,
       "popular": true
+    },
+    {
+      "id": "0d6e",
+      "title": "Call Of Duty",
+      "developer": "Infinity Ward",
+      "price": 69.99,
+      "image": "https://th.bing.com/th/id/R.c8fe0553721dc7e81b305d1e7d188c40?rik=rn0mbnMLa39Qwg&riu=http%3a%2f%2fimages.wikia.com%2fcallofduty%2fimages%2f3%2f37%2fCall_of_Duty_Cover.jpg&ehk=a6zn3CUZpPX84oK9WCEmAGOcK5GazwGbxNzM%2bG9K9Ns%3d&risl=&pid=ImgRaw&r=0",
+      "unitsSold": "1.4 M",
+      "releaseDate": "2003-10-22",
+      "details": "Call of Duty: Modern Warfare II is a first-person shooter (FPS) that delivers a cinematic single-player campaign, fast-paced multiplayer combat, and cooperative Special Ops missions.\n\nPlayers join Task Force 141 in high-stakes operations across the globe, featuring modern weapons, advanced movement, and realistic gunplay powered by a new game engine.",
+      "images": [
+        "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/07/call-of-duty-warzone.jpg",
+        "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/02/gameplay-screenshot-multiplayer-call-of-duty-black-ops-6.jpg",
+        "https://cdn.uc.assets.prezly.com/37182caf-fbce-4711-a91d-396ffc1635ad/-/resize/1200x/-/format/auto/",
+        "https://sm.ign.com/t/ign_br/video/c/call-of-du/call-of-duty-modern-warfare-2-season-4-vondel-reveal-trailer_k38u.600.jpg",
+        "https://tse1.mm.bing.net/th/id/OIF.xJJoMNUlfiDCR2jKXrGrlw?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/02/call-of-duty-sbmm.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=bH1lHCirCGI",
+        "https://www.youtube.com/watch?v=K4eXjltawZ4",
+        "https://www.youtube.com/watch?v=pGFYtZD53ZA"
+      ],
+      "categories": [
+        "action",
+        "adventure",
+        "strategy"
+      ],
+      "rating": null,
+      "popular": false
     }
   ]
 }

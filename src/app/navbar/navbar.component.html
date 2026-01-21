@@ -1,24 +1,14 @@
 <nav class="store-navbar">
 
-  <!-- LEFT SIDE -->
   <div class="categories">
-
-    <!-- CATEGORIES DROPDOWN -->
-    <button
-      class="categories-btn"
-      (click)="toggleDropdown()"
-      type="button">
+    <button class="categories-btn" (click)="toggleDropdown()" type="button">
       Categories ▾
     </button>
 
-    <!-- ✅ CATALOG LINK -->
-    <a
-      routerLink="/catalog"
-      class="catalog-link">
+    <a routerLink="/catalog" class="catalog-link" (click)="closeDropdown()">
       Catalog
     </a>
 
-    <!-- DROPDOWN -->
     <div class="dropdown" *ngIf="isOpen">
       <div class="grid">
         <a routerLink="/category/action" (click)="closeDropdown()">Action</a>
@@ -30,13 +20,26 @@
         <a routerLink="/category/open-world" (click)="closeDropdown()">Open World</a>
       </div>
     </div>
-
   </div>
 
-  <!-- RIGHT SIDE -->
   <div class="icons">
-    <a routerLink="/wishlist">❤️</a>
-    <a routerLink="/cart">🛒</a>
+    <a routerLink="/wishlist" (click)="closeDropdown()">❤️</a>
+
+    <!-- 📚 ICON ONLY -->
+    <a
+      *ngIf="userService.isLoggedIn()"
+      routerLink="/library"
+      (click)="closeDropdown()"
+      aria-label="Library"
+      title="Library"
+      class="lib-icon"
+    >
+      📚
+    </a>
+
+    <a routerLink="/cart" (click)="closeDropdown()">
+      🛒 <span *ngIf="cartCount > 0">({{ cartCount }})</span>
+    </a>
   </div>
 
 </nav>

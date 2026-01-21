@@ -8,13 +8,54 @@ import { User } from './modules/users';
 export class UserService {
 
   /* =============================
-     THEME
+     THEME (FIXED)
      ============================= */
   private darkMode = false;
 
+  /* =============================
+     ✅ SESSION (ADD ONLY)
+     ============================= */
+  private sessionKey = 'gv_user_id';
+
+  private saveSession(userId: any): void {
+    localStorage.setItem(this.sessionKey, String(userId));
+  }
+
+  private clearSession(): void {
+    localStorage.removeItem(this.sessionKey);
+  }
+
+  private restoreSession(): void {
+    const savedId = localStorage.getItem(this.sessionKey);
+    if (!savedId) return;
+
+    const found = this.users.find(u => String(u.id) === String(savedId));
+    if (found && !found.banned) {
+      this.currentUser = found;
+    }
+  }
+
+  constructor(private http: HttpClient) {
+    this.loadUsers();
+
+    // ✅ LOAD SAVED THEME ON START
+    const saved = localStorage.getItem('gv_theme');
+    this.darkMode = saved === 'dark';
+
+    // ✅ APPLY TO html (your CSS uses html.dark-theme)
+    document.documentElement.classList.toggle('dark-theme', this.darkMode);
+    document.body.classList.toggle('dark-theme', this.darkMode);
+  }
+
   toggleTheme(): void {
     this.darkMode = !this.darkMode;
+
+    // ✅ APPLY THEME (FIX)
+    document.documentElement.classList.toggle('dark-theme', this.darkMode);
     document.body.classList.toggle('dark-theme', this.darkMode);
+
+    // ✅ SAVE THEME
+    localStorage.setItem('gv_theme', this.darkMode ? 'dark' : 'light');
   }
 
   isDarkMode(): boolean {
@@ -29,16 +70,15 @@ export class UserService {
 
   private dataUrl = 'http://localhost:3001/users';
 
-  constructor(private http: HttpClient) {
-    this.loadUsers();
-  }
-
   /* =============================
      LOAD USERS
      ============================= */
   private loadUsers(): void {
     this.http.get<User[]>(this.dataUrl).subscribe(users => {
       this.users = users.map(u => new User(u));
+
+      // ✅ ADD ONLY: restore session after users loaded
+      this.restoreSession();
     });
   }
 
@@ -55,11 +95,18 @@ export class UserService {
     }
 
     this.currentUser = user;
+
+    // ✅ ADD ONLY: persist session
+    this.saveSession(user.id);
+
     return user;
   }
 
   logout(): void {
     this.currentUser = null;
+
+    // ✅ ADD ONLY: clear session
+    this.clearSession();
   }
 
   isLoggedIn(): boolean {
@@ -104,13 +151,16 @@ export class UserService {
       const user = new User(saved);
       this.users.push(user);
       this.currentUser = user;
+
+      // ✅ ADD ONLY: persist session
+      this.saveSession(user.id);
     });
 
     return true;
   }
 
   /* =============================
-     PROFILE UPDATE (PERMANENT)
+     PROFILE UPDATE
      ============================= */
   updateProfile(data: {
     fullName: string;
@@ -121,29 +171,26 @@ export class UserService {
 
     const id = this.currentUser.id;
 
-    const payload = {
-      fullName: data.fullName,
-      gender: data.gender,
-      dob: data.dob
-    };
-
     this.currentUser.fullName = data.fullName;
     this.currentUser.gender = data.gender;
     this.currentUser.dob = data.dob;
 
-    this.http.patch(`${this.dataUrl}/${id}`, payload).subscribe();
+    this.http.patch(`${this.dataUrl}/${id}`, {
+      fullName: data.fullName,
+      gender: data.gender,
+      dob: data.dob
+    }).subscribe();
 
     return true;
   }
 
   /* =============================
-     PROFILE IMAGE (PERMANENT)
+     PROFILE IMAGE
      ============================= */
   updateProfileImage(base64Image: string): boolean {
     if (!this.currentUser) return false;
 
     const id = this.currentUser.id;
-
     this.currentUser.profileImage = base64Image;
 
     this.http
@@ -154,20 +201,13 @@ export class UserService {
   }
 
   /* =============================
-     PASSWORD CHANGE (PERMANENT)
+     PASSWORD CHANGE
      ============================= */
-  changePassword(
-    currentPassword: string,
-    newPassword: string
-  ): boolean {
+  changePassword(currentPassword: string, newPassword: string): boolean {
     if (!this.currentUser) return false;
-
-    if (this.currentUser.password !== currentPassword) {
-      return false;
-    }
+    if (this.currentUser.password !== currentPassword) return false;
 
     const id = this.currentUser.id;
-
     this.currentUser.password = newPassword;
 
     this.http
@@ -231,9 +271,8 @@ export class UserService {
   }
 
   /* =============================
-     ❤️ WISHLIST (PERMANENT)
+     ❤️ WISHLIST
      ============================= */
-
   isInWishlist(gameId: string): boolean {
     if (!this.currentUser) return false;
     return this.currentUser.wishlist.includes(gameId);
@@ -272,6 +311,64 @@ export class UserService {
       .patch(`${this.dataUrl}/${this.currentUser.id}`, {
         wishlist: this.currentUser.wishlist
       })
+      .subscribe();
+  }
+
+  /* =============================
+     📚 LIBRARY
+     ============================= */
+
+  private ensureLibrary(): string[] {
+    if (!this.currentUser) return [];
+    const u: any = this.currentUser as any;
+
+    if (!Array.isArray(u.library)) {
+      u.library = [];
+    }
+    return u.library as string[];
+  }
+
+  getLibraryIds(): string[] {
+    if (!this.currentUser) return [];
+    return [...this.ensureLibrary()];
+  }
+
+  isInLibrary(gameId: string): boolean {
+    if (!this.currentUser) return false;
+    return this.ensureLibrary().includes(gameId);
+  }
+
+  toggleLibrary(gameId: string): void {
+    if (!this.currentUser) return;
+
+    if (this.isInLibrary(gameId)) {
+      this.removeFromLibrary(gameId);
+    } else {
+      this.addToLibrary(gameId);
+    }
+  }
+
+  addToLibrary(gameId: string): void {
+    if (!this.currentUser) return;
+
+    const lib = this.ensureLibrary();
+    if (lib.includes(gameId)) return;
+
+    lib.push(gameId);
+
+    this.http
+      .patch(`${this.dataUrl}/${this.currentUser.id}`, { library: lib })
+      .subscribe();
+  }
+
+  removeFromLibrary(gameId: string): void {
+    if (!this.currentUser) return;
+
+    const lib = this.ensureLibrary().filter(id => id !== gameId);
+    (this.currentUser as any).library = lib;
+
+    this.http
+      .patch(`${this.dataUrl}/${this.currentUser.id}`, { library: lib })
       .subscribe();
   }
 }

@@ -1,35 +1,15 @@
-<header class="top-navbar">
+<header class="top-navbar"> 
   <!-- LEFT -->
   <div class="left">
-    <!-- Dummy Logo -->
-    <span class="logo">
-      🎮 GameVerse
-    </span>
+    <span class="logo">🎮 GameVerse</span>
 
-    <!-- Navigation -->
     <nav class="links">
-      <!-- Store (always visible) -->
-      <a routerLink="/home" routerLinkActive="active">
-        Store
-      </a>
+      <a routerLink="/home" routerLinkActive="active">Store</a>
+      <a routerLink="/about" routerLinkActive="active">About Us</a>
 
-      <!-- About Us (always visible) -->
-      <a routerLink="/about" routerLinkActive="active">
-        About Us
-      </a>
-
-      <!-- Library (hidden for admin) -->
+      <!-- Admin only -->
       <a
-        *ngIf="userService.isLoggedIn() && !userService.getCurrentUser()!.isAdmin()"
-        routerLink="/library"
-        routerLinkActive="active"
-      >
-        Library
-      </a>
-
-      <!-- Admin (admin only) -->
-      <a
-        *ngIf="userService.isLoggedIn() && userService.getCurrentUser()!.isAdmin()"
+        *ngIf="userService.isLoggedIn() && userService.getCurrentUser()?.isAdmin()"
         routerLink="/admin"
         routerLinkActive="active"
       >
@@ -40,24 +20,22 @@
 
   <!-- RIGHT -->
   <div class="right">
-    <!-- Theme Toggle -->
+    <!-- Theme -->
     <button class="theme-btn" (click)="toggleTheme()">
       {{ userService.isDarkMode() ? '☀️' : '🌙' }}
     </button>
 
-    <!-- 👤 PROFILE DROPDOWN (user + admin) -->
+    <!-- Profile -->
     <div
       *ngIf="userService.isLoggedIn() && avatarSrc"
       class="navbar-avatar-wrapper"
     >
       <img
         [src]="avatarSrc"
-        alt="Profile"
         class="navbar-avatar"
         (click)="toggleDropdown()"
       >
 
-      <!-- 🛡 ADMIN BADGE -->
       <span
         *ngIf="userService.getCurrentUser()?.isAdmin()"
         class="admin-badge"
@@ -65,27 +43,14 @@
         ADMIN
       </span>
 
-      <!-- ⬇️ DROPDOWN -->
-      <div
-        class="profile-dropdown"
-        *ngIf="dropdownOpen"
-      >
-        <button (click)="goToProfile()">
-          Profile
-        </button>
-
-        <button (click)="logout()">
-          Logout
-        </button>
+      <div class="profile-dropdown" *ngIf="dropdownOpen">
+        <button (click)="goToProfile()">Profile</button>
+        <button (click)="logout()">Logout</button>
       </div>
     </div>
 
-    <!-- Login (guest only) -->
-    <a
-      *ngIf="!userService.isLoggedIn()"
-      routerLink="/login"
-      class="login"
-    >
+    <!-- Login -->
+    <a *ngIf="!userService.isLoggedIn()" routerLink="/login" class="login">
       Login
     </a>
   </div>
