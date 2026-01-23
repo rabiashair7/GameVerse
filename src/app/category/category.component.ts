@@ -8,8 +8,8 @@ import { GameService } from '../gameService.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-   @Input() menuMode: boolean = false;   // 👈 בשביל Catalog
-  @Output() categorySelected = new EventEmitter<string>(); // 👈 בשביל Catalog
+   @Input() menuMode: boolean = false;   
+  @Output() categorySelected = new EventEmitter<string>(); 
   category = '';
   games: any[] = [];
   filteredGames: any[] = [];
@@ -38,7 +38,6 @@ export class CategoryComponent implements OnInit {
   applyFilters(): void {
     let result = [...this.games];
 
-    // SEARCH
     const q = this.search.toLowerCase().trim();
     if (q) {
       result = result.filter(g =>
@@ -47,7 +46,6 @@ export class CategoryComponent implements OnInit {
       );
     }
 
-    // SORT
     if (this.sortBy === 'price') {
       result.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
     } else {

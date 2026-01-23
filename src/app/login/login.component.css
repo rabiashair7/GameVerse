@@ -1,4 +1,3 @@
-/* FULL SCREEN BACKGROUND */
 .login-wrapper {
   min-height: 100vh;
   display: flex;
@@ -8,7 +7,6 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* LOGIN CARD */
 .login-box {
   width: 360px;
   padding: 40px 30px;
@@ -22,7 +20,6 @@
   text-align: center;
 }
 
-/* TITLE */
 .title {
   margin-bottom: 5px;
   font-size: 24px;
@@ -35,7 +32,6 @@
   margin-bottom: 30px;
 }
 
-/* INPUT GROUP */
 .input-group {
   position: relative;
   margin-bottom: 25px;
@@ -62,7 +58,6 @@
   transition: 0.25s ease;
 }
 
-/* FLOATING LABEL */
 .input-group input:focus + label,
 .input-group input:valid + label {
   top: -8px;
@@ -70,14 +65,12 @@
   color: #818cf8;
 }
 
-/* ERROR */
 .error {
   margin-bottom: 15px;
   font-size: 13px;
   color: #f87171;
 }
 
-/* BUTTON */
 .login-btn {
   width: 100%;
   padding: 12px;

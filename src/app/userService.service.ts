@@ -7,14 +7,10 @@ import { User } from './modules/users';
 })
 export class UserService {
 
-  /* =============================
-     THEME (FIXED)
-     ============================= */
+
   private darkMode = false;
 
-  /* =============================
-     ✅ SESSION (ADD ONLY)
-     ============================= */
+  
   private sessionKey = 'gv_user_id';
 
   private saveSession(userId: any): void {
@@ -38,11 +34,11 @@ export class UserService {
   constructor(private http: HttpClient) {
     this.loadUsers();
 
-    // ✅ LOAD SAVED THEME ON START
+    
     const saved = localStorage.getItem('gv_theme');
     this.darkMode = saved === 'dark';
 
-    // ✅ APPLY TO html (your CSS uses html.dark-theme)
+    
     document.documentElement.classList.toggle('dark-theme', this.darkMode);
     document.body.classList.toggle('dark-theme', this.darkMode);
   }
@@ -50,11 +46,10 @@ export class UserService {
   toggleTheme(): void {
     this.darkMode = !this.darkMode;
 
-    // ✅ APPLY THEME (FIX)
+    
     document.documentElement.classList.toggle('dark-theme', this.darkMode);
     document.body.classList.toggle('dark-theme', this.darkMode);
 
-    // ✅ SAVE THEME
     localStorage.setItem('gv_theme', this.darkMode ? 'dark' : 'light');
   }
 
@@ -62,29 +57,24 @@ export class UserService {
     return this.darkMode;
   }
 
-  /* =============================
-     USERS STATE
-     ============================= */
+  
   private users: User[] = [];
   private currentUser: User | null = null;
 
   private dataUrl = 'http://localhost:3001/users';
 
-  /* =============================
-     LOAD USERS
-     ============================= */
+  
   private loadUsers(): void {
     this.http.get<User[]>(this.dataUrl).subscribe(users => {
       this.users = users.map(u => new User(u));
 
-      // ✅ ADD ONLY: restore session after users loaded
+      
       this.restoreSession();
     });
   }
 
-  /* =============================
-     AUTH
-     ============================= */
+
+  
   login(email: string, password: string): User | null {
     const user = this.users.find(
       u => u.email === email && u.password === password
@@ -96,7 +86,7 @@ export class UserService {
 
     this.currentUser = user;
 
-    // ✅ ADD ONLY: persist session
+    
     this.saveSession(user.id);
 
     return user;
@@ -105,7 +95,7 @@ export class UserService {
   logout(): void {
     this.currentUser = null;
 
-    // ✅ ADD ONLY: clear session
+  
     this.clearSession();
   }
 
@@ -117,9 +107,7 @@ export class UserService {
     return this.currentUser;
   }
 
-  /* =============================
-     REGISTER (PERMANENT)
-     ============================= */
+  
   register(data: {
     fullName: string;
     email: string;
@@ -152,16 +140,13 @@ export class UserService {
       this.users.push(user);
       this.currentUser = user;
 
-      // ✅ ADD ONLY: persist session
       this.saveSession(user.id);
     });
 
     return true;
   }
 
-  /* =============================
-     PROFILE UPDATE
-     ============================= */
+  
   updateProfile(data: {
     fullName: string;
     gender: 'male' | 'female';
@@ -184,9 +169,7 @@ export class UserService {
     return true;
   }
 
-  /* =============================
-     PROFILE IMAGE
-     ============================= */
+
   updateProfileImage(base64Image: string): boolean {
     if (!this.currentUser) return false;
 
@@ -200,9 +183,6 @@ export class UserService {
     return true;
   }
 
-  /* =============================
-     PASSWORD CHANGE
-     ============================= */
   changePassword(currentPassword: string, newPassword: string): boolean {
     if (!this.currentUser) return false;
     if (this.currentUser.password !== currentPassword) return false;
@@ -217,9 +197,7 @@ export class UserService {
     return true;
   }
 
-  /* =============================
-     ADMIN HELPERS
-     ============================= */
+ 
   getAllUsers(): User[] {
     return this.users;
   }
@@ -270,9 +248,7 @@ export class UserService {
       .subscribe();
   }
 
-  /* =============================
-     ❤️ WISHLIST
-     ============================= */
+ 
   isInWishlist(gameId: string): boolean {
     if (!this.currentUser) return false;
     return this.currentUser.wishlist.includes(gameId);
@@ -314,9 +290,7 @@ export class UserService {
       .subscribe();
   }
 
-  /* =============================
-     📚 LIBRARY
-     ============================= */
+  
 
   private ensureLibrary(): string[] {
     if (!this.currentUser) return [];

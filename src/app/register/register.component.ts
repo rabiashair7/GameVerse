@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   filteredUsers: any[] = [];
   userSearch = '';
 
-  // max date for DOB (today)
+
   today = new Date().toISOString().split('T')[0];
 
   constructor(
@@ -23,9 +23,6 @@ export class RegisterComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  /* =============================
-     INIT
-     ============================= */
   ngOnInit(): void {
     this.loadUsers();
   }
@@ -34,10 +31,6 @@ export class RegisterComponent implements OnInit {
     this.users = this.userService.getAllUsers();
     this.filteredUsers = [...this.users];
   }
-
-  /* =============================
-     SEARCH (optional / admin use)
-     ============================= */
   filterUsers(): void {
     const value = this.userSearch.toLowerCase().trim();
     this.filteredUsers = this.users.filter(user =>
@@ -47,9 +40,6 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  /* =============================
-     FORM
-     ============================= */
   registerForm = this.fb.group(
     {
       fullName: ['', [Validators.required, Validators.minLength(2)]],
@@ -71,9 +61,7 @@ export class RegisterComponent implements OnInit {
     { validators: this.passwordsMatch }
   );
 
-  /* =============================
-     VALIDATORS
-     ============================= */
+
   noFutureDate(control: AbstractControl) {
     if (!control.value) return null;
 
@@ -99,9 +87,7 @@ export class RegisterComponent implements OnInit {
     return p === c ? null : { passwordMismatch: true };
   }
 
-  /* =============================
-     ACTION
-     ============================= */
+ 
   submitRegister(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -113,7 +99,7 @@ export class RegisterComponent implements OnInit {
       email: this.registerForm.value.email!,
       password: this.registerForm.value.password!,
       gender: this.registerForm.value.gender as 'male' | 'female',
-      dob: this.registerForm.value.dob!              // ✅ DOB SAVED
+      dob: this.registerForm.value.dob!             
     });
 
     if (!success) {
@@ -124,9 +110,6 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  /* =============================
-     HELPERS
-     ============================= */
   isInvalid(name: string): boolean {
     const c = this.registerForm.get(name);
     return !!(c && c.invalid && c.touched);

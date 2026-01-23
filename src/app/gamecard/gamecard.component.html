@@ -1,17 +1,13 @@
-<!-- ⏳ LOADING -->
 <div *ngIf="loading" class="loading">
   Loading game...
 </div>
 
-<!-- ❌ ERROR -->
 <div *ngIf="!loading && error" class="error">
   {{ error }}
 </div>
 
-<!-- 🎮 GAME CARD -->
 <div *ngIf="!loading && game" class="game-card-page">
 
-  <!-- ⬅ BACK TO HOME -->
   <button class="back-btn" (click)="goHome()">
     ⬅ Back to Home
   </button>
@@ -19,12 +15,10 @@
   <h1>{{ game.title }}</h1>
   <p class="developer">{{ game.developer }}</p>
 
-  <!-- 🖼 MAIN IMAGE -->
   <div class="image-viewer">
     <img [src]="selectedImage" class="main-image">
   </div>
 
-  <!-- 🖼 THUMBNAILS -->
   <div class="thumbnails" *ngIf="allImages.length">
     <img
       *ngFor="let img of allImages"
@@ -34,13 +28,11 @@
     >
   </div>
 
-  <!-- INFO -->
   <div class="info">
     <p class="price">${{ game.price }}</p>
     <p class="release">Released: {{ game.releaseDate }}</p>
     <p class="description">{{ game.details }}</p>
 
-    <!-- 🛒 ADD TO CART BUTTON (NEW) -->
     <button
       class="cart-btn"
       (click)="addToCart()"
@@ -49,7 +41,6 @@
       {{ isInCart() ? 'In Cart' : 'Add to Cart' }}
     </button>
 
-    <!-- ❤️ WISHLIST BUTTON -->
     <button
       class="wishlist-btn"
       (click)="addToWishlist()"
@@ -59,7 +50,6 @@
     </button>
   </div>
 
-  <!-- 🎥 VIDEOS -->
   <div *ngIf="safeVideos.length" class="videos">
     <iframe
       *ngFor="let v of safeVideos"

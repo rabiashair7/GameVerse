@@ -1,4 +1,3 @@
-// ✅ src/app/cart.service.ts  (FULL - LIVE)
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -32,14 +31,13 @@ export class CartService {
 
   private setCart(items: CartItem[]): void {
     this.saveToStorage(items);
-    this.cartSubject.next(items); // ✅ LIVE update
+    this.cartSubject.next(items); 
   }
 
   private normId(id: string): string {
     return String(id).trim();
   }
 
-  // ---------- API ----------
   getCart(): CartItem[] {
     return this.cartSubject.value;
   }

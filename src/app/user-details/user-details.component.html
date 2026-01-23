@@ -1,8 +1,5 @@
 <div class="user-details-card" *ngIf="user">
 
-  <!-- =============================
-       AVATAR
-       ============================= -->
   <div class="avatar">
     <img [src]="avatarSrc" alt="User Avatar">
 
@@ -18,20 +15,15 @@
     </label>
   </div>
 
-  <!-- =============================
-       INFO
-       ============================= -->
+  
   <div class="info">
 
     <h3>User Details</h3>
 
-    <!-- SUCCESS / ERROR -->
     <div class="success" *ngIf="success">{{ success }}</div>
     <div class="error" *ngIf="error">{{ error }}</div>
 
-    <!-- =============================
-         READ MODE
-         ============================= -->
+   
     <div *ngIf="!editMode && !passwordMode">
 
       <p><strong>Name:</strong> {{ user.fullName }}</p>
@@ -63,9 +55,6 @@
 
     </div>
 
-    <!-- =============================
-         EDIT PROFILE
-         ============================= -->
     <div *ngIf="editMode">
 
       <label>Full Name</label>
@@ -104,9 +93,6 @@
 
     </div>
 
-    <!-- =============================
-         CHANGE PASSWORD
-         ============================= -->
     <div *ngIf="passwordMode">
 
       <label>Current Password</label>

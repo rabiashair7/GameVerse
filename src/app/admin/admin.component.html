@@ -1,6 +1,5 @@
 <div class="admin-container">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <h3>🎮 Admin</h3>
 
@@ -10,13 +9,10 @@
     <button type="button" (click)="setView('users')">👥 Users</button>
   </aside>
 
-  <!-- MAIN CONTENT -->
   <section class="content">
     <h2>🎮 GameVerse Admin Panel</h2>
 
-    <!-- =============================
-         ADD / EDIT GAME FORM
-         ============================= -->
+    
     <form
       *ngIf="view === 'add' || view === 'edit'"
       class="admin-card"
@@ -56,7 +52,6 @@
         [(ngModel)]="videosText">
       </textarea>
 
-      <!-- CATEGORIES -->
       <div class="categories">
         <span
           *ngFor="let cat of categories"
@@ -72,9 +67,7 @@
       </button>
     </form>
 
-    <!-- =============================
-         EDIT GAME LIST
-         ============================= -->
+    
     <div *ngIf="view === 'edit'" class="admin-card">
       <h4>Edit Games</h4>
 
@@ -92,9 +85,7 @@
       </div>
     </div>
 
-    <!-- =============================
-         DELETE GAME LIST
-         ============================= -->
+    
     <div *ngIf="view === 'delete'" class="admin-card">
       <h4>Delete Games</h4>
 
@@ -112,9 +103,7 @@
       </div>
     </div>
 
-    <!-- =============================
-         USERS
-         ============================= -->
+    
     <div *ngIf="view === 'users'" class="admin-card">
       <h4>User Management</h4>
 

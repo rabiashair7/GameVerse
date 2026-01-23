@@ -11,9 +11,7 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
-  /* =======================
-     READ
-     ======================= */
+ 
 
   getGames(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl).pipe(
@@ -45,9 +43,7 @@ export class GameService {
     );
   }
 
-  /* =======================
-     CREATE (ADMIN)
-     ======================= */
+
 
   addGame(game: any): Observable<any> {
     const payload = {
@@ -59,9 +55,6 @@ export class GameService {
     return this.http.post<any>(this.apiUrl, payload);
   }
 
-  /* =======================
-     UPDATE
-     ======================= */
 
   updateGame(game: any): Observable<any> {
     const payload = {
@@ -73,17 +66,11 @@ export class GameService {
     return this.http.put<any>(`${this.apiUrl}/${game.id}`, payload);
   }
 
-  /* =======================
-     DELETE
-     ======================= */
+
 
   deleteGame(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
-
-  /* =======================
-     SEARCH
-     ======================= */
 
   searchGames(query: string): Observable<any[]> {
     const q = query.trim();
@@ -93,10 +80,6 @@ export class GameService {
       `${this.apiUrl}?q=${encodeURIComponent(q)}`
     );
   }
-
-  /* =======================
-     BUSINESS LOGIC
-     ======================= */
 
   private isPopular(unitsSold?: string): boolean {
     return this.parseUnitsSold(unitsSold) >= 10_000_000;

@@ -1,5 +1,4 @@
 <header class="top-navbar"> 
-  <!-- LEFT -->
   <div class="left">
     <span class="logo">🎮 GameVerse</span>
 
@@ -7,7 +6,7 @@
       <a routerLink="/home" routerLinkActive="active">Store</a>
       <a routerLink="/about" routerLinkActive="active">About Us</a>
 
-      <!-- Admin only -->
+      
       <a
         *ngIf="userService.isLoggedIn() && userService.getCurrentUser()?.isAdmin()"
         routerLink="/admin"
@@ -18,14 +17,13 @@
     </nav>
   </div>
 
-  <!-- RIGHT -->
   <div class="right">
     <!-- Theme -->
     <button class="theme-btn" (click)="toggleTheme()">
       {{ userService.isDarkMode() ? '☀️' : '🌙' }}
     </button>
 
-    <!-- Profile -->
+ 
     <div
       *ngIf="userService.isLoggedIn() && avatarSrc"
       class="navbar-avatar-wrapper"
@@ -49,7 +47,7 @@
       </div>
     </div>
 
-    <!-- Login -->
+
     <a *ngIf="!userService.isLoggedIn()" routerLink="/login" class="login">
       Login
     </a>

@@ -2,22 +2,18 @@
 
   <h2>🛒 Your Cart</h2>
 
-  <!-- Not logged in -->
   <div class="cart-empty" *ngIf="!isLoggedIn">
     <p>You must login to see your cart.</p>
     <button (click)="goLogin()">Go to Login</button>
   </div>
 
-  <!-- Logged in -->
   <ng-container *ngIf="isLoggedIn">
 
-    <!-- Empty cart -->
     <div class="cart-empty" *ngIf="cartItems.length === 0">
       <p>Your cart is empty.</p>
       <button (click)="goHome()">Browse Games</button>
     </div>
 
-    <!-- Cart items -->
     <div *ngIf="cartItems.length > 0" class="cart-list">
 
       <div class="cart-item" *ngFor="let item of cartItems">

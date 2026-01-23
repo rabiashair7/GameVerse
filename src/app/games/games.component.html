@@ -1,6 +1,6 @@
 <h2 class="title">🎮 All Games</h2>
 
-<!-- 🔍 SEARCH -->
+
 <input
   type="text"
   class="search-input"
@@ -9,7 +9,7 @@
   (input)="searchGames()"
 />
 
-<!-- 🎮 GAMES GRID -->
+
 <div class="grid">
   <div
     class="game-card"
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<!-- ❌ EMPTY STATE -->
+
 <p *ngIf="!filteredGames.length" class="empty">
   No games found.
 </p>

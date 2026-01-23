@@ -17,27 +17,20 @@ export class TopNavbarComponent {
     private router: Router
   ) {}
 
-  /* =============================
-     PROFILE IMAGE
-     ============================= */
   get avatarSrc(): string | null {
     const user: User | null = this.userService.getCurrentUser();
     if (!user) return null;
 
-    // 1️⃣ Custom uploaded image
+    
     if (user.profileImage) {
       return user.profileImage;
     }
 
-    // 2️⃣ Gender fallback
     return user.gender === 'male'
       ? 'assets/avatar male.webp'
       : 'assets/avatar female.webp';
   }
 
-  /* =============================
-     DROPDOWN
-     ============================= */
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }

@@ -1,11 +1,9 @@
-/* Page */
 .wishlist-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Header */
 .wishlist-header {
   display: flex;
   align-items: flex-end;
@@ -25,7 +23,6 @@
   color: var(--text-muted);
 }
 
-/* Count badge */
 .meta {
   display: flex;
   align-items: baseline;
@@ -46,7 +43,6 @@
   color: var(--text-muted);
 }
 
-/* States */
 .state {
   border: 1px solid var(--border);
   background: var(--card);
@@ -76,7 +72,6 @@
   gap: 12px;
 }
 
-/* Spinner */
 .spinner {
   width: 18px;
   height: 18px;
@@ -90,14 +85,12 @@
   to { transform: rotate(360deg); }
 }
 
-/* Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 18px;
 }
 
-/* Card */
 .wish-card {
   border: 1px solid var(--border);
   background: var(--card);
@@ -112,7 +105,6 @@
   border-color: var(--accent);
 }
 
-/* Cover */
 .cover {
   position: relative;
   background: var(--bg-soft);
@@ -125,7 +117,6 @@
   display: block;
 }
 
-/* Remove X */
 .remove-btn {
   position: absolute;
   top: 10px;
@@ -144,7 +135,6 @@
   transform: scale(1.05);
 }
 
-/* Info */
 .info {
   padding: 14px 14px 16px 14px;
 }
@@ -188,14 +178,12 @@
   font-size: 13px;
   line-height: 1.35;
 
-  /* clamp */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Buttons */
 .actions {
   display: flex;
   gap: 10px;

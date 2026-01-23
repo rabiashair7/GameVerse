@@ -23,13 +23,13 @@ export class LibraryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // ✅ ADD ONLY: wait a bit for users/session to restore after refresh
+   
     this.waitForUserThenLoad();
   }
 
   private waitForUserThenLoad(): void {
     let tries = 0;
-    const maxTries = 20; // ~2 seconds
+    const maxTries = 20;
 
     const tick = () => {
       const user = this.userService.getCurrentUser();
@@ -73,7 +73,7 @@ export class LibraryComponent implements OnInit {
   remove(gameId: string): void {
     this.userService.removeFromLibrary(gameId);
 
-    // instant UI update
+    
     this.libraryIds = this.libraryIds.filter(id => id !== gameId);
     this.libraryGames = this.libraryGames.filter(g => String(g.id) !== gameId);
   }

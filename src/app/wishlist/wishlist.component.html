@@ -12,18 +12,15 @@
     </div>
   </div>
 
-  <!-- Loading -->
   <div *ngIf="loading" class="state loading">
     <div class="spinner"></div>
     <div>Loading wishlist...</div>
   </div>
 
-  <!-- Error -->
   <div *ngIf="!loading && error" class="state error">
     {{ error }}
   </div>
 
-  <!-- Empty -->
   <div *ngIf="!loading && !error && wishlistGames.length === 0" class="state empty">
     <div class="empty-icon">☆</div>
     <h3>Your wishlist is empty</h3>
@@ -31,7 +28,6 @@
     <button class="btn-primary" routerLink="/catalog">Go to Catalog</button>
   </div>
 
-  <!-- Grid -->
   <div *ngIf="!loading && !error && wishlistGames.length > 0" class="grid">
     <div
       class="wish-card"
@@ -41,7 +37,6 @@
       tabindex="0"
     >
 
-      <!-- COVER -->
       <div class="cover">
         <img [src]="g.image" [alt]="g.title" />
 
@@ -55,7 +50,6 @@
         </button>
       </div>
 
-      <!-- INFO -->
       <div class="info">
         <div class="top">
           <h4 class="name">{{ g.title }}</h4>
@@ -84,7 +78,6 @@
             View
           </button>
 
-          <!-- 🛒 ADD TO CART (NEW) -->
           <button
             class="btn-outline"
             type="button"

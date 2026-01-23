@@ -1,7 +1,3 @@
-/* ===============================
-   STORE NAVBAR
-================================ */
-
 .store-navbar {
   display: flex;
   align-items: center;
@@ -10,10 +6,6 @@
   background-color: var(--bg-shell);
   border-bottom: 1px solid var(--border);
 }
-
-/* ===============================
-   CATEGORIES
-================================ */
 
 .categories {
   position: relative;
@@ -32,10 +24,6 @@
 .categories-btn:hover {
   color: var(--accent);
 }
-
-/* ===============================
-   DROPDOWN
-================================ */
 
 .dropdown {
   position: absolute;
@@ -62,14 +50,6 @@
   cursor: pointer;
 }
 
-
-
-
-
-/* ===============================
-   GRID
-================================ */
-
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -87,10 +67,6 @@
   background: var(--bg-hover);
   color: var(--accent);
 }
-
-/* ===============================
-   SEARCH
-================================ */
 
 .search {
   flex: 1;
@@ -112,10 +88,6 @@
   color: var(--text-muted);
 }
 
-/* ===============================
-   ICONS
-================================ */
-
 .icons a {
   margin-left: 16px;
   font-size: 1.4rem;
@@ -126,10 +98,6 @@
 .icons a:hover {
   color: var(--accent);
 }
-
-/* ===============================
-   LINKS (GLOBAL SAFETY)
-================================ */
 
 a {
   color: var(--text-main);

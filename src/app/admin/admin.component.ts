@@ -9,14 +9,10 @@ import { UserService } from '../userService.service';
 })
 export class AdminComponent implements OnInit {
 
-  /* =============================
-     VIEW STATE
-     ============================= */
+
   view: 'add' | 'edit' | 'delete' | 'users' = 'add';
 
-  /* =============================
-     GAMES
-     ============================= */
+ 
   games: any[] = [];
   filteredGames: any[] = [];
   gameSearch = '';
@@ -45,9 +41,7 @@ export class AdminComponent implements OnInit {
   selectedCategories: string[] = [];
   editingGame: any = null;
 
-  /* =============================
-     USERS
-     ============================= */
+  
   users: any[] = [];
   filteredUsers: any[] = [];
   userSearch = '';
@@ -62,9 +56,7 @@ export class AdminComponent implements OnInit {
     this.loadUsers();
   }
 
-  /* =============================
-     LOAD GAMES
-     ============================= */
+  
   loadGames(): void {
     this.gameService.getGames().subscribe(games => {
       this.games = games;
@@ -72,9 +64,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  /* =============================
-     VIEW SWITCH
-     ============================= */
   setView(v: 'add' | 'edit' | 'delete' | 'users'): void {
     this.view = v;
     this.editingGame = null;
@@ -85,9 +74,7 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  /* =============================
-     USERS
-     ============================= */
+
   loadUsers(): void {
     this.users = this.userService.getAllUsers();
     this.filteredUsers = [...this.users];
@@ -116,10 +103,6 @@ export class AdminComponent implements OnInit {
     this.userService.unbanUser(email);
     this.loadUsers();
   }
-
-  /* =============================
-     GAME SEARCH
-     ============================= */
   filterGames(): void {
     const value = this.gameSearch.toLowerCase().trim();
     this.filteredGames = this.games.filter(game =>
@@ -131,9 +114,6 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  /* =============================
-     CATEGORIES
-     ============================= */
   toggleCategory(cat: string): void {
     this.selectedCategories.includes(cat)
       ? this.selectedCategories =
@@ -141,9 +121,6 @@ export class AdminComponent implements OnInit {
       : this.selectedCategories.push(cat);
   }
 
-  /* =============================
-     ADD GAME
-     ============================= */
   addGame(): void {
     if (!this.title || !this.developer || this.price === null) return;
 
@@ -166,9 +143,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  /* =============================
-     EDIT GAME
-     ============================= */
+ 
   editGame(game: any): void {
     this.editingGame = game;
 
@@ -210,18 +185,13 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  /* =============================
-     DELETE GAME
-     ============================= */
   deleteGame(id: string): void {
     this.gameService.deleteGame(id).subscribe(() => {
       this.loadGames();
     });
   }
 
-  /* =============================
-     RESET FORM
-     ============================= */
+ 
   resetForm(): void {
     this.title = '';
     this.developer = '';

@@ -1,5 +1,5 @@
 export type CartItem = {
-  gameId: string;   // keep as string (works with "4207", "fdd4", etc.)
+  gameId: string;  
   title: string;
   price: number;
   image?: string;
@@ -17,29 +17,23 @@ export class User {
   banned!: boolean;
   createdAt!: string;
 
-  // 🖼️ PROFILE IMAGE (Base64)
   profileImage?: string | null;
 
-  // ❤️ WISHLIST (game IDs — MUST be strings)
   wishlist: string[] = [];
 
-  // 🛒 CART (persisted per user)
   cart: CartItem[] = [];
 
   constructor(data?: Partial<User>) {
     Object.assign(this, data);
 
-    // ✅ Ensure wishlist is always initialized
     if (!this.wishlist) {
       this.wishlist = [];
     }
 
-    // ✅ Ensure cart is always initialized
     if (!this.cart) {
       this.cart = [];
     }
 
-    // ✅ Ensure profileImage exists (optional)
     if (this.profileImage === undefined) {
       this.profileImage = null;
     }

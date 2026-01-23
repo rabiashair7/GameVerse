@@ -8,16 +8,12 @@ import { GameService } from '../gameService.service';
 })
 export class HomeComponent implements OnInit {
 
-  /* =============================
-     DATA
-     ============================= */
+  
   games: any[] = [];
   popularGames: any[] = [];
   filteredGames: any[] = [];
 
-  /* =============================
-     SEARCH & SORT
-     ============================= */
+  
   search = '';
   sortBy: 'title' | 'price' | 'date' = 'title';
 
@@ -27,9 +23,6 @@ export class HomeComponent implements OnInit {
     this.loadGames();
   }
 
-  /* =============================
-     LOAD FROM BACKEND
-     ============================= */
   loadGames(): void {
     this.gameService.getGames().subscribe(games => {
       this.games = games;
@@ -39,13 +32,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /* =============================
-     SEARCH + SORT
-     ============================= */
+ 
   applySearchAndSort(): void {
     let result = [...this.games];
 
-    // 🔍 SEARCH
     const q = this.search.toLowerCase().trim();
     if (q) {
       result = result.filter(g =>
@@ -54,7 +44,6 @@ export class HomeComponent implements OnInit {
       );
     }
 
-    // 🔃 SORT
     switch (this.sortBy) {
       case 'price':
         result.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));

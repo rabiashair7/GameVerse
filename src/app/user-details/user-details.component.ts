@@ -11,15 +11,12 @@ export class UserDetailsComponent implements OnInit {
 
   user!: User;
 
-  // modes
   editMode = false;
   passwordMode = false;
 
-  // password fields
   currentPassword = '';
   newPassword = '';
 
-  // messages
   error = '';
   success = '';
 
@@ -32,16 +29,12 @@ export class UserDetailsComponent implements OnInit {
     this.user = new User(u);
   }
 
-  /* =============================
-     PROFILE IMAGE
-     ============================= */
+  
   get avatarSrc(): string {
-    // 1️⃣ Custom uploaded image (permanent)
     if (this.user.profileImage) {
       return this.user.profileImage;
     }
 
-    // 2️⃣ Fallback to gender avatar
     return this.user.gender === 'male'
       ? 'assets/avatar male.webp'
       : 'assets/avatar female.webp';
@@ -79,9 +72,7 @@ export class UserDetailsComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  /* =============================
-     PROFILE UPDATE
-     ============================= */
+  
   saveProfile(): void {
     this.clearMessages();
 
@@ -109,9 +100,7 @@ export class UserDetailsComponent implements OnInit {
     this.clearMessages();
   }
 
-  /* =============================
-     PASSWORD CHANGE
-     ============================= */
+
   changePassword(): void {
     this.clearMessages();
 
@@ -144,9 +133,7 @@ export class UserDetailsComponent implements OnInit {
     this.clearMessages();
   }
 
-  /* =============================
-     HELPERS
-     ============================= */
+ 
   private clearMessages(): void {
     this.error = '';
     this.success = '';

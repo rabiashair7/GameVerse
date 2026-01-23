@@ -15,16 +15,14 @@ export class WishlistComponent implements OnInit {
   loading = true;
   error = '';
 
-  // ✅ IDs are STRINGS (db.json source of truth)
   wishlistIds: string[] = [];
 
-  // ✅ NO Game model / interface
   wishlistGames: any[] = [];
 
   constructor(
     private gameService: GameService,
     private userService: UserService,
-    private cartService: CartService, // ✅ NEW
+    private cartService: CartService, 
     private router: Router
   ) {}
 
@@ -35,7 +33,7 @@ export class WishlistComponent implements OnInit {
       return;
     }
 
-    // ✅ enforce string[]
+    
     this.wishlistIds = Array.isArray(user.wishlist)
       ? [...user.wishlist]
       : [];
@@ -44,12 +42,11 @@ export class WishlistComponent implements OnInit {
       next: (games: any[]) => {
         const idSet = new Set(this.wishlistIds);
 
-        // map IDs → full game objects
         this.wishlistGames = (games || []).filter(g =>
-          idSet.has(String(g.id)) // ✅ make sure it's string
+          idSet.has(String(g.id))
         );
 
-        // preserve wishlist order
+        
         this.wishlistGames.sort(
           (a, b) =>
             this.wishlistIds.indexOf(String(a.id)) -
@@ -74,11 +71,11 @@ export class WishlistComponent implements OnInit {
 
     const id = String(gameId);
 
-    // optimistic UI
+   
     this.wishlistIds = this.wishlistIds.filter(x => x !== id);
     this.wishlistGames = this.wishlistGames.filter(g => String(g.id) !== id);
 
-    // persist
+    
     this.userService.removeFromWishlist(id);
   }
 
@@ -86,14 +83,11 @@ export class WishlistComponent implements OnInit {
     return String(g.id);
   }
 
-  /* =============================
-     🛒 CART (NEW LOGIC)
-     ============================= */
+ 
 
   addToCart(game: any, ev?: Event): void {
     ev?.stopPropagation();
 
-    // optional: force login
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
