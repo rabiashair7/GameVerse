@@ -8,19 +8,11 @@ import { UserService } from './userService.service';
 })
 export class AppComponent {
 
-  showStoreNavbar = false;
   
   constructor(private router: Router,
     public userService: UserService
   ) {
-    this.router.events.subscribe(event=>{
-      if(event instanceof NavigationEnd){
-        this.showStoreNavbar=
-          event.url.startsWith('/home')||
-          event.url.startsWith('/games')||
-          event.url.startsWith('/category');
-      }
-    });
+   
   }
   get isDarkMode(): boolean{
     return this.userService.isDarkMode();
