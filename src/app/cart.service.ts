@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from './userService.service';
 
 export interface CartItem {
   gameId: string;
@@ -10,32 +12,78 @@ export interface CartItem {
 }
 
 @Injectable({ providedIn: 'root' })
-export class CartService {
-  private storageKey = 'gv_cart';
+export class CartService implements OnDestroy {
+  private apiUsers = 'http://localhost:3001/users';
 
-  private cartSubject = new BehaviorSubject<CartItem[]>(this.readFromStorage());
+  private cartSubject = new BehaviorSubject<CartItem[]>([]);
   cart$ = this.cartSubject.asObservable();
 
-  private readFromStorage(): CartItem[] {
-    try {
-      const raw = localStorage.getItem(this.storageKey);
-      return raw ? (JSON.parse(raw) as CartItem[]) : [];
-    } catch {
-      return [];
-    }
+  private userPoll?: any;
+  private lastUserId: string | null = null;
+
+  constructor(
+    private http: HttpClient,
+    private userService: UserService
+  ) {
+    this.userPoll = setInterval(() => {
+      const u: any = this.userService.getCurrentUser() as any;
+      const uid = u ? String(u.id) : null;
+
+      if (uid !== this.lastUserId) {
+        this.lastUserId = uid;
+
+        if (!uid) {
+          this.cartSubject.next([]);
+        } else {
+          this.loadCart(uid);
+        }
+      }
+    }, 250);
   }
 
-  private saveToStorage(items: CartItem[]): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(items));
-  }
-
-  private setCart(items: CartItem[]): void {
-    this.saveToStorage(items);
-    this.cartSubject.next(items); 
+  ngOnDestroy(): void {
+    if (this.userPoll) clearInterval(this.userPoll);
   }
 
   private normId(id: string): string {
     return String(id).trim();
+  }
+
+  private getUserId(): string | null {
+    const u: any = this.userService.getCurrentUser() as any;
+    return u ? String(u.id) : null;
+  }
+
+  private ensureCartShape(items: any): CartItem[] {
+    if (!Array.isArray(items)) return [];
+    return items.map((x: any) => ({
+      gameId: this.normId(x?.gameId),
+      title: String(x?.title ?? ''),
+      price: Number(x?.price) || 0,
+      image: String(x?.image ?? ''),
+      qty: Math.max(1, Number(x?.qty) || 1)
+    }));
+  }
+
+  private loadCart(userId: string): void {
+    this.http.get<any>(`${this.apiUsers}/${userId}`).subscribe({
+      next: (user) => {
+        const cart = this.ensureCartShape(user?.cart);
+        this.cartSubject.next(cart);
+      },
+      error: () => this.cartSubject.next([])
+    });
+  }
+
+  private saveCart(items: CartItem[]): void {
+    const userId = this.getUserId();
+    this.cartSubject.next(items);
+    if (!userId) return;
+
+    this.http.patch(`${this.apiUsers}/${userId}`, { cart: items }).subscribe({
+      next: () => {},
+      error: () => {}
+    });
   }
 
   getCart(): CartItem[] {
@@ -57,7 +105,7 @@ export class CartService {
     if (idx === -1) return;
 
     cart[idx] = { ...cart[idx], qty: cart[idx].qty + 1 };
-    this.setCart(cart);
+    this.saveCart(cart);
   }
 
   decreaseQty(gameId: string): void {
@@ -67,23 +115,22 @@ export class CartService {
     if (idx === -1) return;
 
     const newQty = cart[idx].qty - 1;
-
     if (newQty <= 0) {
-      this.setCart(cart.filter(x => this.normId(x.gameId) !== id));
+      this.saveCart(cart.filter(x => this.normId(x.gameId) !== id));
       return;
     }
 
     cart[idx] = { ...cart[idx], qty: newQty };
-    this.setCart(cart);
+    this.saveCart(cart);
   }
 
   removeFromCart(gameId: string): void {
     const id = this.normId(gameId);
-    this.setCart(this.cartSubject.value.filter(x => this.normId(x.gameId) !== id));
+    this.saveCart(this.cartSubject.value.filter(x => this.normId(x.gameId) !== id));
   }
 
   clearCart(): void {
-    this.setCart([]);
+    this.saveCart([]);
   }
 
   addToCart(
@@ -108,7 +155,7 @@ export class CartService {
       });
     }
 
-    this.setCart(cart);
+    this.saveCart(cart);
   }
 
   getItemsCount(): number {

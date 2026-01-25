@@ -19,12 +19,7 @@
         "https://www.youtube.com/watch?v=E3Huy2cdih0&t=46s",
         "https://www.youtube.com/watch?v=K_03kFqWfqs"
       ],
-      "categories": [
-        "rpg",
-        "open-world",
-        "adventure",
-        "action"
-      ],
+      "categories": ["rpg", "open-world", "adventure", "action"],
       "rating": null,
       "popular": true
     },
@@ -48,11 +43,7 @@
         "https://www.youtube.com/watch?v=F63h3v9QV7w",
         "https://www.youtube.com/watch?v=eaW0tYpxyp0"
       ],
-      "categories": [
-        "action",
-        "adventure",
-        "open-world"
-      ],
+      "categories": ["action", "adventure", "open-world"],
       "rating": null,
       "popular": true
     },
@@ -76,12 +67,7 @@
         "https://www.youtube.com/watch?v=QkkoHAzjnUs",
         "https://www.youtube.com/watch?v=nzV5_Uhu08A"
       ],
-      "categories": [
-        "open-world",
-        "adventure",
-        "action",
-        "racing"
-      ],
+      "categories": ["open-world", "adventure", "action", "racing"],
       "rating": null,
       "popular": true
     },
@@ -105,12 +91,7 @@
         "https://www.youtube.com/watch?v=c0i88t0Kacs",
         "https://www.youtube.com/watch?v=1-l29HlKkXU"
       ],
-      "categories": [
-        "rpg",
-        "open-world",
-        "adventure",
-        "action"
-      ],
+      "categories": ["rpg", "open-world", "adventure", "action"],
       "rating": null,
       "popular": true
     },
@@ -136,10 +117,7 @@
         "https://www.youtube.com/watch?v=pBM2xyco_Kg",
         "https://www.youtube.com/watch?v=RefXbk1_taI"
       ],
-      "categories": [
-        "strategy",
-        "sports"
-      ],
+      "categories": ["strategy", "sports"],
       "rating": null,
       "popular": true
     },
@@ -151,7 +129,7 @@
       "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/583562178513315.64e908d8b1e0c.jpg",
       "unitsSold": "6.8M",
       "releaseDate": "2023-09-29",
-      "details": "EA SPORTS FC™ 24 is a football simulation game developed by EA Vancouver and EA Romania, released on September 29, 2023. It features HyperMotionV, PlayStyles, and an enhanced Frostbite™ Engine, providing a true-to-football experience with over 19,000 fully licensed players and 700+ teams. The game is available on multiple platforms, including Nintendo Switch, PlayStation 4, PlayStation 5, Windows, Xbox One, and Xbox Series X/S.",
+      "details": "EA SPORTS FC™ 24 is a football simulation game developed by EA Vancouver and EA Romania, released on September 29, 2023. It features HyperMotionV, PlayStyles, and an enhanced Frostbite™ Engine, providing a true-to-football experience with over 19,000 fully licensed players and 700+ teams.",
       "images": [
         "https://tse4.mm.bing.net/th/id/OIP.TwCfymIVSsp4aTrB9VHiKwHaEY?rs=1&pid=ImgDetMain&o=7&rm=3",
         "https://5.imimg.com/data5/SELLER/Default/2023/10/352017418/TH/PG/ZI/110396315/fc24-ut-keyart-4x5-withlogos-1689004114401-500x500.png",
@@ -163,10 +141,7 @@
         "https://www.youtube.com/watch?v=-vL01jbgENE",
         "https://www.youtube.com/watch?v=IpTyOJL59N0"
       ],
-      "categories": [
-        "sports",
-        "strategy"
-      ],
+      "categories": ["sports", "strategy"],
       "rating": null,
       "popular": false
     },
@@ -178,7 +153,7 @@
       "image": "https://tse3.mm.bing.net/th/id/OIP.6Xrog4tqxzzBP8k8YxLcxQHaJP?rs=1&pid=ImgDetMain&o=7&rm=3",
       "unitsSold": "28M",
       "releaseDate": "2008-04-29",
-      "details": "Niko Bellic, Johnny Klebitz and Luis Lopez all have one thing in common - they live in the worst city in America. Liberty City worships money and status, and is heaven for those who have them and a living nightmare for those who don't.",
+      "details": "Niko Bellic, Johnny Klebitz and Luis Lopez all have one thing in common - they live in the worst city in America.",
       "images": [
         "https://tse3.mm.bing.net/th/id/OIP.3MQnkJeAfGro0hU_JO9u3QHaEo?rs=1&pid=ImgDetMain&o=7&rm=3",
         "https://th.bing.com/th/id/R.cc20207f817eaa2254a61f6163b5b061?rik=2NnKkEdGBnNirQ&riu=http%3a%2f%2fimages.bit-tech.net%2fcontent_images%2f2008%2f12%2fgrand-theft-auto-iv-pc%2fbvieh.jpg&ehk=Z4T71XPonrAszWDP4oS%2fWuZm43tp%2bdMoy7D3k7Nmsvo%3d&risl=&pid=ImgRaw&r=0",
@@ -189,11 +164,7 @@
         "https://www.youtube.com/watch?v=M80K51DosFo",
         "https://www.youtube.com/watch?v=kOZ8bRAO7YQ"
       ],
-      "categories": [
-        "open-world",
-        "adventure",
-        "action"
-      ],
+      "categories": ["open-world", "adventure", "action"],
       "rating": null,
       "popular": true
     },
@@ -205,7 +176,7 @@
       "image": "https://fontmeme.com/images/most-wanted-nfs-font-370x459.jpg",
       "unitsSold": "18M",
       "releaseDate": "2005-11-22",
-      "details": "In \"Need for Speed: Most Wanted,\" players take on the role of a street racer who must compete against 15 elite racers known as the Blacklist. The main objective is to become the most wanted racer by defeating these opponents while evading the police. The game features a mix of racing events, including circuit races, sprints, and drag races, all set in an open-world environment.",
+      "details": "In \"Need for Speed: Most Wanted,\" players take on the role of a street racer who must compete against 15 elite racers known as the Blacklist.",
       "images": [
         "https://tse1.mm.bing.net/th/id/OIP.CeQkESzGKuqhiwayaXV0sQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
         "https://c4.wallpaperflare.com/wallpaper/392/116/1018/need-for-speed-most-wanted-video-games-render-hd-wallpaper-preview.jpg",
@@ -222,12 +193,7 @@
         "https://www.youtube.com/watch?v=vEVzGMKNiGE",
         "https://www.youtube.com/watch?v=EFytqeYIXzM"
       ],
-      "categories": [
-        "sports",
-        "racing",
-        "open-world",
-        "action"
-      ],
+      "categories": ["sports", "racing", "open-world", "action"],
       "rating": null,
       "popular": true
     },
@@ -239,7 +205,7 @@
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202211/2510/VOSSvGjCpMF0uj9qQtmW6AnH.png",
       "unitsSold": "2.9M",
       "releaseDate": "2017-11-10",
-      "details": "Set in the underworld of Fortune Valley, you and your crew were divided by betrayal and reunited by revenge to take down The House — a powerful cartel controlling the city’s casinos, criminals, and cops. In this gambler’s paradise, the stakes are high and The House always wins.\n\nIn this action-driving adventure you can:\n- Customize cars deeply: Build and tune vehicles in five classes (Race, Drift, Off-Road, Drag, Runner)\n- Play as three characters: Each with unique roles working together for revenge\n- Face epic police chases: Fight intense pursuits with dynamic cop encounters\n- Drive on and off-road: Races and challenges span desert, canyon & city environments\n- Compete online: Leaderboards, co-op, PvP & Autolog competitive features\n",
+      "details": "Set in the underworld of Fortune Valley, you and your crew were divided by betrayal and reunited by revenge.",
       "images": [
         "https://th.bing.com/th/id/R.efc516b9105573b81af2822e311b6939?rik=6SMM%2bwRNFDOXyg&pid=ImgRaw&r=0",
         "https://www.arealgamer.net/wp-content/uploads/2021/12/Need-for-Speed-Payback-Screenshot-3.jpg",
@@ -255,12 +221,7 @@
         "https://www.youtube.com/watch?v=l6EjYuUSn1Y&t=310s",
         "https://www.youtube.com/watch?v=kf2qDAEZc2w"
       ],
-      "categories": [
-        "open-world",
-        "racing",
-        "sports",
-        "action"
-      ],
+      "categories": ["open-world", "racing", "sports", "action"],
       "rating": null,
       "popular": false
     },
@@ -272,7 +233,7 @@
       "image": "https://tse4.mm.bing.net/th/id/OIP.iNcRIaquuXPuVjtB1WskxwAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
       "unitsSold": "27.5M",
       "releaseDate": "2004-10-10",
-      "details": "Grand Theft Auto: San Andreas is an action-adventure game played from a third-person view. Players control criminal Carl \"CJ\" Johnson and complete missions—linear scenarios with set objectives—to progress through the story. Outside of missions, players can freely roam the game's open world and complete optional side missions. \n\nA multiplayer mode allows two players to roam the world. The fictional state of San Andreas, which makes up the open world, comprises three metropolitan cities: Los Santos, San Fierro, and Las Venturas. The cities are unlocked as the story progresses, and airports allow fast travel between them.\n",
+      "details": "Grand Theft Auto: San Andreas is an action-adventure game played from a third-person view.",
       "images": [
         "https://lodosgamers.com/wp-content/uploads/2025/03/Grand-Theft-Auto-San-Andreas.jpeg",
         "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/10/_grand-theft-auto-san-andreas-three-cities-different-maps-canceled-plan.jpg",
@@ -287,11 +248,7 @@
         "https://www.youtube.com/watch?v=GHzG0bKTa1g",
         "https://www.youtube.com/watch?v=sOvyNa9-39c&list=RDsOvyNa9-39c&start_radio=1"
       ],
-      "categories": [
-        "open-world",
-        "strategy",
-        "action"
-      ],
+      "categories": ["open-world", "strategy", "action"],
       "rating": null,
       "popular": true
     },
@@ -303,7 +260,7 @@
       "image": "https://lparchive.org/Grand-Theft-Auto-Vice-City/Images/1-title.jpg",
       "unitsSold": "17.5m",
       "releaseDate": "2002-10-27",
-      "details": "Grand Theft Auto: Vice City is a 2002 open-world action-adventure game developed by Rockstar North, where players control Tommy Vercetti to build a criminal empire in the 1980s Vice City setting inspired by Miami.",
+      "details": "Grand Theft Auto: Vice City is a 2002 open-world action-adventure game.",
       "images": [
         "https://d1lss44hh2trtw.cloudfront.net/assets/article/2021/08/12/gta-vice-city_feature.jpg",
         "https://wallpapers.com/images/hd/grand-theft-auto-vice-city-mpyfb1zi3im4l4r3.jpg",
@@ -320,11 +277,7 @@
         "https://www.youtube.com/watch?v=m8oQllwqw_I",
         "https://www.youtube.com/watch?v=BcqMaYdYow0"
       ],
-      "categories": [
-        "open-world",
-        "adventure",
-        "action"
-      ],
+      "categories": ["open-world", "adventure", "action"],
       "rating": null,
       "popular": true
     },
@@ -336,7 +289,7 @@
       "image": "https://images.rbxcdn.com/5348266ea6c5e67b19d6a814cbbb70f6.jpg",
       "unitsSold": "1B",
       "releaseDate": "2004-09-01",
-      "details": "Roblox is a free online gaming platform where players can play millions of games created by other users, or create their own games. It offers action, adventure, role-play, racing, simulator, and many other game types in one place.",
+      "details": "Roblox is a free online gaming platform where players can play millions of games created by other users.",
       "images": [
         "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/10/roblox-city-character-artwork-with-game-logo.jpg",
         "https://www.gaming.net/wp-content/uploads/2022/10/Roblox-1.jpg",
@@ -351,14 +304,7 @@
         "https://www.youtube.com/watch?v=DZo6u0c7DWk",
         "https://www.youtube.com/watch?v=la9jp9nqdm8"
       ],
-      "categories": [
-        "open-world",
-        "strategy",
-        "racing",
-        "sports",
-        "adventure",
-        "action"
-      ],
+      "categories": ["open-world", "strategy", "racing", "sports", "adventure", "action"],
       "rating": null,
       "popular": true
     },
@@ -370,7 +316,7 @@
       "image": "https://th.bing.com/th/id/R.c8fe0553721dc7e81b305d1e7d188c40?rik=rn0mbnMLa39Qwg&riu=http%3a%2f%2fimages.wikia.com%2fcallofduty%2fimages%2f3%2f37%2fCall_of_Duty_Cover.jpg&ehk=a6zn3CUZpPX84oK9WCEmAGOcK5GazwGbxNzM%2bG9K9Ns%3d&risl=&pid=ImgRaw&r=0",
       "unitsSold": "1.4 M",
       "releaseDate": "2003-10-22",
-      "details": "Call of Duty: Modern Warfare II is a first-person shooter (FPS) that delivers a cinematic single-player campaign, fast-paced multiplayer combat, and cooperative Special Ops missions.\n\nPlayers join Task Force 141 in high-stakes operations across the globe, featuring modern weapons, advanced movement, and realistic gunplay powered by a new game engine.",
+      "details": "Call of Duty: Modern Warfare II is a first-person shooter (FPS) that delivers a cinematic single-player campaign.",
       "images": [
         "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/07/call-of-duty-warzone.jpg",
         "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/02/gameplay-screenshot-multiplayer-call-of-duty-black-ops-6.jpg",
@@ -384,13 +330,26 @@
         "https://www.youtube.com/watch?v=K4eXjltawZ4",
         "https://www.youtube.com/watch?v=pGFYtZD53ZA"
       ],
-      "categories": [
-        "action",
-        "adventure",
-        "strategy"
-      ],
+      "categories": ["action", "adventure", "strategy"],
       "rating": null,
       "popular": false
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "fullName": "Mohamd Sarhan",
+      "email": "mohmdsarhan@gameverse.com",
+      "password": "Admin@12345",
+      "gender": "male",
+      "role": "admin",
+      "banned": false,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "dob": "2001-09-14",
+      "wishlist": [],
+      "profileImage": null,
+      "library": [],
+      "cart": []
     }
   ]
 }

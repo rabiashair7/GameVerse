@@ -7,10 +7,8 @@ import { User } from './modules/users';
 })
 export class UserService {
 
-
   private darkMode = false;
 
-  
   private sessionKey = 'gv_user_id';
 
   private saveSession(userId: any): void {
@@ -34,11 +32,9 @@ export class UserService {
   constructor(private http: HttpClient) {
     this.loadUsers();
 
-    
     const saved = localStorage.getItem('gv_theme');
     this.darkMode = saved === 'dark';
 
-    
     document.documentElement.classList.toggle('dark-theme', this.darkMode);
     document.body.classList.toggle('dark-theme', this.darkMode);
   }
@@ -46,7 +42,6 @@ export class UserService {
   toggleTheme(): void {
     this.darkMode = !this.darkMode;
 
-    
     document.documentElement.classList.toggle('dark-theme', this.darkMode);
     document.body.classList.toggle('dark-theme', this.darkMode);
 
@@ -57,24 +52,18 @@ export class UserService {
     return this.darkMode;
   }
 
-  
   private users: User[] = [];
   private currentUser: User | null = null;
 
   private dataUrl = 'http://localhost:3001/users';
 
-  
   private loadUsers(): void {
     this.http.get<User[]>(this.dataUrl).subscribe(users => {
       this.users = users.map(u => new User(u));
-
-      
       this.restoreSession();
     });
   }
 
-
-  
   login(email: string, password: string): User | null {
     const user = this.users.find(
       u => u.email === email && u.password === password
@@ -85,8 +74,6 @@ export class UserService {
     }
 
     this.currentUser = user;
-
-    
     this.saveSession(user.id);
 
     return user;
@@ -94,8 +81,6 @@ export class UserService {
 
   logout(): void {
     this.currentUser = null;
-
-  
     this.clearSession();
   }
 
@@ -107,7 +92,6 @@ export class UserService {
     return this.currentUser;
   }
 
-  
   register(data: {
     fullName: string;
     email: string;
@@ -119,6 +103,7 @@ export class UserService {
     const emailExists = this.users.some(u => u.email === data.email);
     if (emailExists) return false;
 
+    // ✅ ADD ONLY: library + cart (and keep everything else the same)
     const newUser = new User({
       id: this.users.length
         ? Math.max(...this.users.map(u => u.id)) + 1
@@ -132,8 +117,12 @@ export class UserService {
       banned: false,
       createdAt: new Date().toISOString(),
       wishlist: [],
-      profileImage: null
-    });
+      profileImage: null,
+
+      // ✅ ADDED
+      library: [],
+      cart: []
+    } as any);
 
     this.http.post<User>(this.dataUrl, newUser).subscribe(saved => {
       const user = new User(saved);
@@ -146,7 +135,6 @@ export class UserService {
     return true;
   }
 
-  
   updateProfile(data: {
     fullName: string;
     gender: 'male' | 'female';
@@ -168,7 +156,6 @@ export class UserService {
 
     return true;
   }
-
 
   updateProfileImage(base64Image: string): boolean {
     if (!this.currentUser) return false;
@@ -197,7 +184,6 @@ export class UserService {
     return true;
   }
 
- 
   getAllUsers(): User[] {
     return this.users;
   }
@@ -248,7 +234,6 @@ export class UserService {
       .subscribe();
   }
 
- 
   isInWishlist(gameId: string): boolean {
     if (!this.currentUser) return false;
     return this.currentUser.wishlist.includes(gameId);
@@ -289,8 +274,6 @@ export class UserService {
       })
       .subscribe();
   }
-
-  
 
   private ensureLibrary(): string[] {
     if (!this.currentUser) return [];

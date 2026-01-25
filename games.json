@@ -19,12 +19,7 @@
         "https://www.youtube.com/watch?v=E3Huy2cdih0&t=46s",
         "https://www.youtube.com/watch?v=K_03kFqWfqs"
       ],
-      "categories": [
-        "rpg",
-        "open-world",
-        "adventure",
-        "action"
-      ],
+      "categories": ["rpg", "open-world", "adventure", "action"],
       "rating": null,
       "popular": true
     },
@@ -48,11 +43,7 @@
         "https://www.youtube.com/watch?v=F63h3v9QV7w",
         "https://www.youtube.com/watch?v=eaW0tYpxyp0"
       ],
-      "categories": [
-        "action",
-        "adventure",
-        "open-world"
-      ],
+      "categories": ["action", "adventure", "open-world"],
       "rating": null,
       "popular": true
     },
@@ -76,14 +67,199 @@
         "https://www.youtube.com/watch?v=QkkoHAzjnUs",
         "https://www.youtube.com/watch?v=nzV5_Uhu08A"
       ],
-      "categories": [
-        "open-world",
-        "adventure",
-        "action",
-        "racing"
-      ],
+      "categories": ["open-world", "adventure", "action", "racing"],
       "rating": null,
       "popular": true
+    },
+    {
+      "id": "eccf",
+      "title": "The Witcher 3:Wild Hunt",
+      "developer": "CD Projekt RED",
+      "price": 39.99,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjoeSJD-maaNd40HZzP9bXE7K-9hLPQmo1FrGv1QFEZUBiTqT_xZxbKhBoTD__ETcvFlLFyg&s=10",
+      "unitsSold": "60M",
+      "releaseDate": "2015-05-18",
+      "details": "You are Geralt of Rivia, mercenary monster slayer.",
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTOyJMdJZuqgaajESBEWHGyXFnjXSMXVYbYQ&s"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=c0i88t0Kacs"
+      ],
+      "categories": ["rpg", "open-world", "adventure", "action"],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "c294",
+      "title": "EA Sports FC 25",
+      "developer": "EA Sports",
+      "price": 49.99,
+      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2669320/86a267ec44fc57124127eba46f25120813374317/capsule_616x353.jpg?t=1752681627",
+      "unitsSold": "19.2M",
+      "releaseDate": "2024-09-27",
+      "details": "EA SPORTS FC™ 25 gives you more ways to win for the club.",
+      "images": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD016nD6bscGw5H3r_ksqX4rXrK9t_Q9qZLg&s"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=pBM2xyco_Kg"
+      ],
+      "categories": ["strategy", "sports"],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "13bf",
+      "title": "EA Sports FC 24",
+      "developer": "EA Sports",
+      "price": 29.99,
+      "image": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/583562178513315.64e908d8b1e0c.jpg",
+      "unitsSold": "6.8M",
+      "releaseDate": "2023-09-29",
+      "details": "EA SPORTS FC™ 24 is a football simulation game.",
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.TwCfymIVSsp4aTrB9VHiKwHaEY?rs=1&pid=ImgDetMain&o=7&rm=3"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=-vL01jbgENE"
+      ],
+      "categories": ["sports", "strategy"],
+      "rating": null,
+      "popular": false
+    },
+    {
+      "id": "4a66",
+      "title": "Grand Theft Auto IV ",
+      "developer": "Rockstar Games",
+      "price": 29.9,
+      "image": "https://tse3.mm.bing.net/th/id/OIP.6Xrog4tqxzzBP8k8YxLcxQHaJP?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "unitsSold": "28M",
+      "releaseDate": "2008-04-29",
+      "details": "Niko Bellic...",
+      "images": [
+        "https://tse3.mm.bing.net/th/id/OIP.3MQnkJeAfGro0hU_JO9u3QHaEo?rs=1&pid=ImgDetMain&o=7&rm=3"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=M80K51DosFo"
+      ],
+      "categories": ["open-world", "adventure", "action"],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "4c2b",
+      "title": "Need For Speed Most Wanted (2005) ",
+      "developer": "EA ",
+      "price": 59.99,
+      "image": "https://fontmeme.com/images/most-wanted-nfs-font-370x459.jpg",
+      "unitsSold": "18M",
+      "releaseDate": "2005-11-22",
+      "details": "Need for Speed: Most Wanted...",
+      "images": [
+        "https://tse1.mm.bing.net/th/id/OIP.CeQkESzGKuqhiwayaXV0sQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Zz4wM8N0QEQ"
+      ],
+      "categories": ["sports", "racing", "open-world", "action"],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "52c3",
+      "title": "Need For Speed PayBack",
+      "developer": " Ghost Games",
+      "price": 29.99,
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202211/2510/VOSSvGjCpMF0uj9qQtmW6AnH.png",
+      "unitsSold": "2.9M",
+      "releaseDate": "2017-11-10",
+      "details": "Need For Speed PayBack...",
+      "images": [
+        "https://th.bing.com/th/id/R.efc516b9105573b81af2822e311b6939?rik=6SMM%2bwRNFDOXyg&pid=ImgRaw&r=0"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=kc-OcOduEx0"
+      ],
+      "categories": ["open-world", "racing", "sports", "action"],
+      "rating": null,
+      "popular": false
+    },
+    {
+      "id": "3c32",
+      "title": "Grand Theft Auto San Andreas",
+      "developer": "Rockstar Games",
+      "price": 35.99,
+      "image": "https://tse4.mm.bing.net/th/id/OIP.iNcRIaquuXPuVjtB1WskxwAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "unitsSold": "27.5M",
+      "releaseDate": "2004-10-10",
+      "details": "GTA San Andreas...",
+      "images": [
+        "https://lodosgamers.com/wp-content/uploads/2025/03/Grand-Theft-Auto-San-Andreas.jpeg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Pze6mdhnBLM"
+      ],
+      "categories": ["open-world", "strategy", "action"],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "75b5",
+      "title": "Grand Theft Auto Vice City",
+      "developer": "Rocstar Games",
+      "price": 24.99,
+      "image": "https://lparchive.org/Grand-Theft-Auto-Vice-City/Images/1-title.jpg",
+      "unitsSold": "17.5m",
+      "releaseDate": "2002-10-27",
+      "details": "GTA Vice City...",
+      "images": [
+        "https://d1lss44hh2trtw.cloudfront.net/assets/article/2021/08/12/gta-vice-city_feature.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=IlZZDQIYRyg"
+      ],
+      "categories": ["open-world", "adventure", "action"],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "fdd4",
+      "title": "Roblex",
+      "developer": "Roblox Corporation",
+      "price": 0,
+      "image": "https://images.rbxcdn.com/5348266ea6c5e67b19d6a814cbbb70f6.jpg",
+      "unitsSold": "1B",
+      "releaseDate": "2004-09-01",
+      "details": "Roblox...",
+      "images": [
+        "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/10/roblox-city-character-artwork-with-game-logo.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=sme76WoJ_-U"
+      ],
+      "categories": ["open-world", "strategy", "racing", "sports", "adventure", "action"],
+      "rating": null,
+      "popular": true
+    },
+    {
+      "id": "0d6e",
+      "title": "Call Of Duty",
+      "developer": "Infinity Ward",
+      "price": 69.99,
+      "image": "https://th.bing.com/th/id/R.c8fe0553721dc7e81b305d1e7d188c40?rik=rn0mbnMLa39Qwg&riu=http%3a%2f%2fimages.wikia.com%2fcallofduty%2fimages%2f3%2f37%2fCall_of_Duty_Cover.jpg&ehk=a6zn3CUZpPX84oK9WCEmAGOcK5GazwGbxNzM%2bG9K9Ns%3d&risl=&pid=ImgRaw&r=0",
+      "unitsSold": "1.4 M",
+      "releaseDate": "2003-10-22",
+      "details": "Call of Duty...",
+      "images": [
+        "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/07/call-of-duty-warzone.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=bH1lHCirCGI"
+      ],
+      "categories": ["action", "adventure", "strategy"],
+      "rating": null,
+      "popular": false
     }
   ]
 }
