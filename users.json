@@ -409,9 +409,25 @@
       "library": [
         "eccf",
         "559a",
-        "d3a4"
+        "d3a4",
+        "4207"
       ],
       "cart": []
+    },
+    {
+      "id": 2,
+      "wishlist": [],
+      "cart": [],
+      "fullName": "Rabia Shaier",
+      "email": "rabiashair7@gameverse.com",
+      "password": "Admin@123456",
+      "gender": "male",
+      "dob": "2001-09-14",
+      "role": "user",
+      "banned": false,
+      "createdAt": "2026-01-26T19:28:56.256Z",
+      "profileImage": null,
+      "library": []
     }
   ]
 }
