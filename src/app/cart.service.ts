@@ -2,14 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './userService.service';
-
-export interface CartItem {
-  gameId: string;
-  title: string;
-  price: number;
-  image: string;
-  qty: number;
-}
+import { CartItem } from './modules/cart';
 
 @Injectable({ providedIn: 'root' })
 export class CartService implements OnDestroy {
@@ -54,9 +47,9 @@ export class CartService implements OnDestroy {
     return u ? String(u.id) : null;
   }
 
-  private ensureCartShape(items: any): CartItem[] {
+  private ensureCart(items: any): CartItem[] {
     if (!Array.isArray(items)) return [];
-    return items.map((x: any) => ({
+    return items.map((x: any) => new CartItem({
       gameId: this.normId(x?.gameId),
       title: String(x?.title ?? ''),
       price: Number(x?.price) || 0,
@@ -68,7 +61,7 @@ export class CartService implements OnDestroy {
   private loadCart(userId: string): void {
     this.http.get<any>(`${this.apiUsers}/${userId}`).subscribe({
       next: (user) => {
-        const cart = this.ensureCartShape(user?.cart);
+        const cart = this.ensureCart(user?.cart);
         this.cartSubject.next(cart);
       },
       error: () => this.cartSubject.next([])
@@ -77,10 +70,23 @@ export class CartService implements OnDestroy {
 
   private saveCart(items: CartItem[]): void {
     const userId = this.getUserId();
-    this.cartSubject.next(items);
+
+    // ✅ normalize to CartItem class
+    const normalized = items.map(i => new CartItem(i));
+    this.cartSubject.next(normalized);
+
     if (!userId) return;
 
-    this.http.patch(`${this.apiUsers}/${userId}`, { cart: items }).subscribe({
+    // ✅ save to JSON as plain objects
+    const payload = normalized.map(i => ({
+      gameId: i.gameId,
+      title: i.title,
+      price: i.price,
+      image: i.image,
+      qty: i.qty
+    }));
+
+    this.http.patch(`${this.apiUsers}/${userId}`, { cart: payload }).subscribe({
       next: () => {},
       error: () => {}
     });
@@ -104,7 +110,7 @@ export class CartService implements OnDestroy {
     const idx = cart.findIndex(x => this.normId(x.gameId) === id);
     if (idx === -1) return;
 
-    cart[idx] = { ...cart[idx], qty: cart[idx].qty + 1 };
+    cart[idx] = new CartItem({ ...cart[idx], qty: cart[idx].qty + 1 });
     this.saveCart(cart);
   }
 
@@ -115,12 +121,13 @@ export class CartService implements OnDestroy {
     if (idx === -1) return;
 
     const newQty = cart[idx].qty - 1;
+
     if (newQty <= 0) {
       this.saveCart(cart.filter(x => this.normId(x.gameId) !== id));
       return;
     }
 
-    cart[idx] = { ...cart[idx], qty: newQty };
+    cart[idx] = new CartItem({ ...cart[idx], qty: newQty });
     this.saveCart(cart);
   }
 
@@ -144,15 +151,15 @@ export class CartService implements OnDestroy {
     const idx = cart.findIndex(x => this.normId(x.gameId) === id);
 
     if (idx >= 0) {
-      cart[idx] = { ...cart[idx], qty: cart[idx].qty + safeQty };
+      cart[idx] = new CartItem({ ...cart[idx], qty: cart[idx].qty + safeQty });
     } else {
-      cart.push({
+      cart.push(new CartItem({
         gameId: id,
         title: item.title,
         price: Number(item.price) || 0,
         image: item.image || '',
         qty: safeQty
-      });
+      }));
     }
 
     this.saveCart(cart);

@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GameServiceService {
+import { GameService } from './gameService.service';
 
-  private apiUrl = 'http://localhost:3001/games';
+describe('GameService', () => {
+  let service: GameService;
 
-  constructor(private http: HttpClient) {}
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    });
 
-  getGames() {
-    return this.http.get<any[]>(this.apiUrl);
-  }
+    service = TestBed.inject(GameService);
+  });
 
-  getGameById(id: string) {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-}
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

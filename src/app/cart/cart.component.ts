@@ -1,7 +1,9 @@
+// ✅ src/app/cart/cart.component.ts (FULL - UPDATED)
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CartService, CartItem } from '../cart.service';
+import { CartService } from '../cart.service';
+import { CartItem } from '../modules/cart';
 import { UserService } from '../userService.service';
 
 @Component({
@@ -27,8 +29,10 @@ export class CartComponent implements OnInit, OnDestroy {
     this.isLoggedIn = this.userService.isLoggedIn();
     if (!this.isLoggedIn) return;
 
+    // ✅ initial
     this.refresh();
 
+    // ✅ LIVE: update when cart changes from any page
     this.sub = this.cartService.cart$.subscribe(() => this.refresh());
   }
 
@@ -57,6 +61,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.clearCart();
   }
 
+  // ✅ UPDATED: checkout removes purchased games from wishlist too
   checkout(): void {
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
@@ -69,7 +74,11 @@ export class CartComponent implements OnInit, OnDestroy {
     }
 
     for (const item of this.cartItems) {
-      this.userService.addToLibrary(String(item.gameId));
+      const id = String(item.gameId);
+
+      this.userService.addToLibrary(id);
+
+      this.userService.removeFromWishlist(id);
     }
 
     this.clearCart();
