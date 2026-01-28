@@ -71,13 +71,11 @@ export class CartService implements OnDestroy {
   private saveCart(items: CartItem[]): void {
     const userId = this.getUserId();
 
-    // ✅ normalize to CartItem class
     const normalized = items.map(i => new CartItem(i));
     this.cartSubject.next(normalized);
 
     if (!userId) return;
 
-    // ✅ save to JSON as plain objects
     const payload = normalized.map(i => ({
       gameId: i.gameId,
       title: i.title,

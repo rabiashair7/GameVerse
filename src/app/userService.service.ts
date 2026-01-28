@@ -103,7 +103,6 @@ export class UserService {
     const emailExists = this.users.some(u => u.email === data.email);
     if (emailExists) return false;
 
-    // ✅ ADD ONLY: library + cart (and keep everything else the same)
     const newUser = new User({
       id: this.users.length
         ? Math.max(...this.users.map(u => u.id)) + 1
@@ -119,7 +118,6 @@ export class UserService {
       wishlist: [],
       profileImage: null,
 
-      // ✅ ADDED
       library: [],
       cart: []
     } as any);

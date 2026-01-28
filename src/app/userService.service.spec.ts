@@ -117,7 +117,6 @@ export class UserService {
       wishlist: [],
       profileImage: null,
 
-      // ✅ ADD ONLY (so JSON has cart + library fields)
       library: [],
       cart: []
     });
