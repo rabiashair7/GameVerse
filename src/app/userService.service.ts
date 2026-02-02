@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { User } from './modules/users';
 
 @Injectable({
@@ -11,6 +12,15 @@ export class UserService {
 
   private sessionKey = 'gv_user_id';
 
+  private users: User[] = [];
+  private currentUser: User | null = null;
+
+  // ✅ NEW: live current user stream
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
+
+  private dataUrl = 'http://localhost:3001/users';
+
   private saveSession(userId: any): void {
     localStorage.setItem(this.sessionKey, String(userId));
   }
@@ -19,13 +29,19 @@ export class UserService {
     localStorage.removeItem(this.sessionKey);
   }
 
+  // ✅ NEW helper
+  private setCurrentUser(user: User | null): void {
+    this.currentUser = user;
+    this.currentUserSubject.next(user);
+  }
+
   private restoreSession(): void {
     const savedId = localStorage.getItem(this.sessionKey);
     if (!savedId) return;
 
     const found = this.users.find(u => String(u.id) === String(savedId));
     if (found && !found.banned) {
-      this.currentUser = found;
+      this.setCurrentUser(found);
     }
   }
 
@@ -52,15 +68,13 @@ export class UserService {
     return this.darkMode;
   }
 
-  private users: User[] = [];
-  private currentUser: User | null = null;
-
-  private dataUrl = 'http://localhost:3001/users';
-
   private loadUsers(): void {
     this.http.get<User[]>(this.dataUrl).subscribe(users => {
       this.users = users.map(u => new User(u));
       this.restoreSession();
+
+      // ✅ if no session, still emit null
+      if (!this.currentUser) this.currentUserSubject.next(null);
     });
   }
 
@@ -73,14 +87,14 @@ export class UserService {
       return null;
     }
 
-    this.currentUser = user;
+    this.setCurrentUser(user);
     this.saveSession(user.id);
 
     return user;
   }
 
   logout(): void {
-    this.currentUser = null;
+    this.setCurrentUser(null);
     this.clearSession();
   }
 
@@ -103,10 +117,9 @@ export class UserService {
     const emailExists = this.users.some(u => u.email === data.email);
     if (emailExists) return false;
 
-    // ✅ ADD ONLY: library + cart (and keep everything else the same)
     const newUser = new User({
       id: this.users.length
-        ? Math.max(...this.users.map(u => u.id)) + 1
+        ? Math.max(...this.users.map(u => Number(u.id))) + 1
         : 1,
       fullName: data.fullName,
       email: data.email,
@@ -119,7 +132,6 @@ export class UserService {
       wishlist: [],
       profileImage: null,
 
-      // ✅ ADDED
       library: [],
       cart: []
     } as any);
@@ -127,8 +139,8 @@ export class UserService {
     this.http.post<User>(this.dataUrl, newUser).subscribe(saved => {
       const user = new User(saved);
       this.users.push(user);
-      this.currentUser = user;
 
+      this.setCurrentUser(user);
       this.saveSession(user.id);
     });
 
@@ -154,6 +166,9 @@ export class UserService {
       dob: data.dob
     }).subscribe();
 
+    // ✅ keep stream updated (same object, but good habit)
+    this.currentUserSubject.next(this.currentUser);
+
     return true;
   }
 
@@ -166,6 +181,8 @@ export class UserService {
     this.http
       .patch(`${this.dataUrl}/${id}`, { profileImage: base64Image })
       .subscribe();
+
+    this.currentUserSubject.next(this.currentUser);
 
     return true;
   }
@@ -180,6 +197,8 @@ export class UserService {
     this.http
       .patch(`${this.dataUrl}/${id}`, { password: newPassword })
       .subscribe();
+
+    this.currentUserSubject.next(this.currentUser);
 
     return true;
   }
@@ -221,6 +240,11 @@ export class UserService {
     this.http
       .patch(`${this.dataUrl}/${user.id}`, { banned: true })
       .subscribe();
+
+    // ✅ if you banned current user, force logout
+    if (this.currentUser && String(this.currentUser.id) === String(user.id)) {
+      this.logout();
+    }
   }
 
   unbanUser(email: string): void {
@@ -260,6 +284,8 @@ export class UserService {
         wishlist: this.currentUser.wishlist
       })
       .subscribe();
+
+    this.currentUserSubject.next(this.currentUser);
   }
 
   removeFromWishlist(gameId: string): void {
@@ -273,59 +299,7 @@ export class UserService {
         wishlist: this.currentUser.wishlist
       })
       .subscribe();
-  }
 
-  private ensureLibrary(): string[] {
-    if (!this.currentUser) return [];
-    const u: any = this.currentUser as any;
-
-    if (!Array.isArray(u.library)) {
-      u.library = [];
-    }
-    return u.library as string[];
-  }
-
-  getLibraryIds(): string[] {
-    if (!this.currentUser) return [];
-    return [...this.ensureLibrary()];
-  }
-
-  isInLibrary(gameId: string): boolean {
-    if (!this.currentUser) return false;
-    return this.ensureLibrary().includes(gameId);
-  }
-
-  toggleLibrary(gameId: string): void {
-    if (!this.currentUser) return;
-
-    if (this.isInLibrary(gameId)) {
-      this.removeFromLibrary(gameId);
-    } else {
-      this.addToLibrary(gameId);
-    }
-  }
-
-  addToLibrary(gameId: string): void {
-    if (!this.currentUser) return;
-
-    const lib = this.ensureLibrary();
-    if (lib.includes(gameId)) return;
-
-    lib.push(gameId);
-
-    this.http
-      .patch(`${this.dataUrl}/${this.currentUser.id}`, { library: lib })
-      .subscribe();
-  }
-
-  removeFromLibrary(gameId: string): void {
-    if (!this.currentUser) return;
-
-    const lib = this.ensureLibrary().filter(id => id !== gameId);
-    (this.currentUser as any).library = lib;
-
-    this.http
-      .patch(`${this.dataUrl}/${this.currentUser.id}`, { library: lib })
-      .subscribe();
+    this.currentUserSubject.next(this.currentUser);
   }
 }
