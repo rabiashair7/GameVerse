@@ -10,40 +10,12 @@ export class UserService {
 
   private darkMode = false;
 
-  private sessionKey = 'gv_user_id';
-
   private users: User[] = [];
   private currentUser: User | null = null;
-
-  // ✅ NEW: live current user stream
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
   private dataUrl = 'http://localhost:3001/users';
-
-  private saveSession(userId: any): void {
-    localStorage.setItem(this.sessionKey, String(userId));
-  }
-
-  private clearSession(): void {
-    localStorage.removeItem(this.sessionKey);
-  }
-
-  // ✅ NEW helper
-  private setCurrentUser(user: User | null): void {
-    this.currentUser = user;
-    this.currentUserSubject.next(user);
-  }
-
-  private restoreSession(): void {
-    const savedId = localStorage.getItem(this.sessionKey);
-    if (!savedId) return;
-
-    const found = this.users.find(u => String(u.id) === String(savedId));
-    if (found && !found.banned) {
-      this.setCurrentUser(found);
-    }
-  }
 
   constructor(private http: HttpClient) {
     this.loadUsers();
@@ -71,11 +43,15 @@ export class UserService {
   private loadUsers(): void {
     this.http.get<User[]>(this.dataUrl).subscribe(users => {
       this.users = users.map(u => new User(u));
-      this.restoreSession();
 
-      // ✅ if no session, still emit null
-      if (!this.currentUser) this.currentUserSubject.next(null);
+      this.currentUserSubject.next(null);
     });
+  }
+
+  
+  private setCurrentUser(user: User | null): void {
+    this.currentUser = user;
+    this.currentUserSubject.next(user);
   }
 
   login(email: string, password: string): User | null {
@@ -83,19 +59,14 @@ export class UserService {
       u => u.email === email && u.password === password
     );
 
-    if (!user || user.banned) {
-      return null;
-    }
+    if (!user || user.banned) return null;
 
     this.setCurrentUser(user);
-    this.saveSession(user.id);
-
     return user;
   }
 
   logout(): void {
     this.setCurrentUser(null);
-    this.clearSession();
   }
 
   isLoggedIn(): boolean {
@@ -141,7 +112,6 @@ export class UserService {
       this.users.push(user);
 
       this.setCurrentUser(user);
-      this.saveSession(user.id);
     });
 
     return true;
@@ -166,9 +136,7 @@ export class UserService {
       dob: data.dob
     }).subscribe();
 
-    // ✅ keep stream updated (same object, but good habit)
     this.currentUserSubject.next(this.currentUser);
-
     return true;
   }
 
@@ -183,7 +151,6 @@ export class UserService {
       .subscribe();
 
     this.currentUserSubject.next(this.currentUser);
-
     return true;
   }
 
@@ -199,7 +166,6 @@ export class UserService {
       .subscribe();
 
     this.currentUserSubject.next(this.currentUser);
-
     return true;
   }
 
@@ -241,7 +207,7 @@ export class UserService {
       .patch(`${this.dataUrl}/${user.id}`, { banned: true })
       .subscribe();
 
-    // ✅ if you banned current user, force logout
+
     if (this.currentUser && String(this.currentUser.id) === String(user.id)) {
       this.logout();
     }

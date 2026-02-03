@@ -1,45 +1,44 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './userService.service';
 import { CartItem } from './modules/cart';
 
 @Injectable({ providedIn: 'root' })
 export class CartService implements OnDestroy {
+
   private apiUsers = 'http://localhost:3001/users';
 
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
   cart$ = this.cartSubject.asObservable();
 
-  private userPoll?: any;
+  private sub?: Subscription;
   private lastUserId: string | null = null;
 
   constructor(
     private http: HttpClient,
     private userService: UserService
   ) {
-    this.userPoll = setInterval(() => {
-      const u: any = this.userService.getCurrentUser() as any;
-      const uid = u ? String(u.id) : null;
+    this.sub = this.userService.currentUser$.subscribe(user => {
+      const uid = user ? String((user as any).id) : null;
 
-      if (uid !== this.lastUserId) {
-        this.lastUserId = uid;
+      if (uid === this.lastUserId) return;
+      this.lastUserId = uid;
 
-        if (!uid) {
-          this.cartSubject.next([]);
-        } else {
-          this.loadCart(uid);
-        }
+      if (!uid) {
+        this.cartSubject.next([]);
+      } else {
+        this.loadCart(uid);
       }
-    }, 250);
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.userPoll) clearInterval(this.userPoll);
+    this.sub?.unsubscribe();
   }
 
-  private normId(id: string): string {
-    return String(id).trim();
+  private normId(id: any): string {
+    return String(id ?? '').trim();
   }
 
   private getUserId(): string | null {
@@ -77,17 +76,14 @@ export class CartService implements OnDestroy {
     if (!userId) return;
 
     const payload = normalized.map(i => ({
-      gameId: i.gameId,
-      title: i.title,
-      price: i.price,
-      image: i.image,
-      qty: i.qty
+      gameId: this.normId(i.gameId),
+      title: String(i.title ?? ''),
+      price: Number(i.price) || 0,
+      image: String(i.image ?? ''),
+      qty: Math.max(1, Number(i.qty) || 1)
     }));
 
-    this.http.patch(`${this.apiUsers}/${userId}`, { cart: payload }).subscribe({
-      next: () => {},
-      error: () => {}
-    });
+    this.http.patch(`${this.apiUsers}/${userId}`, { cart: payload }).subscribe();
   }
 
   getCart(): CartItem[] {
@@ -164,7 +160,10 @@ export class CartService implements OnDestroy {
   }
 
   getItemsCount(): number {
-    return this.cartSubject.value.reduce((sum, item) => sum + (Number(item.qty) || 0), 0);
+    return this.cartSubject.value.reduce(
+      (sum, item) => sum + (Number(item.qty) || 0),
+      0
+    );
   }
 
   isInCart(gameId: string): boolean {
