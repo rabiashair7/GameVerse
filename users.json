@@ -434,7 +434,7 @@
       "password": "Admin@123456789",
       "gender": "male",
       "dob": "2001-09-14",
-      "role": "user",
+      "role": "admin",
       "banned": false,
       "createdAt": "2026-01-28T15:24:53.282Z",
       "profileImage": null,

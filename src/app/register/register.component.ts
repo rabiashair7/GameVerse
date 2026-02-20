@@ -100,7 +100,7 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.value.password!,
       gender: this.registerForm.value.gender as 'male' | 'female',
       dob: this.registerForm.value.dob!             
-    });
+    }); 
 
     if (!success) {
       alert('Email already exists');
